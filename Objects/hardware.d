@@ -22,4 +22,3 @@
 .\objects\hardware.o: input.h
 .\objects\hardware.o: display.h
 .\objects\hardware.o: engine.h
-.\objects\hardware.o: usb.h

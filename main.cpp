@@ -4,7 +4,6 @@
 #include "text.h"
 #include "helpers.h"
 #include "hardware.h"
-#include "sprites.h"
 #include "mem.h"
 #include "vex_loader.h"
 #include "terminal.h"

@@ -7,7 +7,6 @@
 ".\objects\input.o"
 ".\objects\main.o"
 ".\objects\text.o"
-".\objects\sprites.o"
 ".\objects\mem.o"
 ".\objects\vex_loader.o"
 ".\objects\terminal.o"

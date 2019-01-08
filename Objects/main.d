@@ -25,7 +25,6 @@
 .\objects\main.o: text.h
 .\objects\main.o: helpers.h
 .\objects\main.o: hardware.h
-.\objects\main.o: sprites.h
 .\objects\main.o: mem.h
 .\objects\main.o: vex_loader.h
 .\objects\main.o: terminal.h
