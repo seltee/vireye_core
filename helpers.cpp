@@ -1,16 +1,8 @@
+#include <string.h>
 #include "helpers.h"
 
 void delayByLoop(uint32_t nCount){
-	for (; nCount > 0; nCount--);
-}
-
-unsigned short strlen(char s[]){
-	unsigned short count = 0;
-	while(*s){
-		s++;
-		count++;
-	}
-	return count;
+	while(nCount--);
 }
 
 void reverse(char s[]){
@@ -37,4 +29,15 @@ void itoa(int n, char s[]){
 	}
 	s[i] = '\0';
 	reverse(s);
+}
+
+bool cmp(char *a, char *b){
+	while(*a == *b){
+		if (*a == 0){
+			return true;
+		}
+		a++;
+		b++;
+	}
+	return false;
 }

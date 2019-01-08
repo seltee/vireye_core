@@ -22,7 +22,6 @@
 #define BINARY( bits ) _bitset(0##bits)
 
 void delayByLoop(uint32_t nCount);
-unsigned short strlen(char s[]);
 void reverse(char s[]);
 void itoa(int n, char s[]);
-
+bool cmp(char *a, char *b);

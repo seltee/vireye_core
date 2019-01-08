@@ -3,8 +3,17 @@
 #include "input.h"
 #include "hardware.h"
 
-bool Input::getState(uint16_t button){
-	return GPIO_ReadInputDataBit(INPUT_PORT, button) ? false : true;
+#define INPUT_SELECT GPIO_Pin_4
+#define INPUT_START GPIO_Pin_5
+#define INPUT_A GPIO_Pin_6
+#define INPUT_X GPIO_Pin_7
+#define INPUT_B GPIO_Pin_8
+#define INPUT_Y GPIO_Pin_9
+
+const uint16_t butEq[] = {GPIO_Pin_4, GPIO_Pin_5, GPIO_Pin_6, GPIO_Pin_7, GPIO_Pin_8, GPIO_Pin_9};
+
+bool Input::getState(uint8_t button){
+	return GPIO_ReadInputDataBit(INPUT_PORT, butEq[button]) ? false : true;
 }
 
 short int Input::getXAxis(){

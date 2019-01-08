@@ -1,7 +1,8 @@
 .\objects\helpers.o: helpers.cpp
+.\objects\helpers.o: D:\programs\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\helpers.o: helpers.h
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
-.\objects\helpers.o: D:\art\всякое\vireye\RTE\_Target_1\RTE_Components.h
+.\objects\helpers.o: D:\art\всякое\vireye\RTE\_STM32F103C8T6_Vireye_Core\RTE_Components.h
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\core_cm3.h
 .\objects\helpers.o: D:\programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\cmsis_version.h
@@ -17,4 +18,5 @@
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_spi.h
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h
+.\objects\helpers.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\helpers.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\misc.h

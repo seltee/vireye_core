@@ -9,10 +9,11 @@ class Display{
 		virtual unsigned short int getNativeWidth();
 		virtual unsigned short int getNativeHeight();
 		virtual bool setDimentions();
-		virtual unsigned char getFPS();
-		virtual void init(Engine *engine);
+		virtual unsigned short getFPS();
+		virtual void setFPS(unsigned short limit);
+		virtual void init();
 		virtual void draw();
-		
+	
 	protected:
-		Engine *engine;
+		unsigned short fpsLimit;
 };

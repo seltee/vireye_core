@@ -14,9 +14,10 @@ public:
 	virtual unsigned short int getNativeWidth();
 	virtual unsigned short int getNativeHeight();
 	virtual bool setDimentions();
-	virtual unsigned char getFPS();
+	virtual unsigned short getFPS();
+	virtual void setFPS(unsigned short limit);
 
-	virtual void init(Engine *engine);
+	virtual void init();
 	virtual void draw();
 private:
 	void sendCMD(uint8_t cmd);
@@ -27,6 +28,7 @@ private:
 
 	void initDMA(uint16_t *cLine);
 	void initTimer();
+	void initFPSTimer(unsigned short limit);
 
 	void setCol(uint16_t startCol, uint16_t endCol);
 	void setPage(uint16_t startPage, uint16_t endPage);

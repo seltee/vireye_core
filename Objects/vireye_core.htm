@@ -3,16 +3,16 @@
 <title>Static Call Graph - [.\Objects\vireye_core.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\vireye_core.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sat Jan 05 00:03:46 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Jan 08 17:34:02 2019
 <BR><P>
-<H3>Maximum Stack Usage =        584 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        240 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; Display_ILI9341::init(Engine*) &rArr; Display_ILI9341::displayClear(unsigned char) &rArr; Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
+__rt_entry_main &rArr; main &rArr; loadGame() &rArr; Terminal::sendNumber(int, bool) &rArr; itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
 <P>
 <H3>
 Functions with no stack information
 </H3><UL>
- <LI><a href="#[47]">__user_initial_stackheap</a>
+ <LI><a href="#[5a]">__user_initial_stackheap</a>
 </UL>
 </UL>
 <P>
@@ -65,7 +65,7 @@ Function Pointers
  <LI><a href="#[1a]">RCC_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[3e]">RTCAlarm_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[18]">RTC_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
- <LI><a href="#[45]">Reset_Handler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
+ <LI><a href="#[58]">Reset_Handler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[38]">SPI1_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[39]">SPI2_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[11]">SVC_Handler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
@@ -78,7 +78,7 @@ Function Pointers
  <LI><a href="#[2e]">TIM1_UP_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[31]">TIM2_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[32]">TIM3_IRQHandler</a> from display_ili9341.o(i.TIM3_IRQHandler) referenced from startup_stm32f10x_md.o(RESET)
- <LI><a href="#[33]">TIM4_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
+ <LI><a href="#[33]">TIM4_IRQHandler</a> from display_ili9341.o(i.TIM4_IRQHandler) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[3a]">USART1_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[3b]">USART2_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[3c]">USART3_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
@@ -87,149 +87,175 @@ Function Pointers
  <LI><a href="#[29]">USB_LP_CAN1_RX0_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[10]">UsageFault_Handler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
  <LI><a href="#[15]">WWDG_IRQHandler</a> from startup_stm32f10x_md.o(.text) referenced from startup_stm32f10x_md.o(RESET)
- <LI><a href="#[44]">Display_ILI9341::draw()</a> from display_ili9341.o(i._ZN15Display_ILI93414drawEv) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
- <LI><a href="#[43]">Display_ILI9341::init(Engine*)</a> from display_ili9341.o(i._ZN15Display_ILI93414initEP6Engine) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
- <LI><a href="#[42]">Display_ILI9341::getFPS()</a> from display_ili9341.o(i._ZN15Display_ILI93416getFPSEv) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
- <LI><a href="#[46]">__main</a> from __main.o(!!!main) referenced from startup_stm32f10x_md.o(.text)
+ <LI><a href="#[49]">displaySync()</a> from vex_loader.o(i._Z11displaySyncv) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[50]">cmp(char*, char*)</a> from helpers.o(i._Z3cmpPcS_) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[51]">itoa(int, char*)</a> from helpers.o(i._Z4itoaiPc) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[4a]">getFPS()</a> from vex_loader.o(i._Z6getFPSv) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[4b]">setFPS(unsigned short)</a> from vex_loader.o(i._Z6setFPSt) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[56]">Display_ILI9341::draw()</a> from display_ili9341.o(i._ZN15Display_ILI93414drawEv) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+ <LI><a href="#[55]">Display_ILI9341::init()</a> from display_ili9341.o(i._ZN15Display_ILI93414initEv) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+ <LI><a href="#[53]">Display_ILI9341::getFPS()</a> from display_ili9341.o(i._ZN15Display_ILI93416getFPSEv) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+ <LI><a href="#[54]">Display_ILI9341::setFPS(unsigned short)</a> from display_ili9341.o(i._ZN15Display_ILI93416setFPSEt) referenced from display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+ <LI><a href="#[48]">Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool)</a> from text.o(i._ZN4Text13displayStringEPKchttb) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[4d]">Input::getState(unsigned char)</a> from input.o(i._ZN5Input8getStateEh) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[4e]">Input::getXAxis()</a> from input.o(i._ZN5Input8getXAxisEv) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[4f]">Input::getYAxis()</a> from input.o(i._ZN5Input8getYAxisEv) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[4c]">Engine::setPalette(const unsigned short*, unsigned char, unsigned char)</a> from engine.o(i._ZN6Engine10setPaletteEPKthh) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[43]">Engine::setFillColor(unsigned char)</a> from engine.o(i._ZN6Engine12setFillColorEh) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[42]">Engine::setLineClear(bool)</a> from engine.o(i._ZN6Engine12setLineClearEb) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[45]">Engine::displaySprite(const unsigned char*, short, short, short, short, bool)</a> from engine.o(i._ZN6Engine13displaySpriteEPKhssssb) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[44]">Engine::setSpriteMemory(unsigned char*, unsigned)</a> from engine.o(i._ZN6Engine15setSpriteMemoryEPhj) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[46]">Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)</a> from engine.o(i._ZN6Engine17displaySpriteMaskEPKhhsshsb) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[47]">Engine::displaySpriteMatrix(const Matrix*, signed char, short, short, short, short, bool)</a> from engine.o(i._ZN6Engine19displaySpriteMatrixEPK6Matrixassssb) referenced from vex_loader.o(i._Z6getCmdPc)
+ <LI><a href="#[59]">__main</a> from __main.o(!!!main) referenced from startup_stm32f10x_md.o(.text)
+ <LI><a href="#[57]">__sti___8_main_cpp_display</a> from main.o(i.__sti___8_main_cpp_display) referenced from main.o(.init_array)
+ <LI><a href="#[52]">memcpy</a> from memcpy.o(.text) referenced from vex_loader.o(i._Z6getCmdPc)
 </UL>
 <P>
 <H3>
 Global Symbols
 </H3>
-<P><STRONG><a name="[46]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
-<BR><BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<P><STRONG><a name="[59]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
+<BR><BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[48]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
-<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<P><STRONG><a name="[5c]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
 </UL>
 
-<P><STRONG><a name="[4a]"></a>__scatterload_rt2</STRONG> (Thumb, 44 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<P><STRONG><a name="[5e]"></a>__scatterload_rt2</STRONG> (Thumb, 44 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
 </UL>
 
-<P><STRONG><a name="[97]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<P><STRONG><a name="[b2]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
 
-<P><STRONG><a name="[98]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<P><STRONG><a name="[b3]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
 
-<P><STRONG><a name="[4b]"></a>__scatterload_copy</STRONG> (Thumb, 26 bytes, Stack size unknown bytes, __scatter_copy.o(!!handler_copy), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
+<P><STRONG><a name="[5f]"></a>__scatterload_copy</STRONG> (Thumb, 26 bytes, Stack size unknown bytes, __scatter_copy.o(!!handler_copy), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
-</UL>
-
-<P><STRONG><a name="[99]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
-
-<P><STRONG><a name="[4f]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
-<BR><BR>[Called By]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_copy
 </UL>
 
-<P><STRONG><a name="[9a]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
+<P><STRONG><a name="[b4]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
 
-<P><STRONG><a name="[9b]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
-
-<P><STRONG><a name="[9c]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
-
-<P><STRONG><a name="[9d]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
-
-<P><STRONG><a name="[9e]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
-
-<P><STRONG><a name="[9f]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
-
-<P><STRONG><a name="[a0]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000002))
-
-<P><STRONG><a name="[a1]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
-
-<P><STRONG><a name="[a2]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
-
-<P><STRONG><a name="[a3]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
-
-<P><STRONG><a name="[a4]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
-
-<P><STRONG><a name="[a5]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
-
-<P><STRONG><a name="[a6]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
-
-<P><STRONG><a name="[a7]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
-
-<P><STRONG><a name="[a8]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
-
-<P><STRONG><a name="[a9]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
-
-<P><STRONG><a name="[aa]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
-
-<P><STRONG><a name="[ab]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000033))
-
-<P><STRONG><a name="[ac]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
-
-<P><STRONG><a name="[ad]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
-
-<P><STRONG><a name="[ae]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
-
-<P><STRONG><a name="[54]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
-<BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
+<P><STRONG><a name="[64]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
 </UL>
 
-<P><STRONG><a name="[af]"></a>__rt_lib_shutdown_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000002))
+<P><STRONG><a name="[b5]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
 
-<P><STRONG><a name="[b0]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000007))
+<P><STRONG><a name="[b6]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
 
-<P><STRONG><a name="[b1]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+<P><STRONG><a name="[b7]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
 
-<P><STRONG><a name="[b2]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000010))
+<P><STRONG><a name="[b8]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
 
-<P><STRONG><a name="[b3]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A))
-
-<P><STRONG><a name="[b4]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000004))
-
-<P><STRONG><a name="[b5]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C))
-
-<P><STRONG><a name="[49]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
-<BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
-<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
+<P><STRONG><a name="[60]"></a>__rt_lib_init_cpp_2</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000031))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
+<LI>Call Chain = __rt_lib_init_cpp_2 &rArr; __cpp_initialize__aeabi_
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__cpp_initialize__aeabi_
 </UL>
 
-<P><STRONG><a name="[b6]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+<P><STRONG><a name="[b9]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
 
-<P><STRONG><a name="[4c]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry4.o(.ARM.Collect$$rtentry$$00000004))
+<P><STRONG><a name="[ba]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000002))
+
+<P><STRONG><a name="[bb]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
+
+<P><STRONG><a name="[bc]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
+
+<P><STRONG><a name="[bd]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
+
+<P><STRONG><a name="[be]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
+
+<P><STRONG><a name="[bf]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
+
+<P><STRONG><a name="[c0]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
+
+<P><STRONG><a name="[c1]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
+
+<P><STRONG><a name="[c2]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
+
+<P><STRONG><a name="[c3]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
+
+<P><STRONG><a name="[c4]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
+
+<P><STRONG><a name="[c5]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
+
+<P><STRONG><a name="[c6]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
+
+<P><STRONG><a name="[c7]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
+
+<P><STRONG><a name="[c8]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
+
+<P><STRONG><a name="[c9]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000033))
+
+<P><STRONG><a name="[69]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
+</UL>
+
+<P><STRONG><a name="[ca]"></a>__rt_lib_shutdown_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000002))
+
+<P><STRONG><a name="[cb]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000007))
+
+<P><STRONG><a name="[cc]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+
+<P><STRONG><a name="[cd]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000010))
+
+<P><STRONG><a name="[ce]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A))
+
+<P><STRONG><a name="[cf]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000004))
+
+<P><STRONG><a name="[d0]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C))
+
+<P><STRONG><a name="[5d]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
+</UL>
+
+<P><STRONG><a name="[d1]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+
+<P><STRONG><a name="[61]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry4.o(.ARM.Collect$$rtentry$$00000004))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_sh &rArr; __user_setup_stackheap
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+<BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[4e]"></a>__rt_entry_li</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000A))
-<BR><BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init
+<P><STRONG><a name="[63]"></a>__rt_entry_li</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000A))
+<BR><BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init
 </UL>
 
-<P><STRONG><a name="[b7]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
+<P><STRONG><a name="[d2]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
-<P><STRONG><a name="[50]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 584 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; Display_ILI9341::init(Engine*) &rArr; Display_ILI9341::displayClear(unsigned char) &rArr; Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
+<P><STRONG><a name="[65]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
+<BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; loadGame() &rArr; Terminal::sendNumber(int, bool) &rArr; itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
 </UL>
-<BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
-</UL>
-
-<P><STRONG><a name="[b8]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
-
-<P><STRONG><a name="[5c]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
-<BR><BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+<BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 </UL>
 
-<P><STRONG><a name="[53]"></a>__rt_exit_ls</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000003))
-<BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
+<P><STRONG><a name="[d3]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
+
+<P><STRONG><a name="[74]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 </UL>
 
-<P><STRONG><a name="[b9]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
-
-<P><STRONG><a name="[55]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
-<BR><BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+<P><STRONG><a name="[68]"></a>__rt_exit_ls</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000003))
+<BR><BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
 </UL>
 
-<P><STRONG><a name="[45]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
+<P><STRONG><a name="[d4]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
+
+<P><STRONG><a name="[6a]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+</UL>
+
+<P><STRONG><a name="[58]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
 
 <P><STRONG><a name="[c]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NMI_Handler
@@ -397,9 +423,6 @@ Global Symbols
 <P><STRONG><a name="[31]"></a>TIM2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[33]"></a>TIM4_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
-</UL>
 <P><STRONG><a name="[3a]"></a>USART1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
@@ -421,558 +444,761 @@ Global Symbols
 <P><STRONG><a name="[15]"></a>WWDG_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f10x_md.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[47]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_stm32f10x_md.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+<P><STRONG><a name="[5a]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_stm32f10x_md.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[57]"></a>__aeabi_memset</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, aeabi_memset.o(.text))
-<BR><BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset
+<P><STRONG><a name="[90]"></a>strlen</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, strlen.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::parseLine(short, unsigned short*)
-</UL>
-
-<P><STRONG><a name="[ba]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[5]"></a>__rt_heap_escrow</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[4]"></a>__rt_heap_expand</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[bb]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
-
-<P><STRONG><a name="[59]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset_w
+<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendString(char*)
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool)
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reverse(char*)
 </UL>
 
-<P><STRONG><a name="[58]"></a>_memset</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<P><STRONG><a name="[6e]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::scroll()
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::draw()
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendString(char*)
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcpy
 </UL>
 
-<P><STRONG><a name="[bc]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
-
-<P><STRONG><a name="[bd]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
-
-<P><STRONG><a name="[be]"></a>__rt_memclr_w</STRONG> (Thumb, 78 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
-
-<P><STRONG><a name="[5a]"></a>_memset_w</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
-<BR><BR>[Called By]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memclr
+<P><STRONG><a name="[6c]"></a>__rt_memcpy</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 </UL>
 
-<P><STRONG><a name="[4d]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
+<P><STRONG><a name="[d5]"></a>_memcpy_lastbytes</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_v6.o(.text), UNUSED)
+
+<P><STRONG><a name="[52]"></a>memcpy</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, memcpy.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = memcpy
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[6f]"></a>__aeabi_memset</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, aeabi_memset.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::scroll()
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::parseLine(short, unsigned short*)
+</UL>
+
+<P><STRONG><a name="[d6]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[7]"></a>__rt_heap_escrow</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[6]"></a>__rt_heap_expand</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[5b]"></a>__cpp_initialize__aeabi_</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, init_aeabi.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __cpp_initialize__aeabi_
+</UL>
+<BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_cpp_2
+</UL>
+
+<P><STRONG><a name="[6d]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memcpy
+</UL>
+
+<P><STRONG><a name="[d7]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[d8]"></a>__rt_memcpy_w</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[d9]"></a>_memcpy_lastbytes_aligned</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[da]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
+
+<P><STRONG><a name="[71]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset_w
+</UL>
+
+<P><STRONG><a name="[70]"></a>_memset</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+</UL>
+
+<P><STRONG><a name="[db]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[dc]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[dd]"></a>__rt_memclr_w</STRONG> (Thumb, 78 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[72]"></a>_memset_w</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memclr
+</UL>
+
+<P><STRONG><a name="[62]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = __user_setup_stackheap
 </UL>
-<BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+<BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
 </UL>
 
-<P><STRONG><a name="[52]"></a>exit</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, exit.o(.text))
+<P><STRONG><a name="[67]"></a>exit</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, exit.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = exit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
-</UL>
-
-<P><STRONG><a name="[56]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
+<BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[bf]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
-
-<P><STRONG><a name="[5b]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+<P><STRONG><a name="[6b]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[c0]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[de]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
-<P><STRONG><a name="[c1]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
-
-<P><STRONG><a name="[c2]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
-
-<P><STRONG><a name="[6f]"></a>ADC_AutoInjectedConvCmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_AutoInjectedConvCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[73]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[c3]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
+<P><STRONG><a name="[df]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
-<P><STRONG><a name="[6a]"></a>ADC_Cmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[e0]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[e1]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[89]"></a>ADC_AutoInjectedConvCmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_AutoInjectedConvCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[69]"></a>ADC_ExternalTrigInjectedConvConfig</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_ExternalTrigInjectedConvConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[e2]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[84]"></a>ADC_Cmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[6e]"></a>ADC_GetCalibrationStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetCalibrationStatus))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[83]"></a>ADC_ExternalTrigInjectedConvConfig</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_ExternalTrigInjectedConvConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[72]"></a>ADC_GetInjectedConversionValue</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, stm32f10x_adc.o(i.ADC_GetInjectedConversionValue))
+<P><STRONG><a name="[88]"></a>ADC_GetCalibrationStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetCalibrationStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+</UL>
+
+<P><STRONG><a name="[8c]"></a>ADC_GetInjectedConversionValue</STRONG> (Thumb, 28 bytes, Stack size 8 bytes, stm32f10x_adc.o(i.ADC_GetInjectedConversionValue))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC_GetInjectedConversionValue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForYAxis()
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForXAxis()
+<BR>[Called By]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForYAxis()
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForXAxis()
 </UL>
 
-<P><STRONG><a name="[6c]"></a>ADC_GetResetCalibrationStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetResetCalibrationStatus))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[86]"></a>ADC_GetResetCalibrationStatus</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_GetResetCalibrationStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[66]"></a>ADC_Init</STRONG> (Thumb, 70 bytes, Stack size 12 bytes, stm32f10x_adc.o(i.ADC_Init))
+<P><STRONG><a name="[80]"></a>ADC_Init</STRONG> (Thumb, 70 bytes, Stack size 12 bytes, stm32f10x_adc.o(i.ADC_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = ADC_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[68]"></a>ADC_InjectedChannelConfig</STRONG> (Thumb, 130 bytes, Stack size 20 bytes, stm32f10x_adc.o(i.ADC_InjectedChannelConfig))
+<P><STRONG><a name="[82]"></a>ADC_InjectedChannelConfig</STRONG> (Thumb, 130 bytes, Stack size 20 bytes, stm32f10x_adc.o(i.ADC_InjectedChannelConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = ADC_InjectedChannelConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[67]"></a>ADC_InjectedSequencerLengthConfig</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, stm32f10x_adc.o(i.ADC_InjectedSequencerLengthConfig))
+<P><STRONG><a name="[81]"></a>ADC_InjectedSequencerLengthConfig</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, stm32f10x_adc.o(i.ADC_InjectedSequencerLengthConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC_InjectedSequencerLengthConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[6b]"></a>ADC_ResetCalibration</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_ResetCalibration))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[85]"></a>ADC_ResetCalibration</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_ResetCalibration))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[70]"></a>ADC_SoftwareStartInjectedConvCmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_SoftwareStartInjectedConvCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[8a]"></a>ADC_SoftwareStartInjectedConvCmd</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_SoftwareStartInjectedConvCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[6d]"></a>ADC_StartCalibration</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_StartCalibration))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[87]"></a>ADC_StartCalibration</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_adc.o(i.ADC_StartCalibration))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
 <P><STRONG><a name="[22]"></a>DMA1_Channel3_IRQHandler</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, display_ili9341.o(i.DMA1_Channel3_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = DMA1_Channel3_IRQHandler
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ClearITPendingBit
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ClearITPendingBit
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[5f]"></a>DMA_ClearITPendingBit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_ClearITPendingBit))
+<P><STRONG><a name="[77]"></a>DMA_ClearITPendingBit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_ClearITPendingBit))
 <BR><BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Channel3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[5e]"></a>DMA_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<P><STRONG><a name="[76]"></a>DMA_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
 <LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Channel3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[8a]"></a>DMA_ITConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_ITConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<P><STRONG><a name="[ad]"></a>DMA_ITConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_dma.o(i.DMA_ITConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
 </UL>
 
-<P><STRONG><a name="[88]"></a>DMA_Init</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, stm32f10x_dma.o(i.DMA_Init))
+<P><STRONG><a name="[ab]"></a>DMA_Init</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, stm32f10x_dma.o(i.DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = DMA_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
 </UL>
 
-<P><STRONG><a name="[65]"></a>GPIO_Init</STRONG> (Thumb, 278 bytes, Stack size 24 bytes, stm32f10x_gpio.o(i.GPIO_Init))
+<P><STRONG><a name="[7f]"></a>GPIO_Init</STRONG> (Thumb, 278 bytes, Stack size 24 bytes, stm32f10x_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[91]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ReadInputDataBit))
-<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getState(unsigned short)
+<P><STRONG><a name="[ae]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_ReadInputDataBit))
+<BR><BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getState(unsigned char)
 </UL>
 
-<P><STRONG><a name="[5d]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_WriteBit))
-<BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
-<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
+<P><STRONG><a name="[75]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f10x_gpio.o(i.GPIO_WriteBit))
+<BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
 <LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_Channel3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[64]"></a>RCC_ADCCLKConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_ADCCLKConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<P><STRONG><a name="[7e]"></a>RCC_ADCCLKConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_ADCCLKConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
 </UL>
 
-<P><STRONG><a name="[82]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<P><STRONG><a name="[a5]"></a>RCC_AHBPeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[8d]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
+<P><STRONG><a name="[a0]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initFPSTimer(unsigned short)
 </UL>
 
-<P><STRONG><a name="[63]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<P><STRONG><a name="[7d]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[8c]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 192 bytes, Stack size 12 bytes, stm32f10x_rcc.o(i.RCC_GetClocksFreq))
+<P><STRONG><a name="[9f]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 192 bytes, Stack size 12 bytes, stm32f10x_rcc.o(i.RCC_GetClocksFreq))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = RCC_GetClocksFreq
 </UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initFPSTimer(unsigned short)
 </UL>
 
-<P><STRONG><a name="[84]"></a>SPI_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<P><STRONG><a name="[a7]"></a>SPI_Cmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[89]"></a>SPI_I2S_DMACmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_DMACmd))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<P><STRONG><a name="[ac]"></a>SPI_I2S_DMACmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_DMACmd))
+<BR><BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
 </UL>
 
-<P><STRONG><a name="[78]"></a>SPI_I2S_GetFlagStatus</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus))
-<BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
+<P><STRONG><a name="[97]"></a>SPI_I2S_GetFlagStatus</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
 </UL>
 
-<P><STRONG><a name="[83]"></a>SPI_Init</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, stm32f10x_spi.o(i.SPI_Init))
+<P><STRONG><a name="[a6]"></a>SPI_Init</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, stm32f10x_spi.o(i.SPI_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SPI_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[85]"></a>SPI_NSSInternalSoftwareConfig</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_NSSInternalSoftwareConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<P><STRONG><a name="[a8]"></a>SPI_NSSInternalSoftwareConfig</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, stm32f10x_spi.o(i.SPI_NSSInternalSoftwareConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
 <P><STRONG><a name="[40]"></a>SystemInit</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SystemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = SystemInit &rArr; SetSysClock &rArr; SetSysClockTo72
 </UL>
-<BR>[Calls]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(.text)
 </UL>
 <P><STRONG><a name="[32]"></a>TIM3_IRQHandler</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, display_ili9341.o(i.TIM3_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
 </UL>
-<P><STRONG><a name="[86]"></a>delayByLoop(unsigned)</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, helpers.o(i._Z11delayByLoopj))
-<BR><BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<P><STRONG><a name="[33]"></a>TIM4_IRQHandler</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, display_ili9341.o(i.TIM4_IRQHandler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_md.o(RESET)
+</UL>
+<P><STRONG><a name="[7a]"></a>clearMemory(const unsigned char*, unsigned)</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, vex_loader.o(i._Z11clearMemoryPKhj))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = clearMemory(const unsigned char*, unsigned)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_ready()
+</UL>
+<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
 </UL>
 
-<P><STRONG><a name="[62]"></a>initHardware()</STRONG> (Thumb, 254 bytes, Stack size 32 bytes, hardware.o(i._Z12initHardwarev))
+<P><STRONG><a name="[a9]"></a>delayByLoop(unsigned)</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, helpers.o(i._Z11delayByLoopj))
+<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
+</UL>
+
+<P><STRONG><a name="[49]"></a>displaySync()</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, vex_loader.o(i._Z11displaySyncv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112 + Unknown Stack Size
+<LI>Call Chain = displaySync() &rArr; Display_ILI9341::draw() &rArr; Engine::parseLine(short, unsigned short*)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[7b]"></a>flash_ready()</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, vex_loader.o(i._Z11flash_readyv))
+<BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;saveCode(const unsigned char*, const unsigned char*, unsigned)
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearMemory(const unsigned char*, unsigned)
+</UL>
+
+<P><STRONG><a name="[7c]"></a>initHardware()</STRONG> (Thumb, 252 bytes, Stack size 32 bytes, hardware.o(i._Z12initHardwarev))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = initHardware() &rArr; GPIO_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_ADCCLKConfig
-<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_StartCalibration
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartInjectedConvCmd
-<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ResetCalibration
-<LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_InjectedSequencerLengthConfig
-<LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_InjectedChannelConfig
-<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
-<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetResetCalibrationStatus
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetCalibrationStatus
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ExternalTrigInjectedConvConfig
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
-<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_AutoInjectedConvCmd
-<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_ADCCLKConfig
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_StartCalibration
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_SoftwareStartInjectedConvCmd
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ResetCalibration
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_InjectedSequencerLengthConfig
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_InjectedChannelConfig
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetResetCalibrationStatus
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetCalibrationStatus
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ExternalTrigInjectedConvConfig
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_AutoInjectedConvCmd
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[71]"></a>getAdcValueForXAxis()</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, hardware.o(i._Z19getAdcValueForXAxisv))
+<P><STRONG><a name="[8b]"></a>getAdcValueForXAxis()</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, hardware.o(i._Z19getAdcValueForXAxisv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = getAdcValueForXAxis() &rArr; ADC_GetInjectedConversionValue
 </UL>
-<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetInjectedConversionValue
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetInjectedConversionValue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getXAxis()
+<BR>[Called By]<UL><LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getXAxis()
 </UL>
 
-<P><STRONG><a name="[73]"></a>getAdcValueForYAxis()</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, hardware.o(i._Z19getAdcValueForYAxisv))
+<P><STRONG><a name="[8d]"></a>getAdcValueForYAxis()</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, hardware.o(i._Z19getAdcValueForYAxisv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = getAdcValueForYAxis() &rArr; ADC_GetInjectedConversionValue
 </UL>
-<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetInjectedConversionValue
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetInjectedConversionValue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getYAxis()
-</UL>
-
-<P><STRONG><a name="[74]"></a>itoa(int, char*)</STRONG> (Thumb, 70 bytes, Stack size 20 bytes, helpers.o(i._Z4itoaiPc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = itoa(int, char*) &rArr; reverse(char*)
-</UL>
-<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reverse(char*)
-</UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getYAxis()
 </UL>
 
-<P><STRONG><a name="[76]"></a>strlen(char*)</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, helpers.o(i._Z6strlenPc))
-<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(Engine*, char*, unsigned char, unsigned short, unsigned short, bool)
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reverse(char*)
+<P><STRONG><a name="[50]"></a>cmp(char*, char*)</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, helpers.o(i._Z3cmpPcS_))
+<BR><BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCmd(char*)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[51]"></a>itoa(int, char*)</STRONG> (Thumb, 74 bytes, Stack size 24 bytes, helpers.o(i._Z4itoaiPc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reverse(char*)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendNumber(int, bool)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[8f]"></a>getCmd(char*)</STRONG> (Thumb, 246 bytes, Stack size 8 bytes, vex_loader.o(i._Z6getCmdPc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getCmd(char*)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmp(char*, char*)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
 </UL>
 
-<P><STRONG><a name="[75]"></a>reverse(char*)</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, helpers.o(i._Z7reversePc))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = reverse(char*)
+<P><STRONG><a name="[4a]"></a>getFPS()</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, vex_loader.o(i._Z6getFPSv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = getFPS()
 </UL>
-<BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen(char*)
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::getFPS()
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa(int, char*)
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[4b]"></a>setFPS(unsigned short)</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, vex_loader.o(i._Z6setFPSt))
+<BR><BR>[Stack]<UL><LI>Max Depth = 68<LI>Call Chain = setFPS(unsigned short) &rArr; Display_ILI9341::setFPS(unsigned short) &rArr; Display_ILI9341::initFPSTimer(unsigned short) &rArr; RCC_GetClocksFreq
+</UL>
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setFPS(unsigned short)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[8e]"></a>reverse(char*)</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, helpers.o(i._Z7reversePc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = reverse(char*) &rArr; strlen
+</UL>
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+</UL>
+<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa(int, char*)
 </UL>
 
-<P><STRONG><a name="[77]"></a>Display_ILI9341::writeData8(unsigned char)</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh))
+<P><STRONG><a name="[91]"></a>runGame()</STRONG> (Thumb, 26 bytes, Stack size 16 bytes, vex_loader.o(i._Z7runGamev))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128 + Unknown Stack Size
+<LI>Call Chain = runGame() &rArr; Terminal::sendNumber(int, bool) &rArr; itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
+</UL>
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendNumber(int, bool)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[93]"></a>loadGame()</STRONG> (Thumb, 616 bytes, Stack size 120 bytes, vex_loader.o(i._Z8loadGamev))
+<BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
+<LI>Call Chain = loadGame() &rArr; Terminal::sendNumber(int, bool) &rArr; itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
+</UL>
+<BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendNumber(int, bool)
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;saveCode(const unsigned char*, const unsigned char*, unsigned)
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCmd(char*)
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearMemory(const unsigned char*, unsigned)
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendString(char*)
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[95]"></a>saveCode(const unsigned char*, const unsigned char*, unsigned)</STRONG> (Thumb, 84 bytes, Stack size 12 bytes, vex_loader.o(i._Z8saveCodePKhS0_j))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = saveCode(const unsigned char*, const unsigned char*, unsigned)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;flash_ready()
+</UL>
+<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
+</UL>
+
+<P><STRONG><a name="[96]"></a>Display_ILI9341::writeData8(unsigned char)</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Display_ILI9341::writeData8(unsigned char)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setOrientation(unsigned char)
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setOrientation(unsigned char)
 </UL>
 
-<P><STRONG><a name="[79]"></a>Display_ILI9341::writeData16(unsigned short)</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934111writeData16Et))
+<P><STRONG><a name="[98]"></a>Display_ILI9341::writeData16(unsigned short)</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934111writeData16Et))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Display_ILI9341::writeData16(unsigned short)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
 </UL>
 
-<P><STRONG><a name="[7a]"></a>Display_ILI9341::displayClear(unsigned char)</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934112displayClearEh))
+<P><STRONG><a name="[99]"></a>Display_ILI9341::displayClear(unsigned char)</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934112displayClearEh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = Display_ILI9341::displayClear(unsigned char) &rArr; Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[7f]"></a>Display_ILI9341::setOrientation(unsigned char)</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934114setOrientationEh))
+<P><STRONG><a name="[9e]"></a>Display_ILI9341::initFPSTimer(unsigned short)</STRONG> (Thumb, 92 bytes, Stack size 32 bytes, display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Display_ILI9341::initFPSTimer(unsigned short) &rArr; RCC_GetClocksFreq
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ(IRQn)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setFPS(unsigned short)
+</UL>
+
+<P><STRONG><a name="[a2]"></a>Display_ILI9341::setOrientation(unsigned char)</STRONG> (Thumb, 74 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI934114setOrientationEh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Display_ILI9341::setOrientation(unsigned char) &rArr; Display_ILI9341::sendCMD(unsigned char)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[44]"></a>Display_ILI9341::draw()</STRONG> (Thumb, 152 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93414drawEv))
+<P><STRONG><a name="[56]"></a>Display_ILI9341::draw()</STRONG> (Thumb, 166 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93414drawEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
 <LI>Call Chain = Display_ILI9341::draw() &rArr; Engine::parseLine(short, unsigned short*)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::parseLine(short, unsigned short*)
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::clear()
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
+<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::parseLine(short, unsigned short*)
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::clear()
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-<BR>[Address Reference Count : 1]<UL><LI> display_ili9341.o(.constdata__ZTV15Display_ILI9341)
-</UL>
-<P><STRONG><a name="[43]"></a>Display_ILI9341::init(Engine*)</STRONG> (Thumb, 622 bytes, Stack size 40 bytes, display_ili9341.o(i._ZN15Display_ILI93414initEP6Engine))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = Display_ILI9341::init(Engine*) &rArr; Display_ILI9341::displayClear(unsigned char) &rArr; Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
-</UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delayByLoop(unsigned)
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_NSSInternalSoftwareConfig
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
-<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
-<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setOrientation(unsigned char)
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
-</UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;displaySync()
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> display_ili9341.o(.constdata__ZTV15Display_ILI9341)
 </UL>
-<P><STRONG><a name="[42]"></a>Display_ILI9341::getFPS()</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, display_ili9341.o(i._ZN15Display_ILI93416getFPSEv))
-<BR><BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[55]"></a>Display_ILI9341::init()</STRONG> (Thumb, 620 bytes, Stack size 32 bytes, display_ili9341.o(i._ZN15Display_ILI93414initEv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = Display_ILI9341::init() &rArr; Display_ILI9341::displayClear(unsigned char) &rArr; Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delayByLoop(unsigned)
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_NSSInternalSoftwareConfig
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Init
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Cmd
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setOrientation(unsigned char)
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData8(unsigned char)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> display_ili9341.o(.constdata__ZTV15Display_ILI9341)
 </UL>
-<P><STRONG><a name="[7b]"></a>Display_ILI9341::setCol(unsigned short, unsigned short)</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93416setColEtt))
+<P><STRONG><a name="[53]"></a>Display_ILI9341::getFPS()</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, display_ili9341.o(i._ZN15Display_ILI93416getFPSEv))
+<BR><BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getFPS()
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+</UL>
+<P><STRONG><a name="[9a]"></a>Display_ILI9341::setCol(unsigned short, unsigned short)</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93416setColEtt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Display_ILI9341::setCol(unsigned short, unsigned short) &rArr; Display_ILI9341::sendCMD(unsigned char)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
 </UL>
 
-<P><STRONG><a name="[7e]"></a>Display_ILI9341::initDMA(unsigned short*)</STRONG> (Thumb, 96 bytes, Stack size 56 bytes, display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt))
+<P><STRONG><a name="[54]"></a>Display_ILI9341::setFPS(unsigned short)</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93416setFPSEt))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = Display_ILI9341::setFPS(unsigned short) &rArr; Display_ILI9341::initFPSTimer(unsigned short) &rArr; RCC_GetClocksFreq
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initFPSTimer(unsigned short)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setFPS(unsigned short)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+</UL>
+<P><STRONG><a name="[9d]"></a>Display_ILI9341::initDMA(unsigned short*)</STRONG> (Thumb, 96 bytes, Stack size 56 bytes, display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ITConfig
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ(IRQn)
+<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_DMACmd
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHBPeriphClockCmd
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ITConfig
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ(IRQn)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
 </UL>
 
-<P><STRONG><a name="[7d]"></a>Display_ILI9341::sendCMD(unsigned char)</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh))
+<P><STRONG><a name="[9c]"></a>Display_ILI9341::sendCMD(unsigned char)</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = Display_ILI9341::sendCMD(unsigned char)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_I2S_GetFlagStatus
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
-<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setOrientation(unsigned char)
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setPage(unsigned short, unsigned short)
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setCol(unsigned short, unsigned short)
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::setOrientation(unsigned char)
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
 </UL>
 
-<P><STRONG><a name="[7c]"></a>Display_ILI9341::setPage(unsigned short, unsigned short)</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93417setPageEtt))
+<P><STRONG><a name="[9b]"></a>Display_ILI9341::setPage(unsigned short, unsigned short)</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, display_ili9341.o(i._ZN15Display_ILI93417setPageEtt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Display_ILI9341::setPage(unsigned short, unsigned short) &rArr; Display_ILI9341::sendCMD(unsigned char)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::sendCMD(unsigned char)
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::writeData16(unsigned short)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::displayClear(unsigned char)
 </UL>
 
-<P><STRONG><a name="[87]"></a>Display_ILI9341::initTimer()</STRONG> (Thumb, 86 bytes, Stack size 32 bytes, display_ili9341.o(i._ZN15Display_ILI93419initTimerEv))
+<P><STRONG><a name="[aa]"></a>Display_ILI9341::initTimer()</STRONG> (Thumb, 86 bytes, Stack size 32 bytes, display_ili9341.o(i._ZN15Display_ILI93419initTimerEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Display_ILI9341::initTimer() &rArr; RCC_GetClocksFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ(IRQn)
+<BR>[Calls]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ(IRQn)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
-</UL>
-
-<P><STRONG><a name="[8e]"></a>Text::displayString(Engine*, char*, unsigned char, unsigned short, unsigned short, bool)</STRONG> (Thumb, 182 bytes, Stack size 72 bytes, text.o(i._ZN4Text13displayStringEP6EnginePchttb))
-<BR><BR>[Stack]<UL><LI>Max Depth = 100<LI>Call Chain = Text::displayString(Engine*, char*, unsigned char, unsigned short, unsigned short, bool) &rArr; Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
-</UL>
-<BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen(char*)
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
-</UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
 </UL>
 
-<P><STRONG><a name="[90]"></a>Input::getState(unsigned short)</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, input.o(i._ZN5Input8getStateEt))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Input::getState(unsigned short)
+<P><STRONG><a name="[48]"></a>Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool)</STRONG> (Thumb, 186 bytes, Stack size 64 bytes, text.o(i._ZN4Text13displayStringEPKchttb))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool) &rArr; Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::draw()
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
-
-<P><STRONG><a name="[92]"></a>Input::getXAxis()</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, input.o(i._ZN5Input8getXAxisEv))
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[4d]"></a>Input::getState(unsigned char)</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, input.o(i._ZN5Input8getStateEh))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Input::getState(unsigned char)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[4e]"></a>Input::getXAxis()</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, input.o(i._ZN5Input8getXAxisEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Input::getXAxis() &rArr; getAdcValueForXAxis() &rArr; ADC_GetInjectedConversionValue
 </UL>
-<BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForXAxis()
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForXAxis()
 </UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
 </UL>
-
-<P><STRONG><a name="[93]"></a>Input::getYAxis()</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, input.o(i._ZN5Input8getYAxisEv))
+<P><STRONG><a name="[4f]"></a>Input::getYAxis()</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, input.o(i._ZN5Input8getYAxisEv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Input::getYAxis() &rArr; getAdcValueForYAxis() &rArr; ADC_GetInjectedConversionValue
 </UL>
-<BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForYAxis()
+<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getAdcValueForYAxis()
 </UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[4c]"></a>Engine::setPalette(const unsigned short*, unsigned char, unsigned char)</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine10setPaletteEPKthh))
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[43]"></a>Engine::setFillColor(unsigned char)</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine12setFillColorEh))
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[42]"></a>Engine::setLineClear(bool)</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine12setLineClearEb))
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[45]"></a>Engine::displaySprite(const unsigned char*, short, short, short, short, bool)</STRONG> (Thumb, 158 bytes, Stack size 20 bytes, engine.o(i._ZN6Engine13displaySpriteEPKhssssb))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = Engine::displaySprite(const unsigned char*, short, short, short, short, bool)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[44]"></a>Engine::setSpriteMemory(unsigned char*, unsigned)</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine15setSpriteMemoryEPhj))
+<BR><BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[46]"></a>Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)</STRONG> (Thumb, 222 bytes, Stack size 24 bytes, engine.o(i._ZN6Engine17displaySpriteMaskEPKhhsshsb))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[47]"></a>Engine::displaySpriteMatrix(const Matrix*, signed char, short, short, short, short, bool)</STRONG> (Thumb, 362 bytes, Stack size 28 bytes, engine.o(i._ZN6Engine19displaySpriteMatrixEPK6Matrixassssb))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = Engine::displaySpriteMatrix(const Matrix*, signed char, short, short, short, short, bool)
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> vex_loader.o(i._Z6getCmdPc)
+</UL>
+<P><STRONG><a name="[a4]"></a>Engine::clear()</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine5clearEv))
+<BR><BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
 </UL>
 
-<P><STRONG><a name="[96]"></a>Engine::displaySprite(const unsigned char*, short, short, short, short, bool)</STRONG> (Thumb, 180 bytes, Stack size 24 bytes, engine.o(i._ZN6Engine13displaySpriteEPKhssssb))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = Engine::displaySprite(const unsigned char*, short, short, short, short, bool)
-</UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[8f]"></a>Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)</STRONG> (Thumb, 198 bytes, Stack size 28 bytes, engine.o(i._ZN6Engine17displaySpriteMaskEPKhhsshsb))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
-</UL>
-<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(Engine*, char*, unsigned char, unsigned short, unsigned short, bool)
-</UL>
-
-<P><STRONG><a name="[95]"></a>Engine::displaySpriteMatrix(const unsigned char**, signed char, short, short, short, short, bool)</STRONG> (Thumb, 322 bytes, Stack size 32 bytes, engine.o(i._ZN6Engine19displaySpriteMatrixEPPKhassssb))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Engine::displaySpriteMatrix(const unsigned char**, signed char, short, short, short, short, bool)
-</UL>
-<BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[94]"></a>Engine::init()</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine4initEv))
-<BR><BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[81]"></a>Engine::clear()</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, engine.o(i._ZN6Engine5clearEv))
-<BR><BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
-</UL>
-
-<P><STRONG><a name="[80]"></a>Engine::parseLine(short, unsigned short*)</STRONG> (Thumb, 1100 bytes, Stack size 88 bytes, engine.o(i._ZN6Engine9parseLineEsPt))
+<P><STRONG><a name="[a3]"></a>Engine::parseLine(short, unsigned short*)</STRONG> (Thumb, 1130 bytes, Stack size 88 bytes, engine.o(i._ZN6Engine9parseLineEsPt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = Engine::parseLine(short, unsigned short*)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
-<BR>[Called By]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<BR>[Called By]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
 </UL>
 
-<P><STRONG><a name="[51]"></a>main</STRONG> (Thumb, 430 bytes, Stack size 464 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 584 + Unknown Stack Size
-<LI>Call Chain = main &rArr; Display_ILI9341::init(Engine*) &rArr; Display_ILI9341::displayClear(unsigned char) &rArr; Display_ILI9341::initDMA(unsigned short*) &rArr; DMA_Init
+<P><STRONG><a name="[92]"></a>Terminal::sendNumber(int, bool)</STRONG> (Thumb, 68 bytes, Stack size 56 bytes, terminal.o(i._ZN8Terminal10sendNumberEib))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112 + Unknown Stack Size
+<LI>Call Chain = Terminal::sendNumber(int, bool) &rArr; itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(Engine*, char*, unsigned char, unsigned short, unsigned short, bool)
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getYAxis()
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getXAxis()
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Input::getState(unsigned short)
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa(int, char*)
-<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::init()
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::displaySpriteMatrix(const unsigned char**, signed char, short, short, short, short, bool)
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::displaySprite(const unsigned char*, short, short, short, short, bool)
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
-<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::getFPS()
-<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init(Engine*)
-<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+<BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendString(char*)
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;itoa(int, char*)
 </UL>
-<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;runGame()
+</UL>
+
+<P><STRONG><a name="[94]"></a>Terminal::sendString(char*)</STRONG> (Thumb, 118 bytes, Stack size 24 bytes, terminal.o(i._ZN8Terminal10sendStringEPc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
+<LI>Call Chain = Terminal::sendString(char*) &rArr; Terminal::scroll()
+</UL>
+<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::scroll()
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+</UL>
+<BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendNumber(int, bool)
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[b0]"></a>Terminal::draw()</STRONG> (Thumb, 74 bytes, Stack size 64 bytes, terminal.o(i._ZN8Terminal4drawEv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = Terminal::draw() &rArr; Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool) &rArr; Engine::displaySpriteMask(const unsigned char*, unsigned char, short, short, unsigned char, short, bool)
+</UL>
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool)
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[af]"></a>Terminal::scroll()</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, terminal.o(i._ZN8Terminal6scrollEv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = Terminal::scroll()
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendString(char*)
+</UL>
+
+<P><STRONG><a name="[b1]"></a>Terminal::setMemory(unsigned char*)</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, terminal.o(i._ZN8Terminal9setMemoryEPh))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Terminal::setMemory(unsigned char*)
+</UL>
+<BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 180 bytes, Stack size 8 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
+<LI>Call Chain = main &rArr; loadGame() &rArr; Terminal::sendNumber(int, bool) &rArr; itoa(int, char*) &rArr; reverse(char*) &rArr; strlen
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::setMemory(unsigned char*)
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::draw()
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Terminal::sendString(char*)
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool)
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;loadGame()
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;runGame()
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initHardware()
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Engine::setSpriteMemory(unsigned char*, unsigned)
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::init()
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::draw()
+</UL>
+<BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[8b]"></a>__NVIC_EnableIRQ(IRQn)</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn))
-<BR><BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<P><STRONG><a name="[a1]"></a>__NVIC_EnableIRQ(IRQn)</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn))
+<BR><BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initTimer()
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initDMA(unsigned short*)
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display_ILI9341::initFPSTimer(unsigned short)
 </UL>
 
-<P><STRONG><a name="[60]"></a>SetSysClock</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SetSysClock))
+<P><STRONG><a name="[57]"></a>__sti___8_main_cpp_display</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, main.o(i.__sti___8_main_cpp_display))
+<BR>[Address Reference Count : 1]<UL><LI> main.o(.init_array)
+</UL>
+<P><STRONG><a name="[78]"></a>SetSysClock</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_stm32f10x.o(i.SetSysClock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = SetSysClock &rArr; SetSysClockTo72
 </UL>
-<BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClockTo72
+<BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClockTo72
 </UL>
 <BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
 </UL>
 
-<P><STRONG><a name="[61]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(i.SetSysClockTo72))
+<P><STRONG><a name="[79]"></a>SetSysClockTo72</STRONG> (Thumb, 214 bytes, Stack size 12 bytes, system_stm32f10x.o(i.SetSysClockTo72))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = SetSysClockTo72
 </UL>
-<BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysClock
 </UL>
 <P>
 <H3>

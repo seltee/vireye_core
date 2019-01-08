@@ -10,8 +10,9 @@
 unsigned short int line1[321];
 unsigned short int line2[321];
 bool sendLineDone;
-unsigned char frameCounter = 0;
-unsigned char frameRate = 0;
+unsigned short frameCounter = 0;
+unsigned short frameRate = 0;
+bool allowFrame = false;
 
 unsigned short int Display_ILI9341::getWidth(){
 	return 320;
@@ -33,14 +34,19 @@ bool Display_ILI9341::setDimentions(){
 	return true;
 }
 
-unsigned char Display_ILI9341::getFPS(){
+unsigned short Display_ILI9341::getFPS(){
 	return frameRate;
 }
 
-void Display_ILI9341::init(Engine *engine){
+void Display_ILI9341::setFPS(unsigned short limit){
+	fpsLimit = limit;
+	initFPSTimer(limit);
+}
+
+void Display_ILI9341::init(){
 	sendLineDone = false;
-	this->engine = engine;
-	
+	fpsLimit = 0;
+
 	GPIO_InitTypeDef GPIO_InitStructure;
 	SPI_InitTypeDef SPI_InitStructure;
 	
@@ -162,19 +168,21 @@ void Display_ILI9341::draw(){
 	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_RESET);
 	cLine = line1;
 
-	engine->parseLine(0, cLine);
+	Engine::parseLine(0, cLine);
 	for(uint16_t lineNum=1; lineNum<=240; lineNum++)
 	{
 		sendLineDone = false;
 		initDMA(cLine);
 		DMA_Cmd(DMA1_Channel3, ENABLE);
 		cLine = (cLine == line1 ? line2 : line1);
-		engine->parseLine(lineNum, cLine);
+		Engine::parseLine(lineNum, cLine);
 		while(!sendLineDone);
 	}
 	
-	engine->clear();
+	Engine::clear();
 	frameCounter++;
+	while(fpsLimit && !allowFrame);
+	allowFrame = false;
 }
 
 void Display_ILI9341::sendCMD(uint8_t cmd){
@@ -295,6 +303,19 @@ void Display_ILI9341::initTimer(){
 	NVIC_EnableIRQ(TIM3_IRQn);
 }
 
+void Display_ILI9341::initFPSTimer(unsigned short limit){
+	RCC_ClocksTypeDef RCC_Clocks;
+	RCC_GetClocksFreq(&RCC_Clocks);
+	
+	// Setting up timer for 1 sec / limit
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE);
+	TIM4->PSC = RCC_Clocks.SYSCLK_Frequency / 10000 - 1;
+	TIM4->ARR = 10000/limit;
+	TIM4->DIER |= TIM_DIER_UIE;
+	TIM4->CR1 |= TIM_CR1_CEN;
+	NVIC_EnableIRQ(TIM4_IRQn);
+}
+
 extern "C" void DMA1_Channel3_IRQHandler(void) {
 	GPIO_WriteBit(GPIOA,PIN_LCD_LED,Bit_SET);
 	DMA_Cmd(DMA1_Channel3, DISABLE);
@@ -307,6 +328,12 @@ extern "C" void TIM3_IRQHandler(void)
   TIM3->SR &= ~TIM_SR_UIF;
 	frameRate = frameCounter;
 	frameCounter = 0;
+}
+
+extern "C" void TIM4_IRQHandler(void)
+{
+  TIM4->SR &= ~TIM_SR_UIF;
+	allowFrame = true;
 }
 
 

@@ -1,6 +1,6 @@
 .\objects\hardware.o: hardware.cpp
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
-.\objects\hardware.o: D:\art\всякое\vireye\RTE\_Target_1\RTE_Components.h
+.\objects\hardware.o: D:\art\всякое\vireye\RTE\_STM32F103C8T6_Vireye_Core\RTE_Components.h
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\core_cm3.h
 .\objects\hardware.o: D:\programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\cmsis_version.h
@@ -16,8 +16,10 @@
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_spi.h
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h
+.\objects\hardware.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\hardware.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\hardware.o: hardware.h
 .\objects\hardware.o: input.h
 .\objects\hardware.o: display.h
 .\objects\hardware.o: engine.h
+.\objects\hardware.o: usb.h

@@ -2,7 +2,7 @@
 .\objects\main.o: display_ili9341.h
 .\objects\main.o: display.h
 .\objects\main.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h
-.\objects\main.o: D:\art\всякое\vireye\RTE\_Target_1\RTE_Components.h
+.\objects\main.o: D:\art\всякое\vireye\RTE\_STM32F103C8T6_Vireye_Core\RTE_Components.h
 .\objects\main.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\core_cm3.h
 .\objects\main.o: D:\programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: D:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include\cmsis_version.h
@@ -18,6 +18,7 @@
 .\objects\main.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h
 .\objects\main.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_spi.h
 .\objects\main.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_tim.h
+.\objects\main.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\stm32f10x_usart.h
 .\objects\main.o: D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc\misc.h
 .\objects\main.o: engine.h
 .\objects\main.o: input.h
@@ -25,3 +26,7 @@
 .\objects\main.o: helpers.h
 .\objects\main.o: hardware.h
 .\objects\main.o: sprites.h
+.\objects\main.o: mem.h
+.\objects\main.o: vex_loader.h
+.\objects\main.o: terminal.h
+.\objects\main.o: D:\programs\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

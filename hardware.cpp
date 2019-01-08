@@ -6,6 +6,7 @@
 
 #include "hardware.h"
 #include "input.h"
+#include "usb.h"
 
 bool initHardware(){
 	GPIO_InitTypeDef GPIO_InitStructure;

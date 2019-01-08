@@ -5,82 +5,45 @@
 #include "helpers.h"
 #include "hardware.h"
 #include "sprites.h"
+#include "mem.h"
+#include "vex_loader.h"
+#include "terminal.h"
+#include <string.h>
+
+Display_ILI9341 display;
 
 int main(void)
 {
-	// Initial position of player
-	int positionX = 160-8;
-	int positionY = 120-8;
-	
-	// Other parameters
-	int counter = 0;
-	int spaceMove = 0;
-	short int bulletX = 0;
-	short int bulletY = 0;
-	bool bulletAlive = false;
-
-	// Our space (space is a matrix of sprites)
-	const unsigned char *spaceMatrix[90];
-	for (int i = 0; i < 90; i++){
-		spaceMatrix[i] = space[i % 2];
-	}
-	
 	// Init all of the cpu hardware. Note: display has it's own hardware initialization
-	if (initHardware()){	
-		// initialization
-		Engine engine;
-		Display_ILI9341 display;
-		engine.init();
-		display.init(&engine);
+	if (initHardware()){
+		// Initialization
+		display.init();
+		Terminal::setMemory(ram);
+		Engine::setSpriteMemory(ram+(4*1024), (4*1024));
 
-		// Game cycle
-		while(1)
-    {			
-			// Display space
-			// See engine.h for all available drawing functions
-			spaceMove++;
-			engine.displaySpriteMatrix(spaceMatrix, 16, 0, (spaceMove % 32) - 32, 10, 9);
-		
-			// Update player position
-			positionX += Input::getXAxis()>>8;
-			positionY -= Input::getYAxis()>>8;
-						
-			// Shoot bullet
-			if (Input::getState(INPUT_A) && !bulletAlive){
-				bulletX = positionX + 3;
-				bulletY = positionY;
-				bulletAlive = true;
+		// Check if there is program in memory by file id
+		if (fileRom[0] == 'V' && fileRom[1] == 'E' && fileRom[2] == 'E' && fileRom[3] == 'X'){
+			if (loadGame()){
+				runGame();
+			} else {
+				Terminal::sendString("Unable to load\n");
 			}
-
-			// Draw player
-			counter++;
-			engine.displaySprite(shipSprite[counter%2], positionX, positionY, 8, 8);
-						
-			// Draw bullet
-			if (bulletAlive){
-				bulletY -= 6;
-				bulletAlive = bulletY < 0 ? false : true;
-				engine.displaySprite(bulletSprite, bulletX, bulletY, 4, 4);
+			// Draw terminal infinetelly if error
+			while(1){
+				Terminal::draw();
+				display.draw();
 			}
-			
-			// Draw axis information
-			char string[16];
-			itoa(Input::getXAxis(), string);
-			Text::displayString(&engine, string, 4, 0, 0);
-			itoa(Input::getYAxis(), string);
-			Text::displayString(&engine, string, 4, 0, 24);
-			itoa(display.getFPS(), string);
-			Text::displayString(&engine, string, 4, 0, 48);
-			
-			// Show current cpu frequency
-			RCC_ClocksTypeDef RCC_Clocks;
-			RCC_GetClocksFreq(&RCC_Clocks);	
-			itoa(RCC_Clocks.SYSCLK_Frequency, string);
-			Text::displayString(&engine, "SYSCLK", 4, 0, 220);
-			Text::displayString(&engine, string, 4, 100, 220);
-			
-			// Draw sprites on real screen
-			display.draw();
-    }
+		} else {
+			short c = 0, dir = 1;
+			while(1){
+				c+=dir;
+				if (c > 200) dir = -1;
+				if (c < 0) dir = 1;
+				Text::displayString("No program in memory", 4, 10, 10 + c, false);
+				Text::displayString("Use patcher to link program", 4, 10, 26 + c, false);
+				display.draw();
+			}
+		}
 	}
+	while(1);
 }
