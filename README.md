@@ -1,8 +1,14 @@
-Vireye is homebrew game console, that uses stm32f103c8t6 and ili9341 display.
+### Vireye is homebrew game console, that uses stm32f103c8t6 and ili9341 display. It can run up to 50 frames per second in 320x240 resolution.
 
-Use free version of keil uvision to build this project. Also by default it's configured to use st-link v2 (aliexpress vertion).
+If you're already assembled this board and you don't want to work on the core, you don't need this repository. You need only vireye tools https://github.com/seltee/vireye_tools to compile your programs and run it through swd.
 
-Default wiring (check additional/scheme.jpg):
+Use free version of keil uvision to build this project. Also by default it's configured to use st-link v2 (aliexpress version).
+
+### Youtube videos (rus):
+
+https://www.youtube.com/watch?v=qS5v5xbwclY
+
+### Default wiring (check additional/scheme.jpg):
 
 Display:
 
@@ -33,7 +39,3 @@ Y - b9
 Y Axis - b0
 
 X Axis - b1
-
-More about this on youtube (rus):
-
-https://youtu.be/lUS-fzqFzAk

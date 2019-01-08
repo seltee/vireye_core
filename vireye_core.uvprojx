@@ -455,16 +455,6 @@
               <FilePath>.\text.h</FilePath>
             </File>
             <File>
-              <FileName>sprites.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\sprites.h</FilePath>
-            </File>
-            <File>
-              <FileName>sprites.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\sprites.cpp</FilePath>
-            </File>
-            <File>
               <FileName>mem.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\mem.cpp</FilePath>
