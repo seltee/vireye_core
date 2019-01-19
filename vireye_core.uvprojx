@@ -484,6 +484,16 @@
               <FileType>8</FileType>
               <FilePath>.\terminal.cpp</FilePath>
             </File>
+            <File>
+              <FileName>sdcard.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\sdcard.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>sdcard.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sdcard.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -4,10 +4,6 @@
 
 class Display{
 	public:
-		virtual unsigned short int getWidth();
-		virtual unsigned short int getHeight();
-		virtual unsigned short int getNativeWidth();
-		virtual unsigned short int getNativeHeight();
 		virtual bool setDimentions();
 		virtual unsigned short getFPS();
 		virtual void setFPS(unsigned short limit);

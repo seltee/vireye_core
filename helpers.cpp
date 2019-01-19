@@ -31,8 +31,23 @@ void itoa(int n, char s[]){
 	reverse(s);
 }
 
+char toUpper(char a){
+	return (a >= 'a' && a <= 'z') ? a-0x20 : a;
+}
+
 bool cmp(char *a, char *b){
 	while(*a == *b){
+		if (*a == 0){
+			return true;
+		}
+		a++;
+		b++;
+	}
+	return false;
+}
+
+bool cmpi(char *a, char *b){
+	while(toUpper(*a) == toUpper(*b)){
 		if (*a == 0){
 			return true;
 		}

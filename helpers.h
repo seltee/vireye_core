@@ -24,4 +24,6 @@
 void delayByLoop(uint32_t nCount);
 void reverse(char s[]);
 void itoa(int n, char s[]);
+char toUpper(char a);
 bool cmp(char *a, char *b);
+bool cmpi(char *a, char *b);

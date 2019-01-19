@@ -534,6 +534,51 @@ const uint8_t dot[12] = {
 	BINARY(00000000),
 };
 
+const uint8_t ground[12] = {
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(01111110),
+	BINARY(01111110),
+	BINARY(00000000),
+	BINARY(00000000),
+};
+
+const uint8_t tilda[12] = {
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00100000), 
+	BINARY(01111010), 
+	BINARY(01011110), 
+	BINARY(00000100),
+	BINARY(00000000),
+	BINARY(00000000),
+	BINARY(00000000),
+};
+
+const uint8_t slash[12] = {
+	BINARY(00000100), 
+	BINARY(00000100), 
+	BINARY(00001000), 
+	BINARY(00001000), 
+	BINARY(00010000), 
+	BINARY(00010000), 
+	BINARY(00100000), 
+	BINARY(00100000), 
+	BINARY(01000000),
+	BINARY(01000000),
+	BINARY(00000000),
+	BINARY(00000000),
+};
+
 void Text::displayString(const char *string, uint8_t color, uint16_t x, uint16_t y, bool upscale){
 	uint8_t len = strlen(string);
 	for (uint8_t i = 0; i < len; i++){
@@ -565,11 +610,23 @@ void Text::displayString(const char *string, uint8_t color, uint16_t x, uint16_t
 		}
 		
 		if (c == '.'){
-			sym =  dot;
+			sym = dot;
+		}
+		
+		if (c == '_'){
+			sym = ground;
+		}
+		
+		if (c == '~'){
+			sym = tilda;
+		}
+		
+		if (c == '/'){
+			sym = slash;
 		}
 		
 		if (sym){
-			Engine::displaySpriteMask(sym, color, x, y, 1, 12, upscale);
+			Engine::displaySpriteBitMask(sym, color, x, y, 1, 12, 0, upscale);
 		}
 		
 		x += upscale ? 16 : 8;

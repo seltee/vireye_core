@@ -50,7 +50,8 @@ struct VexCodeRelocation {
 #define VEX_REL_TYPE_RAM 3
 #define VEX_REL_TYPE_CODE 4
 
-bool loadGame();
+bool loadGameInternal();
+bool loadGame(char *path, unsigned char *ramBuffer);
 int runGame();
 
 

@@ -6,6 +6,10 @@
 
 #include "hardware.h"
 #include "input.h"
+#include "sdcard.h"
+
+unsigned int tmrCounter = 0;
+
 bool initHardware(){
 	GPIO_InitTypeDef GPIO_InitStructure;
 	ADC_InitTypeDef ADC_InitStructure;
@@ -14,9 +18,11 @@ bool initHardware(){
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+	
 	//enable ADC system clock
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC2, ENABLE);
+	
 	//clock for ADC
   RCC_ADCCLKConfig (RCC_PCLK2_Div8);
 	
@@ -24,13 +30,13 @@ bool initHardware(){
 	//why actually we need this?
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13 | GPIO_Pin_9 ;
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13 | GPIO_Pin_9;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 	
 	//GPIO for input
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IPU;
-	GPIO_InitStructure.GPIO_Pin   = INPUT_START | INPUT_A | INPUT_B | INPUT_X | INPUT_Y;
+	GPIO_InitStructure.GPIO_Pin   =  GPIO_Pin_4 |  GPIO_Pin_5 |  GPIO_Pin_6 |  GPIO_Pin_7 |  GPIO_Pin_8 |  GPIO_Pin_9;
 	GPIO_Init(INPUT_PORT, &GPIO_InitStructure);
 		
 	//ADC for analog sticks
@@ -57,6 +63,18 @@ bool initHardware(){
   
 	ADC_AutoInjectedConvCmd( ADC1, ENABLE );
 	ADC_SoftwareStartInjectedConvCmd ( ADC1 , ENABLE ) ;
+			
+	//MS timer
+	RCC_ClocksTypeDef RCC_Clocks;
+	RCC_GetClocksFreq(&RCC_Clocks);
+	
+	// Setting up timer for 1000 ms
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+	TIM2->PSC = RCC_Clocks.SYSCLK_Frequency / 10000 - 1;
+	TIM2->ARR = 10;
+	TIM2->DIER |= TIM_DIER_UIE;
+	TIM2->CR1 |= TIM_CR1_CEN;
+	NVIC_EnableIRQ(TIM2_IRQn);
 	
 	return true;
 }
@@ -69,7 +87,25 @@ short int getAdcValueForYAxis(){
 	return ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_2) - 2048;
 }
 
+unsigned int getTimer(){
+	return tmrCounter;
+}
 
+unsigned int getTimerWithClear(){
+	unsigned int ret = tmrCounter;
+	tmrCounter = 0;
+	return ret;
+}
+
+void clearTimer(){
+	tmrCounter = 0;
+}
+
+extern "C" void TIM2_IRQHandler(void)
+{
+  TIM2->SR &= ~TIM_SR_UIF;
+	tmrCounter++;
+}
 
 
 

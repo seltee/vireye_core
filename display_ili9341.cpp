@@ -14,22 +14,6 @@ unsigned short frameCounter = 0;
 unsigned short frameRate = 0;
 bool allowFrame = false;
 
-unsigned short int Display_ILI9341::getWidth(){
-	return 320;
-}
-
-unsigned short int Display_ILI9341::getHeight(){
-	return 240;
-}
-
-unsigned short int Display_ILI9341::getNativeWidth(){
-	return 320;
-}
-
-unsigned short int Display_ILI9341::getNativeHeight(){
-	return 240;
-}
-
 bool Display_ILI9341::setDimentions(){
 	return true;
 }
@@ -77,8 +61,6 @@ void Display_ILI9341::init(){
 	SPI_Init(SPI1, &SPI_InitStructure);
 	SPI_Cmd(SPI1, ENABLE);
 	
-	SPI_NSSInternalSoftwareConfig(SPI1, SPI_NSSInternalSoft_Set);
-		
 	// Display comands
 	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_SET);		
 	GPIO_WriteBit(GPIOA,PIN_LCD_RESET,Bit_RESET);			
@@ -122,11 +104,11 @@ void Display_ILI9341::init(){
 	writeData8(0x25);     // VRH[5:0]
 
 	sendCMD(0xC1);      // Power control
-	writeData8(0x11);     // SAP[2:0];BT[3:0]
+	writeData8(0x10);     // SAP[2:0];BT[3:0]
 
 	sendCMD(0xC5);      			// VCM control
-	writeData8(0x2b);     // Contrast
-	writeData8(0x2b);
+	writeData8(0x3e);     // Contrast
+	writeData8(0x28);
 
 	sendCMD(0xC7);      // VCM control2
 	writeData8(0x86);
@@ -135,7 +117,7 @@ void Display_ILI9341::init(){
 	writeData8(0x48);
 
 	sendCMD(0x3A); 
-	writeData8(0x05); 
+	writeData8(0x55); 
 
 	sendCMD(0xB1); 
 	writeData8(0x00); 
@@ -148,11 +130,53 @@ void Display_ILI9341::init(){
 	
 	sendCMD(0x11);      // Exit Sleep
 	sendCMD(0x29);    // Display on
-	sendCMD(0x2c); 
-	
+
+	//3gamma function disable
+	sendCMD(0xF2);
+	writeData8(0x00);
+
+	//gamma curve selected
+	sendCMD(0x26);
+	writeData8(0x01);
+
+	//set positive gamma correction
+	sendCMD(0xE0);
+	writeData8(0x0F);
+	writeData8(0x31);
+	writeData8(0x2B);
+	writeData8(0x0C);
+	writeData8(0x0E);
+	writeData8(0x08);
+	writeData8(0x4E);
+	writeData8(0xF1);
+	writeData8(0x37);
+	writeData8(0x07);
+	writeData8(0x10);
+	writeData8(0x03);
+	writeData8(0x0E);
+	writeData8(0x09);
+	writeData8(0x00);
+
+	//set negative gamma correction
+	sendCMD(0xE1);
+	writeData8(0x00);
+	writeData8(0x0E);
+	writeData8(0x14);
+	writeData8(0x03);
+	writeData8(0x11);
+	writeData8(0x07);
+	writeData8(0x31);
+	writeData8(0xC1);
+	writeData8(0x48);
+	writeData8(0x08);
+	writeData8(0x0F);
+	writeData8(0x0C);
+	writeData8(0x31);
+	writeData8(0x36);
+	writeData8(0x0F);
+
 	setOrientation(3);
 	displayClear(0);
-	GPIO_WriteBit(GPIOA,PIN_LCD_LED,Bit_SET);
 	
 	initTimer();
 }
@@ -160,8 +184,6 @@ void Display_ILI9341::init(){
 void Display_ILI9341::draw(){
 	uint16_t *cLine;
 	
-	setCol(0, 320);
-	setPage(0, 240);
 	sendCMD(0x2c);
 
 	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
