@@ -35,111 +35,124 @@ int run(char *path, unsigned char *ramBuffer){
 	return loadGame(path, ramBuffer) && runGame();
 }
 
+bool sCmp(char *cmd, char *name){
+	return (strlen(name) > 2 && name[0] == 'c' && name[1] == '.' && cmp(cmd, name+2));
+}
+
 void *getCmd(char *name){
 	// Drawing
-	if (cmp("c.dSetLineClear", name)){
+	if (sCmp("dSetLineClear", name)){
 		return (void *)Engine::setLineClear;
 	}
-	if (cmp("c.dSetFillColor", name)){
+	if (sCmp("dSetFillColor", name)){
 		return (void *)Engine::setFillColor;
 	}
-	if (cmp("c.dSetSpriteMemory", name)){
+	if (sCmp("dSetSpriteMemory", name)){
 		return (void *)Engine::setSpriteMemory;
 	}
-	if (cmp("c.dDisplaySprite", name)){
+	if (sCmp("dDisplaySprite", name)){
 		return (void *)Engine::displaySprite;
 	}
-	if (cmp("c.dDisplaySpriteBitMask", name)){
+	if (sCmp("dDisplaySpriteBitMask", name)){
 		return (void *)Engine::displaySpriteBitMask;
 	}
-	if (cmp("c.dDisplaySpriteByteMask", name)){
+	if (sCmp("dDisplaySpriteByteMask", name)){
 		return (void *)Engine::displaySpriteByteMask;
 	}
-	if (cmp("c.dDisplaySpriteMatrix", name)){
+	if (sCmp("dDisplaySpriteMatrix", name)){
 		return (void *)Engine::displaySpriteMatrix;
 	}
-	if (cmp("c.dDisplayText", name)){
+	if (sCmp("dDisplayText", name)){
 		return (void *)Text::displayString;
 	}
-	if (cmp("c.dSync", name)){
+	if (sCmp("dSync", name)){
 		return (void *)displaySync;
 	}
-	if (cmp("c.dGetFPS", name)){
+	if (sCmp("dGetFPS", name)){
 		return (void *)getFPS;
 	}
-	if (cmp("c.dSetFPS", name)){
+	if (sCmp("dSetFPS", name)){
 		return (void *)setFPS;
 	}
-	if (cmp("c.dSetPalette", name)){
+	if (sCmp("dSetPalette", name)){
 		return (void *)Engine::setPalette;
 	}
 	
 	// Input
-	if (cmp("c.iGetState", name)){
+	if (sCmp("iGetState", name)){
 		return (void *)Input::getState;
 	}
-	if (cmp("c.iGetXAxis", name)){
+	if (sCmp("iGetXAxis", name)){
 		return (void *)Input::getXAxis;
 	}
-	if (cmp("c.iGetYAxis", name)){
+	if (sCmp("iGetYAxis", name)){
 		return (void *)Input::getYAxis;
 	}
 	
 	// FS
-	if (cmp("c.fsInit", name)){
+	if (sCmp("fsInit", name)){
 		return (void *)SDEnable;
 	}
-	if (cmp("c.fsReadDir", name)){
+	if (sCmp("fsReadDir", name)){
 		return (void *)FSReadDir;
 	}
-	if (cmp("c.fsReadNextFile", name)){
+	if (sCmp("fsReadNextFile", name)){
 		return (void *)FSReadNextFile;
 	}
-	if (cmp("c.fsReadFile", name)){
+	if (sCmp("fsReadFile", name)){
 		return (void *)FSReadFile;
 	}
-	if (cmp("c.fsRead", name)){
+	if (sCmp("fsWriteFile", name)){
+		return (void *)FSWriteFile;
+	}
+	if (sCmp("fsRead", name)){
 		return (void *)FSRead;
 	}
+	if (sCmp("fsWrite", name)){
+		return (void *)FSWrite;
+	}
+	/*
 	if (cmp("c.fsSeek", name)){
 		return (void *)FSSeek;
 	}
-	if (cmp("c.fsClose", name)){
+	*/
+	if (sCmp("fsClose", name)){
 		return (void *)FSClose;
 	}
+	
 
 	// Timer
-	if (cmp("c.tGetTimer", name)){
+	if (sCmp("tGetTimer", name)){
 		return (void *)getTimer;
 	}
-	if (cmp("c.tGetTimerWithClear", name)){
+	if (sCmp("tGetTimerWithClear", name)){
 		return (void *)getTimerWithClear;
 	}
-	if (cmp("c.tClearTimer", name)){
+	if (sCmp("tClearTimer", name)){
 		return (void *)clearTimer;
 	}
 	
 	// Helpers
-	if (cmp("c.hCmp", name)){
+	if (sCmp("hCmp", name)){
 		return (void *)cmp;
 	}
-	if (cmp("c.hItoa", name)){
+	if (sCmp("hItoa", name)){
 		return (void *)itoa;
 	}
 	
 	// Default
-	if (cmp("c.memset", name)){
+	if (sCmp("memset", name)){
 		return (void *)memset;
 	}
-	if (cmp("c.memcpy", name)){
+	if (sCmp("memcpy", name)){
 		return (void *)memcpy;
 	}
-	if (cmp("c.strlen", name)){
+	if (sCmp("strlen", name)){
 		return (void *)strlen;
 	}
 
 	// System
-	if (cmp("c.sRun", name)){
+	if (sCmp("sRun", name)){
 		return (void *)run;
 	}
 	
@@ -178,14 +191,9 @@ void saveCode(const unsigned char *data, const unsigned char *address, unsigned 
 
 bool checkHeader(VexMainHeader *header, int romSize){
 	if (header->mark[0] == 'V' && header->mark[1] == 'E' && header->mark[2] == 'E' && header->mark[3] == 'X'){
-		if (header->romSize + header->codeSize > romSize){
+		if (header->romSize + header->codeSize > romSize || header->ramSize > RAM_SIZE){
 			return false;
 		}
-		
-		if (header->ramSize > RAM_SIZE){
-			return false;
-		}
-		
 		return true;
 	}
 	return false;
@@ -196,135 +204,15 @@ void unlockMemory(){
 	FLASH->KEYR = FLASH_KEY2;
 }
 
-bool loadGameInternal(){
-	const unsigned char *reader = fileRom;
-	unsigned char *partData = ram+(8*1024);
-	char *name;
-	unsigned int relCount, cmd;
-	unsigned int totalBlockSize;
-	unsigned short p1, p2;
-	unsigned int p;
-	unsigned int jmpFrom;
-		
-	// Starting the program
-	VexMainHeader header;
-	VexSubHeader subHeader;
-	VexCodeSliceHeader codeSliceHeader;
-
-	memcpy(&header, reader, sizeof(VexMainHeader));			
-	reader += sizeof(VexMainHeader);
-	
-	// Check if we can run program
-	if (!checkHeader(&header, 24*1024)) return false;
-
-	// Unlock memory to write
-	unlockMemory();
-
-	// Clear memory for game
-	clearMemory(gameRom, 24*1024);
-	
-	//Note: using terminal may broke your code, because they may change data stored in after loading ram section
-	const unsigned char *romRomShift = gameRom+header.codeSize;
-	while(1){
-		memcpy(&subHeader, reader, sizeof(VexSubHeader));			
-		reader += sizeof(VexSubHeader);
-
-		switch(subHeader.type){
-			case VEX_BLOCK_TYPE_CODE_PART:
-			
-				for (int i = 0; i < subHeader.size; i++){
-					memcpy(&codeSliceHeader, reader, sizeof(VexCodeSliceHeader));
-					
-					reader += sizeof(VexCodeSliceHeader);
-					totalBlockSize = codeSliceHeader.codeLength + codeSliceHeader.symNameTableLength + (codeSliceHeader.relocationsCount*sizeof(VexCodeRelocation));
-					relCount = codeSliceHeader.relocationsCount;
-								
-					memcpy(partData, reader, totalBlockSize);
-					reader += totalBlockSize;
-					
-					for (int rel = 0; rel < relCount; rel++){
-						VexCodeRelocation *verRel = (VexCodeRelocation *)(partData + codeSliceHeader.codeLength + codeSliceHeader.symNameTableLength + rel*sizeof(VexCodeRelocation));
-						switch(verRel->type){
-							case VEX_BLOCK_TYPE_MAP:
-							case VEX_REL_TYPE_CODE:
-								if (verRel->source != 1){
-									Terminal::sendString("Wr bnd src");
-									return false;
-								}
-								
-								if (verRel->bind == 1){
-									if (verRel->type == VEX_BLOCK_TYPE_MAP){
-										cmd = (unsigned int)(gameRom + verRel->targetShift) + 1;
-									} else {
-										name = (char*)partData + codeSliceHeader.codeLength + verRel->nameShift;
-										cmd = (unsigned int)getCmd(name);
-										if (!cmd){
-											Terminal::sendString("Unk cmd");
-											return false;
-										}
-									}
-									
-									jmpFrom = (unsigned int)(gameRom + codeSliceHeader.globalShift + verRel->shift);
-									p = ((int)cmd - (int)jmpFrom - 4) & 0x7FFFFF;
-									p1 = (p >> 12) & 0x07ff;
-									p2 = (p >> 1) & 0x07ff;
-									
-									*((short int*)(&partData[verRel->shift])) = (*((short int*)(&partData[verRel->shift])) & 0xf800) + p1;
-									*((short int*)(&partData[verRel->shift+2])) = (*((short int*)(&partData[verRel->shift+2])) & 0xf800) + p2;
-								}
-								
-								if (verRel->bind == 0){
-									*((int*)(&partData[verRel->shift])) = (int)(romRomShift + verRel->targetShift);
-								}
-							break;
-																	
-							case VEX_REL_TYPE_ROM:
-								*((int*)(&partData[verRel->shift])) = (int)(romRomShift + verRel->targetShift);
-							break;
-
-							case VEX_REL_TYPE_RAM:
-								*((int*)(&partData[verRel->shift])) = (int)(ram + verRel->targetShift);
-							break;
-							
-							default:
-								Terminal::sendString("Unk tp\n");
-								Terminal::sendNumber(verRel->type);
-								return false;
-						}
-					}
-					saveCode(partData, (unsigned char*)(gameRom + codeSliceHeader.globalShift), codeSliceHeader.codeLength);
-				}
-			break;
-				
-			case VEX_BLOCK_TYPE_RODATA:
-				saveCode(reader, romRomShift, subHeader.size);
-				reader += subHeader.size;
-			break;
-			
-			case VEX_BLOCK_TYPE_RAM:
-				memcpy(ram, reader, subHeader.size);
-				reader += subHeader.size;
-			break;
-				
-			case VEX_BLOCK_TYPE_END:
-				entryPoint = gameRom + header.entry;
-				return true;
-
-			default:
-				Terminal::sendString("Unk bl tp\n");
-				Terminal::sendNumber(subHeader.type);
-				return false;
-		}
+bool debugInternal(){
+	if (checkHeader((VexMainHeader*)fileRom, 48*1024)){
+		FileWorker fileWorker[1];
+		FSWriteFile("/debug.vex", fileWorker);
+		FSWrite(fileWorker, fileRom, 48*1024);
+		FSClose(fileWorker);
+		return true;
 	}
-}
-
-void showError(char *error){
-	Terminal::setMemory(ram);
-	Terminal::sendString(error);
-	while(1){
-		Terminal::draw();
-		display.draw();
-	}
+	return false;
 }
 
 // Needs around 6 kb
@@ -351,6 +239,7 @@ bool loadGame(char *path, unsigned char *ramBuffer){
 			clearMemory(fileRom, 48*1024);
 			
 			const unsigned char *romRomShift = fileRom+header.codeSize;
+			
 			// Main loop of sections
 			while(1){
 				FSRead(&fileWorker, &subHeader, sizeof(VexSubHeader));
@@ -373,7 +262,7 @@ bool loadGame(char *path, unsigned char *ramBuffer){
 									case VEX_BLOCK_TYPE_MAP:
 									case VEX_REL_TYPE_CODE:
 										if (verRel->source != 1){
-											showError("Wr bnd src");
+											//showError("Wr bnd src");
 											return false;
 										}
 										
@@ -384,7 +273,7 @@ bool loadGame(char *path, unsigned char *ramBuffer){
 												name = (char*)ramBuffer + codeSliceHeader.codeLength + verRel->nameShift;
 												cmd = (unsigned int)getCmd(name);
 												if (!cmd){
-													showError("Unk cmd");
+													//showError("Unk cmd");
 													return false;
 												}
 											}
@@ -412,7 +301,7 @@ bool loadGame(char *path, unsigned char *ramBuffer){
 									break;
 									
 									default:
-										showError("Unk tp\n");
+										//showError("Unk tp\n");
 										return false;
 								}
 							}

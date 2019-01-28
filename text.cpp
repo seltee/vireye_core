@@ -534,6 +534,21 @@ const uint8_t dot[12] = {
 	BINARY(00000000),
 };
 
+const uint8_t comma[12] = {
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(00000000), 
+	BINARY(01100000),
+	BINARY(01100000),
+	BINARY(00100000),
+	BINARY(00000000),
+};
+
 const uint8_t ground[12] = {
 	BINARY(00000000), 
 	BINARY(00000000), 
@@ -580,8 +595,8 @@ const uint8_t slash[12] = {
 };
 
 void Text::displayString(const char *string, uint8_t color, uint16_t x, uint16_t y, bool upscale){
-	uint8_t len = strlen(string);
-	for (uint8_t i = 0; i < len; i++){
+	int len = strlen(string);
+	for (int i = 0; i < len; i++){
 		char c = string[i];
 		const unsigned char *sym = 0;
 		
@@ -611,6 +626,10 @@ void Text::displayString(const char *string, uint8_t color, uint16_t x, uint16_t
 		
 		if (c == '.'){
 			sym = dot;
+		}
+		
+		if (c == ','){
+			sym = comma;
 		}
 		
 		if (c == '_'){

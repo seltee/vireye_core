@@ -32,24 +32,25 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 	SpriteCash *sprTarget;
 	Matrix *matrix;
 	const uint8_t *spriteBytes;
-	uint16_t actualWidth, displayWidth;
-	uint16_t actualMatrixWidth, actualMatrixLine;
-	uint16_t actualLine;
-	int32_t targetPixel;
-	int16_t widthIterator, pixelIterator, spriteIterator;
-	uint16_t color;
-	int32_t spriteLineShift, matrixLineSprite;
-	uint8_t byte;
-	int8_t iterator;
+	int actualWidth, displayWidth;
+	int actualMatrixWidth, actualMatrixLine;
+	int actualLine;
+	int targetPixel;
+	int widthIterator, pixelIterator, spriteIterator;
+	int spriteLineShift, matrixLineSprite;
+	unsigned short color;
+	char iterator;
+	unsigned char byte;
+	
 
-	const uint8_t *data;
+	const unsigned char *data;
 	bool upScale;
 	
 	if (lineClear){
 		memset(cLine, fillColor, 640);
 	}
 	
-	for (uint16_t s = 0; s < spriteCount; s++){
+	for (int s = 0; s < spriteCount; s++){
 		sprTarget = &spriteCash[s];
 		if (lineNum >= sprTarget->y && lineNum < sprTarget->y + sprTarget->height){	
 			upScale = sprTarget->upScale;

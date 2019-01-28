@@ -30,5 +30,4 @@ private:
 	void setPage(uint16_t startPage, uint16_t endPage);
 	void setXY(uint16_t positionX, uint16_t positionY);
 	void setPixel(uint16_t positionX, uint16_t positionY, uint8_t color);
-	void setOrientation(uint8_t orient);
 };

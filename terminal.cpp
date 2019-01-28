@@ -1,5 +1,6 @@
 #include <string.h>
 
+#include "config.h"
 #include "terminal.h"
 #include "text.h"
 #include "helpers.h"
@@ -39,7 +40,7 @@ void Terminal::draw(){
 	}
 }
 
-void Terminal::sendString(char *string){
+void Terminal::sendString(const char *string){
 	if (termAddress){
 		int stringSize = strlen(string) < 40 ? strlen(string) : 40;
 		TerminalInfo *termInfo = (TerminalInfo*)termAddress;
@@ -54,7 +55,6 @@ void Terminal::sendString(char *string){
 		}
 		
 		memcpy(termAddress+sizeof(TerminalInfo)+termInfo->currentLine*40, string, stringSize);
-		
 		if (termInfo->currentLine < 19){
 			termInfo->currentLine++;
 		}
@@ -77,27 +77,3 @@ void Terminal::sendNumber(int number, bool asHex){
 		sendString(string);
 	}
 }
-
-void Terminal::sendDebug16(unsigned char *data){
-	TerminalInfo *termInfo = (TerminalInfo*)termAddress;
-	char *string = (char*)(&termAddress[termInfo->currentLine*40 + sizeof(TerminalInfo)]);
-	int iterator = 0;
-
-	for (int c = 0; c < 16; c++){
-		unsigned char number = data[c];
-		char n1 = number & 0x0f;
-		char n2 = number >> 4;
-		string[iterator] = conv[n2];
-		string[iterator+1] = conv[n1];
-		
-		if (c%4 == 3){
-			string[iterator+2] = ' ';
-			iterator+=3;
-		}else{
-			iterator+=2;
-		}
-	}
-	
-	termInfo->currentLine++;
-}
-

@@ -12,11 +12,13 @@
 
 Display_ILI9341 display;
 
-void endlessRun(){
-	while(1){
-		Terminal::draw();
-		display.draw();
-	}
+struct San{
+	char a, b, c, d;
+};
+
+void message(char *msg){
+	Text::displayString(msg, 4, 10, 10, false);
+	display.draw();
 }
 
 int main(void)
@@ -25,35 +27,41 @@ int main(void)
 	if (initHardware()){
 		// Initialization
 		display.init();
-		Terminal::setMemory(ram);
+		//Terminal::setMemory(ram);
 		Engine::setSpriteMemory(ram+(2*1024), (4*1024));
 
 		// Enable SD
 		bool SDStatus = SDEnable(ram+(8*1024));
-
-		// Try to run from internal memory
-		if (loadGameInternal()){
-			runGame();
-		} else {
-			// Try to run from SD Card
-			if (SDStatus && loadGame("/autorun.vex", ram+(9*1024))){
-				runGame();
+		
+		if (SDStatus){
+			message("Starting ...");
+			// Try to run from internal memory
+			if (SDStatus && debugInternal()){
+				if (loadGame("/debug.vex", ram+(9*1024))){
+					runGame();
+				}else{
+					message("Debug failed");
+				}
 			} else {
-				display.setFPS(30);
-				short c = 0, dir = 1;
-				while(1){
-					c+=dir;
-					if (c > 160) dir = -1;
-					if (c < 0) dir = 1;
-					Text::displayString("No program in memory", 4, 10, 10 + c, false);
-					Text::displayString("Use patcher to link program", 4, 10, 26 + c, false);
-					Text::displayString("Or put autorun.vex on SD card", 4, 10, 42 + c, false);
-					Text::displayString("Thank you for using Vireye", 4, 10, 58 + c, false);
-					display.draw();
+				// Try to run from SD Card
+				if (SDStatus && loadGame("/autorun.vex", ram+(9*1024))){
+					runGame();
+				} else {
+					display.setFPS(30);
+					short c = 0, dir = 1;
+					while(1){
+						c+=dir;
+						if (c > 160) dir = -1;
+						if (c < 0) dir = 1;
+						Text::displayString("No program, please, read manual", 4, 10, 10 + c, false);
+						Text::displayString("Thank you for using Vireye", 4, 10, 26 + c, false);
+						display.draw();
+					}
 				}
 			}
-			Terminal::sendString("Unable to load");
+		}else{
+			message("No SD card");
 		}
 	}
-	endlessRun();
+	while(1);
 }

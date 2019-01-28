@@ -32,8 +32,6 @@ void Display_ILI9341::init(){
 	fpsLimit = 0;
 
 	GPIO_InitTypeDef GPIO_InitStructure;
-	SPI_InitTypeDef SPI_InitStructure;
-	
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);	
 
 	// GPIO
@@ -42,25 +40,6 @@ void Display_ILI9341::init(){
 	GPIO_InitStructure.GPIO_Pin   = PIN_LCD_LED | PIN_LCD_DC | PIN_LCD_RESET | PIN_LCD_CS;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 		
-	// Spi1
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6 | GPIO_Pin_5;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-		
-	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
-	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
-	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; 
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2; 
-	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; 
-	
-	SPI_Init(SPI1, &SPI_InitStructure);
-	SPI_Cmd(SPI1, ENABLE);
-	
 	// Display comands
 	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_SET);		
 	GPIO_WriteBit(GPIOA,PIN_LCD_RESET,Bit_RESET);			
@@ -175,9 +154,12 @@ void Display_ILI9341::init(){
 	writeData8(0x36);
 	writeData8(0x0F);
 
-	setOrientation(3);
-	displayClear(0);
+	// Orientation
+	sendCMD(0x36);
+	// 0x28 - upsidedown
+	writeData8(0xE8); 
 	
+	displayClear(0);
 	initTimer();
 }
 
@@ -270,22 +252,6 @@ void Display_ILI9341::setXY(uint16_t positionX, uint16_t positionY){
 void Display_ILI9341::setPixel(uint16_t positionX, uint16_t positionY, uint8_t color){
 	setXY(positionX, positionY);
 	writeData16(color);
-}
-
-void Display_ILI9341::setOrientation(uint8_t orient)
-{
-	sendCMD(0x36);
-	switch (orient)
-	{
-		case 0: writeData8(0x48);
-				break;
-		case 1: writeData8(0x28);
-				break;
-		case 2: writeData8(0x88);
-				break;
-		case 3: writeData8(0xE8);
-				break;
-	}
 }
 
 void Display_ILI9341::initDMA(uint16_t *cLine){
