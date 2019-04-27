@@ -477,14 +477,14 @@ ARM Macro Assembler    Page 8
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
 ork --depend=.\objects\startup_stm32f10x_md.d -o.\objects\startup_stm32f10x_md.
-o -ID:\art\всякое\vireye\RTE\Device\STM32F103C8 -ID:\art\всякое\vireye\RTE\_STM
-32F103C8T6_Vireye_Core -ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include
- -ID:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include -ID:\Keil_v5\ARM\PACK\
-Keil\STM32F1xx_DFP\2.3.0\Device\Include -ID:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DF
-P\2.3.0\Device\StdPeriph_Driver\inc -ID:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.
-3.0\RTE_Driver --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 
-522" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_MD SETA 1" --list=.\star
-tup_stm32f10x_md.lst RTE\Device\STM32F103C8\startup_stm32f10x_md.s
+o -I.\RTE\Device\STM32F103C8 -I.\RTE\_STM32F103C8T6_Vireye_Core -ID:\keil_v5\Pa
+cks\ARM\CMSIS\5.5.1\CMSIS\Core\Include -ID:\keil_v5\Packs\ARM\CMSIS\5.5.1\CMSIS
+\DSP\Include -ID:\keil_v5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include -ID:\ke
+il_v5\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\StdPeriph_Driver\inc -ID:\keil_v5\P
+acks\Keil\STM32F1xx_DFP\2.3.0\RTE_Driver --predefine="__EVAL SETA 1" --predefin
+e="__UVISION_VERSION SETA 527" --predefine="_RTE_ SETA 1" --predefine="STM32F10
+X_MD SETA 1" --list=.\startup_stm32f10x_md.lst RTE\Device\STM32F103C8\startup_s
+tm32f10x_md.s
 
 
 

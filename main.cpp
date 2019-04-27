@@ -9,6 +9,7 @@
 #include "vex_loader.h"
 #include "terminal.h"
 #include "sdcard.h"
+#include "sound.h"
 
 Display_ILI9341 display;
 
@@ -27,9 +28,9 @@ int main(void)
 	if (initHardware()){
 		// Initialization
 		display.init();
-		//Terminal::setMemory(ram);
+		Terminal::setMemory(ram);
 		Engine::setSpriteMemory(ram+(2*1024), (4*1024));
-
+				
 		// Enable SD
 		bool SDStatus = SDEnable(ram+(8*1024));
 		
@@ -37,7 +38,9 @@ int main(void)
 			message("Starting ...");
 			// Try to run from internal memory
 			if (SDStatus && debugInternal()){
+				message("Loading programm ...");
 				if (loadGame("/debug.vex", ram+(9*1024))){
+					message("Starting ...");
 					runGame();
 				}else{
 					message("Debug failed");

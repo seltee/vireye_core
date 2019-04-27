@@ -11,13 +11,14 @@
 #include "terminal.h"
 #include "helpers.h"
 
-#define GO_IDLE_STATE 0 											//Программная перезагрузка
-#define SEND_IF_COND 8 												//Для SDC V2 - проверка диапазона напряжений
-#define READ_SINGLE_BLOCK 17 									//Чтение указанного блока данных
-#define WRITE_SINGLE_BLOCK 24 								//Запись указанного блока данных
-#define SD_SEND_OP_COND 41 										//Начало процесса инициализации
-#define APP_CMD 55 														//Главная команда из ACMD команд
-#define READ_OCR 58 													//Чтение регистра OCR
+#define GO_IDLE_STATE 0 											// Software reboot
+#define SEND_IF_COND 8 												// SDC V2 - check voltage range
+#define STATUS 13 														// Status
+#define READ_SINGLE_BLOCK 17 									// Read block
+#define WRITE_SINGLE_BLOCK 24 								// Write block
+#define SD_SEND_OP_COND 41 										// Start init process
+#define APP_CMD 55 														// Main command from ACMD
+#define READ_OCR 58 													// Read OCR
 
 extern Display_ILI9341 display;
 
@@ -101,7 +102,7 @@ uint8_t SDInit(void)
   spiRead();
 
   retry = 0;                                     
-  while(SDSendCommand(SEND_IF_COND, 0x000001AA)!=0x01)
+  while(SDSendCommand(SEND_IF_COND, 0x000001AA) != 0x01)
   { 
     if(retry++>0xfe) 
     { 
@@ -132,16 +133,22 @@ uint8_t SDInit(void)
 }
 
 bool SDReadSector(unsigned int sector){ 
-	int retry = 0, i;
+	uint32_t retry = 0, i, resp;
 	if (buffer){
 		if (sector == currentSector) return true;
+
 		while(retry++<8){
 			// Not working without this
-			delayByLoop(200000);
 			i=0;
+			
+			while(spiRead() != 0xff);
 		 
 			// Read single block command
-			if(SDSendCommand(READ_SINGLE_BLOCK, sector)) continue;
+			resp = SDSendCommand(READ_SINGLE_BLOCK, sector);
+			if(resp){
+				if (resp == 5) SDInit();
+				continue;
+			}
 			
 			// Waiting for data
 			while(spiRead() != 0xfe)                
@@ -164,32 +171,40 @@ bool SDReadSector(unsigned int sector){
 
 bool SDWriteSector(unsigned int sector){
 	if (buffer){
-		int retry = 0, i;
+		uint32_t retry = 0, i;
+		uint16_t crc, x;
+		
+		// CRC16 code via Scott Dattalo www.dattalo.com
+		for(crc=i=0; i<512; i++) {
+			x   = ((crc >> 8) ^ buffer[i]) & 0xff;
+			x  ^= x >> 4;
+			crc = (crc << 8) ^ (x << 12) ^ (x << 5) ^ x;
+		}
 		
 		while(retry++<8){
-			// Not working without this
-			delayByLoop(200000);
-			i=0;
-			
+			// Wait not busy
+			while(spiRead() != 0xff);
+
 			// Write single block command
-			if(SDSendCommand(WRITE_SINGLE_BLOCK, sector)) continue;
+			if(SDSendCommand(WRITE_SINGLE_BLOCK, sector)){
+				SDInit();
+				continue;
+			}
 			
-			spiRead();
+			// Wait not busy
+			while(spiRead() != 0xff);
+			
 			spiSend(0xfe); // Mark of package sending
 				
 			for (i=0; i<512; i++) 
 				spiSend(buffer[i]);
-			
-			spiSend(0x00); 
-			spiSend(0x00); 
-			
-			i = 0;
-			while(spiRead() != 0x05)
-				if(i++ > 0xffffe) continue;  
-					
-			i = 0;
-			while(spiRead() != 0x00) continue;
 
+			spiSend(crc >> 8);
+			spiSend(crc & 0xff);
+
+			i = 0;
+			while((spiRead() & 0x1F) != 0x05 && i++ < 0xffffe);
+			if (i >= 0xffffe) continue;
 			return true;
 		}
 	}
@@ -215,7 +230,6 @@ bool SDEnable(unsigned char *newBuffer){
 		cluster2Addr = fatStartAddr+(fatSize*fatCount);
 		rootClusterAddr = SDGetDWord(0x2c);
 		rootAddr = cluster2Addr+((rootClusterAddr-2)*sectorsPerCluster);
-
 		return true;
 	}
 	return false;
@@ -326,11 +340,7 @@ int FSGetCluster(const char *filePath, FileInfo *fileInfo, int *targetSector, in
 				
 				while(1){
 					SDReadSector(sectorStart+sectorCounter);
-					
-					if (buffer[inSectorShift] != 0xE5 && buffer[inSectorShift] != 0x05 && buffer[inSectorShift] != 0x2E && buffer[inSectorShift+0x0b] != 0x0f){
-						// File not found
-						// if (buffer[inSectorShift] == 0) return -1; 
-						
+					if (buffer[inSectorShift] != 0xE5 && buffer[inSectorShift] != 0x05 && buffer[inSectorShift] != 0x2E && buffer[inSectorShift] != 0x00 && buffer[inSectorShift+0x0b] != 0x0f){
 						// Compare file names and get cluster if match
 						FSGetNameFromFileStruct(buffer+inSectorShift, cmpName);
 						if (cmpi(cmpName, nameBuffer)){
@@ -371,6 +381,7 @@ int FSGetCluster(const char *filePath, FileInfo *fileInfo, int *targetSector, in
 	}
 	if (targetSector) *targetSector = sectorStart + sectorCounter;
 	if (targetSectorShift) *targetSectorShift = inSectorShift;
+	
 	return cluster;
 }
 
@@ -487,6 +498,7 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 	if (buffer){
 		// Getting file name and path to folder
 		fileName = &filePath[strlen(filePath) - 1];
+		
 		while(fileName != filePath && *fileName != '/' && *fileName) fileName--;
 		if (*fileName == '/') fileName++;
 		if (strlen(fileName) == 0) return false;
@@ -494,7 +506,6 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 		
 		memcpy(filePathFull, filePath, fileName - filePath);
 		filePathFull[fileName - filePath] = 0;
-		
 		
 		// Getting real filename
 		memset(realFileName, ' ', 8);
@@ -516,7 +527,7 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 				memcpy(realFileExt, &fileName[i], 3);
 			}
 		}
-		
+
 		// Searching existing file
 		cluster = FSGetCluster(filePath, &fileInfo, &fileSector, &fileInSectorShift);
 
@@ -525,16 +536,18 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 			// First, let's find place in the folder
 			cluster = FSGetCluster(filePathFull, &fileInfo);
 			if (cluster == -1) return false;
+
 			FSGetEmptyFilePlace(cluster, &fileSector, &fileInSectorShift);
-			
+
 			// New cluster for file
 			cluster = FSMakeNewCluster();
+			if (cluster == -1) return false;
 		} else {
 			// Using existing file
 			FSRemoveClusterChain(cluster);
 			FSSetClusterValue(cluster, 0x0fffffff);
 		}
-				
+	
 		// Writing file data
 		SDReadSector(fileSector);
 		
@@ -544,7 +557,6 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 		SDSetWord(fileInSectorShift+0x1A, cluster & 0xffff);
 		SDSetWord(fileInSectorShift+0x14, cluster >> 16);
 			
-		
 		if (!SDWriteSector(fileSector)) return false;
 		
 		fileWorker->startCluster = cluster;
@@ -555,9 +567,7 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 		fileWorker->inSectorShift = 0;
 		fileWorker->fileSize = 0;
 
-		
 		fileWorker->mode = 'w';
-
 		return true;
 	}
 
@@ -568,13 +578,16 @@ unsigned int FSRead(FileWorker *fileWorker, void *dst, unsigned int length){
 	if (buffer && fileWorker->mode == 'r'){
 		unsigned int startSectorInCluster = FSGetStartSector(fileWorker->currentCluster);
 		char *c = (char*)dst;
+
+		unsigned int readed = fileWorker->readed;
+		unsigned int fileSize = fileWorker->fileSize;
 		
 		while(length--){
-			if (fileWorker->readed >= fileWorker->fileSize) break;
-			fileWorker->readed++;
-			
-			SDReadSector(startSectorInCluster + fileWorker->sectorShift);
-			
+			if (readed >= fileSize) break;
+
+			readed++;
+			if (!SDReadSector(startSectorInCluster + fileWorker->sectorShift)) return 0;
+
 			*c = buffer[fileWorker->inSectorShift];
 			c++;
 			fileWorker->inSectorShift++;
@@ -594,6 +607,7 @@ unsigned int FSRead(FileWorker *fileWorker, void *dst, unsigned int length){
 			}
 		}
 		
+		fileWorker->readed = readed;
 		return c - (char*)dst;
 	}
 	return 0;
@@ -603,7 +617,6 @@ unsigned int FSWrite(FileWorker *fileWorker, const void *src, int length){
 	if (buffer && fileWorker->mode == 'w'){
 		char *c = (char*)src;
 		unsigned int startSectorInCluster = FSGetStartSector(fileWorker->currentCluster);
-		
 		while(length--){
 			SDReadSector(startSectorInCluster + fileWorker->sectorShift);
 			buffer[fileWorker->inSectorShift] = *c;
@@ -611,7 +624,7 @@ unsigned int FSWrite(FileWorker *fileWorker, const void *src, int length){
 			
 			fileWorker->inSectorShift++;
 			fileWorker->fileSize++;
-			
+
 			if (fileWorker->inSectorShift >= 512){
 				SDWriteSector(startSectorInCluster + fileWorker->sectorShift);
 				fileWorker->inSectorShift = 0;
@@ -709,7 +722,7 @@ void FSGetEmptyFilePlace(int cluster, int *targetSector, int *targetSectorShift)
 	while(1){
 		SDReadSector(startSector + sectorShift);
 		if (buffer[inSectorShift] == 0 || buffer[inSectorShift] == 0xE5) break;
-		
+
 		inSectorShift += 32;
 		if (inSectorShift >= 512){
 			sectorShift += 1;

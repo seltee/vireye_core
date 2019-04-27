@@ -6,20 +6,15 @@
 
 #include "display_ili9341.h"
 #include "helpers.h"
+#include "input.h"
 
 unsigned short int line1[321];
 unsigned short int line2[321];
 bool sendLineDone;
-unsigned short frameCounter = 0;
-unsigned short frameRate = 0;
 bool allowFrame = false;
 
 bool Display_ILI9341::setDimentions(){
 	return true;
-}
-
-unsigned short Display_ILI9341::getFPS(){
-	return frameRate;
 }
 
 void Display_ILI9341::setFPS(unsigned short limit){
@@ -160,7 +155,7 @@ void Display_ILI9341::init(){
 	writeData8(0xE8); 
 	
 	displayClear(0);
-	initTimer();
+	//initTimer();
 }
 
 void Display_ILI9341::draw(){
@@ -184,7 +179,6 @@ void Display_ILI9341::draw(){
 	}
 	
 	Engine::clear();
-	frameCounter++;
 	while(fpsLimit && !allowFrame);
 	allowFrame = false;
 }
@@ -278,19 +272,6 @@ void Display_ILI9341::initDMA(uint16_t *cLine){
   NVIC_EnableIRQ(DMA1_Channel3_IRQn);	
 }
 
-void Display_ILI9341::initTimer(){
-	RCC_ClocksTypeDef RCC_Clocks;
-	RCC_GetClocksFreq(&RCC_Clocks);
-	
-	// Setting up 1 second timer
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
-	TIM3->PSC = RCC_Clocks.SYSCLK_Frequency / 10000 - 1;
-	TIM3->ARR = 10000 ;
-	TIM3->DIER |= TIM_DIER_UIE;
-	TIM3->CR1 |= TIM_CR1_CEN;
-	NVIC_EnableIRQ(TIM3_IRQn);
-}
-
 void Display_ILI9341::initFPSTimer(unsigned short limit){
 	RCC_ClocksTypeDef RCC_Clocks;
 	RCC_GetClocksFreq(&RCC_Clocks);
@@ -304,6 +285,13 @@ void Display_ILI9341::initFPSTimer(unsigned short limit){
 	NVIC_EnableIRQ(TIM4_IRQn);
 }
 
+extern "C" void TIM4_IRQHandler(void)
+{
+  TIM4->SR &= ~TIM_SR_UIF;
+	allowFrame = true;
+}
+
+
 extern "C" void DMA1_Channel3_IRQHandler(void) {
 	GPIO_WriteBit(GPIOA,PIN_LCD_LED,Bit_SET);
 	DMA_Cmd(DMA1_Channel3, DISABLE);
@@ -311,18 +299,6 @@ extern "C" void DMA1_Channel3_IRQHandler(void) {
 	sendLineDone = true;
 }
 
-extern "C" void TIM3_IRQHandler(void)
-{
-  TIM3->SR &= ~TIM_SR_UIF;
-	frameRate = frameCounter;
-	frameCounter = 0;
-}
-
-extern "C" void TIM4_IRQHandler(void)
-{
-  TIM4->SR &= ~TIM_SR_UIF;
-	allowFrame = true;
-}
 
 
 

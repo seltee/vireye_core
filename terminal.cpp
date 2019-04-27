@@ -5,6 +5,9 @@
 #include "text.h"
 #include "helpers.h"
 #include "engine.h"
+#include "display_ili9341.h"
+
+extern Display_ILI9341 display;
 
 //terminal need 1600 bytes + sizeof(TerminalInfo)
 unsigned char *termAddress = 0;
@@ -40,7 +43,7 @@ void Terminal::draw(){
 	}
 }
 
-void Terminal::sendString(const char *string){
+void Terminal::sendString(const char *string, bool update){
 	if (termAddress){
 		int stringSize = strlen(string) < 40 ? strlen(string) : 40;
 		TerminalInfo *termInfo = (TerminalInfo*)termAddress;
@@ -58,10 +61,15 @@ void Terminal::sendString(const char *string){
 		if (termInfo->currentLine < 19){
 			termInfo->currentLine++;
 		}
+		
+		if (update){
+			Terminal::draw();
+			display.draw();
+		}
 	}
 }
 
-void Terminal::sendNumber(int number, bool asHex){
+void Terminal::sendNumber(int number, bool asHex, bool update){
 	if (termAddress){
 		char string[40];
 		if (asHex){
@@ -75,5 +83,10 @@ void Terminal::sendNumber(int number, bool asHex){
 			itoa(number, string);
 		}
 		sendString(string);
+		
+		if (update){
+			Terminal::draw();
+			display.draw();
+		}
 	}
 }

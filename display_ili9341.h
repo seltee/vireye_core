@@ -10,11 +10,11 @@
 class Display_ILI9341 : public Display{
 public:
 	virtual bool setDimentions();
-	virtual unsigned short getFPS();
 	virtual void setFPS(unsigned short limit);
 
 	virtual void init();
 	virtual void draw();
+
 private:
 	void sendCMD(uint8_t cmd);
 	void writeData8(uint8_t data);

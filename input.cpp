@@ -2,11 +2,16 @@
 
 #include "input.h"
 #include "hardware.h"
+#include "sound.h"
 
-const uint16_t butEq[] = { GPIO_Pin_4, GPIO_Pin_5, GPIO_Pin_6, GPIO_Pin_7, GPIO_Pin_8, GPIO_Pin_9 };
+const uint16_t butEqPin[] =  { GPIO_Pin_4, GPIO_Pin_13, GPIO_Pin_14, GPIO_Pin_15, GPIO_Pin_8, GPIO_Pin_9 };
+const GPIO_TypeDef * butEqPort[] = { GPIOB, GPIOC, GPIOC, GPIOC, GPIOB, GPIOB };
 
 bool Input::getState(uint8_t button){
-	return ((INPUT_PORT->IDR & butEq[button]) != (uint32_t)Bit_RESET) ? false : true;
+	if (button >= 0 && button <= 5){
+		return (butEqPort[button]->IDR & butEqPin[button]) == 0;
+	}
+	return false;
 }
 
 short int Input::getXAxis(){
