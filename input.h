@@ -5,8 +5,6 @@
 
 #include "display.h"
 
-#define INPUT_PORT GPIOB
-
 enum ButtonId {
 	INPUT_SELECT = 0,
 	INPUT_START,

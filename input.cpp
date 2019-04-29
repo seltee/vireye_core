@@ -4,8 +4,8 @@
 #include "hardware.h"
 #include "sound.h"
 
-const uint16_t butEqPin[] =  { GPIO_Pin_4, GPIO_Pin_13, GPIO_Pin_14, GPIO_Pin_15, GPIO_Pin_8, GPIO_Pin_9 };
-const GPIO_TypeDef * butEqPort[] = { GPIOB, GPIOC, GPIOC, GPIOC, GPIOB, GPIOB };
+const uint16_t butEqPin[] =  { GPIO_Pin_8, GPIO_Pin_12, GPIO_Pin_14, GPIO_Pin_15, GPIO_Pin_13, GPIO_Pin_0 };
+const GPIO_TypeDef * butEqPort[] = { GPIOA, GPIOA, GPIOC, GPIOC, GPIOC, GPIOA };
 
 bool Input::getState(uint8_t button){
 	if (button >= 0 && button <= 5){

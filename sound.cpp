@@ -1,7 +1,7 @@
 #include "sound.h"
 
 uint16_t (*_callback)(void);
-uint16_t sample = 0;
+uint8_t sample = 0;
 int8_t shLeft;
 int8_t shRight;
 
@@ -35,19 +35,8 @@ bool enableSoundMono(unsigned short freq, unsigned char bitPerSample, uint16_t (
 
 extern "C" void TIM3_IRQHandler(void)
 {
-	uint32_t portA = GPIOA->ODR;
-	uint32_t portB = GPIOB->ODR;
-	portA &= 0xFFFF00FF;
-	portA |= (sample & 0xf8) << 5;
-
-	portB &= 0xFFFFFF1F;
-	portB |= (sample & 0x07) << 5;
-	
-	GPIOA->ODR = portA;
-	GPIOB->ODR = portB;
-	
+	GPIOB->ODR = (GPIOB->ODR & 0xfffff00f) | (sample << 4);
 	sample = _callback() >> shRight << shLeft;
-	
   TIM3->SR &= ~TIM_SR_UIF;
 }
 
