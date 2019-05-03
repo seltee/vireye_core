@@ -45,6 +45,7 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 
 	const unsigned char *data;
 	bool upScale;
+	bool hMirror;
 	
 	if (lineClear){
 		memset(cLine, fillColor, 640);
@@ -53,11 +54,13 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 	for (int s = 0; s < spriteCount; s++){
 		sprTarget = &spriteCash[s];
 		if (lineNum >= sprTarget->y && lineNum < sprTarget->y + sprTarget->height){	
+			hMirror = (sprTarget->flags & SPRITE_H_MIRROR);
+			
 			upScale = sprTarget->upScale;
 			actualLine = (sprTarget->flags & SPRITE_V_MIRROR) 
 			? (upScale ? ((sprTarget->height - (lineNum - sprTarget->y) - 1)>>1) : (sprTarget->height - (lineNum - sprTarget->y) - 1)) 
 			: (upScale ? ((lineNum - sprTarget->y)>>1) : (lineNum - sprTarget->y));
-			iterator = (sprTarget->flags & SPRITE_H_MIRROR) ? -1 : 1;
+			iterator = hMirror ? -1 : 1;
 			
 			targetPixel = sprTarget->x;
 			
@@ -70,7 +73,7 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 					data = sprTarget->sprite;
 				
 					// Data to draw pointer
-					spriteBytes = (sprTarget->flags & SPRITE_H_MIRROR) ? &data[actualLine*actualWidth + actualWidth-1] : &data[actualLine*actualWidth];
+					spriteBytes = hMirror ? &data[actualLine*actualWidth + actualWidth-1] : &data[actualLine*actualWidth];
 				
 					if (upScale){
 						// Drawing sprite with upsacle
@@ -123,24 +126,44 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 
 						if (targetPixel >= 0 && targetPixel < 320 - sprTarget->width){
 							for (widthIterator = 0; widthIterator < actualWidth; widthIterator++){
-								byte = data[spriteLineShift + widthIterator];
-								for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
-									if ((0x80 >> pixelIterator) & byte){
-										*(uint32_t*)(&cLine[targetPixel]) = color + (color << 16);
+								byte = hMirror ? data[spriteLineShift + actualWidth - widthIterator - 1] : data[spriteLineShift + widthIterator];
+								if (hMirror){
+									for (pixelIterator = 7; pixelIterator >= 0; pixelIterator--){
+										if ((0x80 >> pixelIterator) & byte){
+											*(uint32_t*)(&cLine[targetPixel]) = color + (color << 16);
+										}
+										targetPixel+=2;
 									}
-									targetPixel+=2;
+								}else{
+									for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
+										if ((0x80 >> pixelIterator) & byte){
+											*(uint32_t*)(&cLine[targetPixel]) = color + (color << 16);
+										}
+										targetPixel+=2;
+									}
 								}
 							}	
 						} else {
 							for (widthIterator = 0; widthIterator < actualWidth; widthIterator++){
-								byte = data[spriteLineShift + widthIterator];
-								for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
-									if (targetPixel >= 0 && targetPixel < 320){
-										if ((0x80 >> pixelIterator) & byte){
-											*(uint32_t*)(&cLine[targetPixel]) = color + (color << 16);
+								byte = hMirror ? data[spriteLineShift + actualWidth - widthIterator - 1] : data[spriteLineShift + widthIterator];
+								if (hMirror){
+									for (pixelIterator = 7; pixelIterator >= 0; pixelIterator--){
+										if (targetPixel >= 0 && targetPixel < 320){
+											if ((0x80 >> pixelIterator) & byte){
+												*(uint32_t*)(&cLine[targetPixel]) = color + (color << 16);
+											}
 										}
+										targetPixel+=2;
 									}
-									targetPixel+=2;
+								}else{
+									for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
+										if (targetPixel >= 0 && targetPixel < 320){
+											if ((0x80 >> pixelIterator) & byte){
+												*(uint32_t*)(&cLine[targetPixel]) = color + (color << 16);
+											}
+										}
+										targetPixel+=2;
+									}
 								}
 							}	
 						}
@@ -150,24 +173,44 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 
 						if (targetPixel >= 0 && targetPixel < 320 - sprTarget->width){
 							for (widthIterator = 0; widthIterator < actualWidth; widthIterator++){
-								byte = data[spriteLineShift + widthIterator];
-								for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
-									if ((0x80 >> pixelIterator) & byte){
-										cLine[targetPixel] = color;
+								byte = hMirror ? data[spriteLineShift + actualWidth - widthIterator - 1] : data[spriteLineShift + widthIterator];
+								if (hMirror){
+									for (pixelIterator = 7; pixelIterator >= 0; pixelIterator--){
+										if ((0x80 >> pixelIterator) & byte){
+											cLine[targetPixel] = color;
+										}
+										targetPixel+=1;
 									}
-									targetPixel+=1;
+								}else{
+									for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
+										if ((0x80 >> pixelIterator) & byte){
+											cLine[targetPixel] = color;
+										}
+										targetPixel+=1;
+									}
 								}
 							}	
 						} else {
 							for (widthIterator = 0; widthIterator < actualWidth; widthIterator++){
-								byte = data[spriteLineShift + widthIterator];
-								for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
-									if (targetPixel >= 0 && targetPixel < 320){
-										if ((0x80 >> pixelIterator) & byte){
-											cLine[targetPixel] = color;
+								byte = hMirror ? data[spriteLineShift + actualWidth - widthIterator - 1] : data[spriteLineShift + widthIterator];
+								if (hMirror){
+									for (pixelIterator = 7; pixelIterator >= 0; pixelIterator--){
+										if (targetPixel >= 0 && targetPixel < 320){
+											if ((0x80 >> pixelIterator) & byte){
+												cLine[targetPixel] = color;
+											}
 										}
+										targetPixel+=1;
 									}
-									targetPixel+=1;
+								}else{
+									for (pixelIterator = 0; pixelIterator < 8; pixelIterator++){
+										if (targetPixel >= 0 && targetPixel < 320){
+											if ((0x80 >> pixelIterator) & byte){
+												cLine[targetPixel] = color;
+											}
+										}
+										targetPixel+=1;
+									}
 								}
 							}	
 						}
@@ -182,7 +225,7 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 					data = sprTarget->sprite;
 				
 					// Data to draw pointer
-					spriteBytes = (sprTarget->flags & SPRITE_H_MIRROR) ? &data[actualLine*actualWidth + actualWidth-1] : &data[actualLine*actualWidth];
+					spriteBytes = hMirror ? &data[actualLine*actualWidth + actualWidth-1] : &data[actualLine*actualWidth];
 				
 					// Color of sprite
 					color = colorPallete[sprTarget->color];

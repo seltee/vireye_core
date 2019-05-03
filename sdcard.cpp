@@ -337,7 +337,7 @@ int FSGetCluster(const char *filePath, FileInfo *fileInfo, int *targetSector, in
 			if (strlen(nameBuffer)){
 				sectorCounter = 0;
 				inSectorShift = 0;
-				
+
 				while(1){
 					SDReadSector(sectorStart+sectorCounter);
 					if (buffer[inSectorShift] != 0xE5 && buffer[inSectorShift] != 0x05 && buffer[inSectorShift] != 0x2E && buffer[inSectorShift] != 0x00 && buffer[inSectorShift+0x0b] != 0x0f){
@@ -347,6 +347,10 @@ int FSGetCluster(const char *filePath, FileInfo *fileInfo, int *targetSector, in
 							cluster = SDGetWord(inSectorShift+0x1A) + (SDGetWord(inSectorShift+0x14) << 16);
 							break;
 						}
+					}
+					
+					if (buffer[inSectorShift] == 0x00){
+						return -1;
 					}
 					
 					inSectorShift+=32;

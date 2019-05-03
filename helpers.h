@@ -27,3 +27,11 @@ void itoa(int n, char s[]);
 char toUpper(char a);
 bool cmp(char *a, char *b);
 bool cmpi(char *a, char *b);
+unsigned int __umodsi3(unsigned int a, unsigned int b);
+int __modsi3(int a, int b);
+unsigned int __udivsi3(unsigned int n, unsigned int d);
+int __divsi3(int n, int d);
+
+
+
+unsigned int rand();

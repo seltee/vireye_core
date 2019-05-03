@@ -512,6 +512,11 @@
               <FileType>8</FileType>
               <FilePath>.\sound.cpp</FilePath>
             </File>
+            <File>
+              <FileName>config.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\config.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -1,5 +1,6 @@
 #include <string.h>
 #include "helpers.h"
+#include "hardware.h"
 
 void delayByLoop(uint32_t nCount){
 	while(nCount--);
@@ -55,4 +56,33 @@ bool cmpi(char *a, char *b){
 		b++;
 	}
 	return false;
+}
+
+unsigned int __umodsi3(unsigned int a, unsigned int b){
+	return a % b;
+}
+
+int __modsi3(int a, int b){
+	return a % b;
+}
+
+unsigned int __udivsi3(unsigned int n, unsigned int d){
+	return n/d;
+}
+
+int __divsi3(int n, int d){
+	return n/d;
+}
+
+unsigned int rand(){
+	unsigned int number = 0;
+	for (int i = 0; i < 32; i++){
+		number += getAdcValueForXAxis() << i;
+		number += getAdcValueForYAxis() << i;
+		number += getTimer() << 1;
+		if (number & 0x80000000 || number & 0x800000 || number & 0x8000 || number & 0x80){
+			number >>= 1;
+		}
+	}
+	return number;
 }

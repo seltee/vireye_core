@@ -14,10 +14,10 @@ Section Cross References
     display_ili9341.o(i.DMA1_Channel3_IRQHandler) refers to stm32f10x_dma.o(i.DMA_ClearITPendingBit) for DMA_ClearITPendingBit
     display_ili9341.o(i.DMA1_Channel3_IRQHandler) refers to display_ili9341.o(.data) for sendLineDone
     display_ili9341.o(i.TIM4_IRQHandler) refers to display_ili9341.o(.data) for allowFrame
-    display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
     display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh) refers to stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
-    display_ili9341.o(i._ZN15Display_ILI934111writeData16Et) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
+    display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
     display_ili9341.o(i._ZN15Display_ILI934111writeData16Et) refers to stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
+    display_ili9341.o(i._ZN15Display_ILI934111writeData16Et) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
     display_ili9341.o(i._ZN15Display_ILI934112displayClearEh) refers to display_ili9341.o(i._ZN15Display_ILI93416setColEtt) for Display_ILI9341::setCol(unsigned short, unsigned short)
     display_ili9341.o(i._ZN15Display_ILI934112displayClearEh) refers to display_ili9341.o(i._ZN15Display_ILI93417setPageEtt) for Display_ILI9341::setPage(unsigned short, unsigned short)
     display_ili9341.o(i._ZN15Display_ILI934112displayClearEh) refers to display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) for Display_ILI9341::sendCMD(unsigned char)
@@ -29,9 +29,11 @@ Section Cross References
     display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt) refers to stm32f10x_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
     display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt) refers to stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
     display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt) refers to display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn) for __NVIC_EnableIRQ(IRQn)
+    display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to engine.o(i._ZN6Engine9parseLineEsPt) for Engine::parseLine(short, unsigned short*)
+    display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to display_ili9341.o(i._ZN15Display_ILI93417setPageEtt) for Display_ILI9341::setPage(unsigned short, unsigned short)
+    display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to display_ili9341.o(i._ZN15Display_ILI93416setColEtt) for Display_ILI9341::setCol(unsigned short, unsigned short)
     display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) for Display_ILI9341::sendCMD(unsigned char)
     display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
-    display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to engine.o(i._ZN6Engine9parseLineEsPt) for Engine::parseLine(short, unsigned short*)
     display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt) for Display_ILI9341::initDMA(unsigned short*)
     display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to stm32f10x_dma.o(i.DMA_Cmd) for DMA_Cmd
     display_ili9341.o(i._ZN15Display_ILI93414drawEv) refers to engine.o(i._ZN6Engine5clearEv) for Engine::clear()
@@ -51,13 +53,12 @@ Section Cross References
     display_ili9341.o(i._ZN15Display_ILI93416setColEtt) refers to display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) for Display_ILI9341::sendCMD(unsigned char)
     display_ili9341.o(i._ZN15Display_ILI93416setColEtt) refers to display_ili9341.o(i._ZN15Display_ILI934111writeData16Et) for Display_ILI9341::writeData16(unsigned short)
     display_ili9341.o(i._ZN15Display_ILI93416setFPSEt) refers to display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt) for Display_ILI9341::initFPSTimer(unsigned short)
-    display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt) refers to stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
     display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt) refers to stm32f10x_dma.o(i.DMA_Init) for DMA_Init
     display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt) refers to stm32f10x_spi.o(i.SPI_I2S_DMACmd) for SPI_I2S_DMACmd
     display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt) refers to stm32f10x_dma.o(i.DMA_ITConfig) for DMA_ITConfig
     display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt) refers to display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn) for __NVIC_EnableIRQ(IRQn)
-    display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
     display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) refers to stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus) for SPI_I2S_GetFlagStatus
+    display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) refers to stm32f10x_gpio.o(i.GPIO_WriteBit) for GPIO_WriteBit
     display_ili9341.o(i._ZN15Display_ILI93417setPageEtt) refers to display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh) for Display_ILI9341::sendCMD(unsigned char)
     display_ili9341.o(i._ZN15Display_ILI93417setPageEtt) refers to display_ili9341.o(i._ZN15Display_ILI934111writeData16Et) for Display_ILI9341::writeData16(unsigned short)
     display_ili9341.o(i._ZN15Display_ILI93418setPixelEtth) refers to display_ili9341.o(i._ZN15Display_ILI93415setXYEtt) for Display_ILI9341::setXY(unsigned short, unsigned short)
@@ -105,7 +106,7 @@ Section Cross References
     hardware.o(i._Z10clearTimerv) refers to hardware.o(.data) for tmrCounter
     hardware.o(i._Z12initHardwarev) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd) for RCC_APB2PeriphClockCmd
     hardware.o(i._Z12initHardwarev) refers to stm32f10x_rcc.o(i.RCC_ADCCLKConfig) for RCC_ADCCLKConfig
-    hardware.o(i._Z12initHardwarev) refers to stm32f10x_gpio.o(i.GPIO_PinRemapConfig) for GPIO_PinRemapConfig
+    hardware.o(i._Z12initHardwarev) refers to stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd) for RCC_AHBPeriphClockCmd
     hardware.o(i._Z12initHardwarev) refers to stm32f10x_gpio.o(i.GPIO_Init) for GPIO_Init
     hardware.o(i._Z12initHardwarev) refers to stm32f10x_adc.o(i.ADC_Init) for ADC_Init
     hardware.o(i._Z12initHardwarev) refers to stm32f10x_adc.o(i.ADC_InjectedSequencerLengthConfig) for ADC_InjectedSequencerLengthConfig
@@ -135,6 +136,9 @@ Section Cross References
     hardware.o(.ARM.exidx) refers to hardware.o(i.TIM2_IRQHandler) for i.TIM2_IRQHandler
     helpers.o(i._Z4cmpiPcS_) refers to helpers.o(i._Z7toUpperc) for toUpper(char)
     helpers.o(i._Z4itoaiPc) refers to helpers.o(i._Z7reversePc) for reverse(char*)
+    helpers.o(i._Z4randv) refers to hardware.o(i._Z19getAdcValueForXAxisv) for getAdcValueForXAxis()
+    helpers.o(i._Z4randv) refers to hardware.o(i._Z19getAdcValueForYAxisv) for getAdcValueForYAxis()
+    helpers.o(i._Z4randv) refers to hardware.o(i._Z8getTimerv) for getTimer()
     helpers.o(i._Z7reversePc) refers to strlen.o(.text) for strlen
     helpers.o(.ARM.exidx) refers to helpers.o(i._Z11delayByLoopj) for i._Z11delayByLoopj
     helpers.o(.ARM.exidx) refers to helpers.o(i._Z7reversePc) for i._Z7reversePc
@@ -142,10 +146,17 @@ Section Cross References
     helpers.o(.ARM.exidx) refers to helpers.o(i._Z7toUpperc) for i._Z7toUpperc
     helpers.o(.ARM.exidx) refers to helpers.o(i._Z3cmpPcS_) for i._Z3cmpPcS_
     helpers.o(.ARM.exidx) refers to helpers.o(i._Z4cmpiPcS_) for i._Z4cmpiPcS_
+    helpers.o(.ARM.exidx) refers to helpers.o(i._Z9__umodsi3jj) for i._Z9__umodsi3jj
+    helpers.o(.ARM.exidx) refers to helpers.o(i._Z8__modsi3ii) for i._Z8__modsi3ii
+    helpers.o(.ARM.exidx) refers to helpers.o(i._Z9__udivsi3jj) for i._Z9__udivsi3jj
+    helpers.o(.ARM.exidx) refers to helpers.o(i._Z8__divsi3ii) for i._Z8__divsi3ii
+    helpers.o(.ARM.exidx) refers to helpers.o(i._Z4randv) for i._Z4randv
     input.o(i._ZN5Input8getStateEh) refers to input.o(.data) for butEqPort
     input.o(i._ZN5Input8getStateEh) refers to input.o(.constdata) for butEqPin
     input.o(i._ZN5Input8getXAxisEv) refers to hardware.o(i._Z19getAdcValueForXAxisv) for getAdcValueForXAxis()
+    input.o(i._ZN5Input8getXAxisEv) refers to config.o(.data) for sysConfig
     input.o(i._ZN5Input8getYAxisEv) refers to hardware.o(i._Z19getAdcValueForYAxisv) for getAdcValueForYAxis()
+    input.o(i._ZN5Input8getYAxisEv) refers to config.o(.data) for sysConfig
     input.o(.ARM.exidx) refers to input.o(i._ZN5Input8getStateEh) for i._ZN5Input8getStateEh
     input.o(.ARM.exidx) refers to input.o(i._ZN5Input8getXAxisEv) for i._ZN5Input8getXAxisEv
     input.o(.ARM.exidx) refers to input.o(i._ZN5Input8getYAxisEv) for i._ZN5Input8getYAxisEv
@@ -157,10 +168,10 @@ Section Cross References
     main.o(i.__sti___8_main_cpp_display) refers to display_ili9341.o(.constdata__ZTV15Display_ILI9341) for vtable for Display_ILI9341
     main.o(i.main) refers to hardware.o(i._Z12initHardwarev) for initHardware()
     main.o(i.main) refers to display_ili9341.o(i._ZN15Display_ILI93414initEv) for Display_ILI9341::init()
-    main.o(i.main) refers to terminal.o(i._ZN8Terminal9setMemoryEPh) for Terminal::setMemory(unsigned char*)
     main.o(i.main) refers to engine.o(i._ZN6Engine15setSpriteMemoryEPhj) for Engine::setSpriteMemory(unsigned char*, unsigned)
     main.o(i.main) refers to sdcard.o(i._Z8SDEnablePh) for SDEnable(unsigned char*)
     main.o(i.main) refers to main.o(i._Z7messagePc) for message(char*)
+    main.o(i.main) refers to config.o(i._Z10configInitv) for configInit()
     main.o(i.main) refers to vex_loader.o(i._Z13debugInternalv) for debugInternal()
     main.o(i.main) refers to vex_loader.o(i._Z8loadGamePcPh) for loadGame(char*, unsigned char*)
     main.o(i.main) refers to vex_loader.o(i._Z7runGamev) for runGame()
@@ -178,14 +189,13 @@ Section Cross References
     text.o(i._ZN4Text13displayStringEPKchttb) refers to engine.o(i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb) for Engine::displaySpriteBitMask(const unsigned char*, unsigned char, short, short, unsigned char, short, unsigned char, bool)
     text.o(i._ZN4Text13displayStringEPKchttb) refers to text.o(.constdata) for symbols
     text.o(.ARM.exidx) refers to text.o(i._ZN4Text13displayStringEPKchttb) for i._ZN4Text13displayStringEPKchttb
-    vex_loader.o(i._Z11clearMemoryPKhj) refers to vex_loader.o(i._Z11flash_readyv) for flash_ready()
+    vex_loader.o(i._Z11clearMemoryPKh) refers to vex_loader.o(i._Z11flash_readyv) for flash_ready()
     vex_loader.o(i._Z11displaySyncv) refers to display_ili9341.o(i._ZN15Display_ILI93414drawEv) for Display_ILI9341::draw()
     vex_loader.o(i._Z11displaySyncv) refers to main.o(.data) for display
-    vex_loader.o(i._Z13debugInternalv) refers to vex_loader.o(i._Z11checkHeaderP13VexMainHeaderi) for checkHeader(VexMainHeader*, int)
+    vex_loader.o(i._Z13debugInternalv) refers to vex_loader.o(i._Z11checkHeaderP13VexMainHeader) for checkHeader(VexMainHeader*)
     vex_loader.o(i._Z13debugInternalv) refers to sdcard.o(i._Z11FSWriteFilePKcP10FileWorker) for FSWriteFile(const char*, FileWorker*)
     vex_loader.o(i._Z13debugInternalv) refers to sdcard.o(i._Z7FSWriteP10FileWorkerPKvi) for FSWrite(FileWorker*, const void*, int)
     vex_loader.o(i._Z13debugInternalv) refers to sdcard.o(i._Z7FSCloseP10FileWorker) for FSClose(FileWorker*)
-    vex_loader.o(i._Z13debugInternalv) refers to mem.o(.data) for fileRom
     vex_loader.o(i._Z3runPcPh) refers to vex_loader.o(i._Z8loadGamePcPh) for loadGame(char*, unsigned char*)
     vex_loader.o(i._Z3runPcPh) refers to vex_loader.o(i._Z7runGamev) for runGame()
     vex_loader.o(i._Z4sCmpPKcS0_) refers to strlen.o(.text) for strlen
@@ -215,6 +225,9 @@ Section Cross References
     vex_loader.o(i._Z6getCmdPc) refers to sdcard.o(i._Z7FSCloseP10FileWorker) for FSClose(FileWorker*)
     vex_loader.o(i._Z6getCmdPc) refers to sound.o(i._Z15enableSoundMonothPFtvE) for enableSoundMono(unsigned short, unsigned char, unsigned short(*)())
     vex_loader.o(i._Z6getCmdPc) refers to sound.o(i._Z12disableSoundv) for disableSound()
+    vex_loader.o(i._Z6getCmdPc) refers to config.o(i._Z9getConfigP10CoreConfigj) for getConfig(CoreConfig*, unsigned)
+    vex_loader.o(i._Z6getCmdPc) refers to config.o(i._Z11applyConfigP10CoreConfigj) for applyConfig(CoreConfig*, unsigned)
+    vex_loader.o(i._Z6getCmdPc) refers to config.o(i._Z10saveConfigv) for saveConfig()
     vex_loader.o(i._Z6getCmdPc) refers to hardware.o(i._Z8getTimerv) for getTimer()
     vex_loader.o(i._Z6getCmdPc) refers to hardware.o(i._Z17getTimerWithClearv) for getTimerWithClear()
     vex_loader.o(i._Z6getCmdPc) refers to hardware.o(i._Z10clearTimerv) for clearTimer()
@@ -223,7 +236,12 @@ Section Cross References
     vex_loader.o(i._Z6getCmdPc) refers to memset.o(.text) for memset
     vex_loader.o(i._Z6getCmdPc) refers to memcpy.o(.text) for memcpy
     vex_loader.o(i._Z6getCmdPc) refers to strlen.o(.text) for strlen
+    vex_loader.o(i._Z6getCmdPc) refers to helpers.o(i._Z4randv) for rand()
     vex_loader.o(i._Z6getCmdPc) refers to vex_loader.o(i._Z3runPcPh) for run(char*, unsigned char*)
+    vex_loader.o(i._Z6getCmdPc) refers to helpers.o(i._Z9__umodsi3jj) for __umodsi3(unsigned, unsigned)
+    vex_loader.o(i._Z6getCmdPc) refers to helpers.o(i._Z8__modsi3ii) for __modsi3(int, int)
+    vex_loader.o(i._Z6getCmdPc) refers to helpers.o(i._Z9__udivsi3jj) for __udivsi3(unsigned, unsigned)
+    vex_loader.o(i._Z6getCmdPc) refers to helpers.o(i._Z8__divsi3ii) for __divsi3(int, int)
     vex_loader.o(i._Z6getFPSv) refers to display.o(i._ZN7Display6getFPSEv) for Display::getFPS()
     vex_loader.o(i._Z6getFPSv) refers to main.o(.data) for display
     vex_loader.o(i._Z6setFPSt) refers to display_ili9341.o(i._ZN15Display_ILI93416setFPSEt) for Display_ILI9341::setFPS(unsigned short)
@@ -231,13 +249,12 @@ Section Cross References
     vex_loader.o(i._Z7runGamev) refers to vex_loader.o(.data) for entryPoint
     vex_loader.o(i._Z8loadGamePcPh) refers to sdcard.o(i._Z10FSReadFilePcP10FileWorker) for FSReadFile(char*, FileWorker*)
     vex_loader.o(i._Z8loadGamePcPh) refers to sdcard.o(i._Z6FSReadP10FileWorkerPvj) for FSRead(FileWorker*, void*, unsigned)
-    vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z11checkHeaderP13VexMainHeaderi) for checkHeader(VexMainHeader*, int)
+    vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z11checkHeaderP13VexMainHeader) for checkHeader(VexMainHeader*)
     vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z12unlockMemoryv) for unlockMemory()
-    vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z11clearMemoryPKhj) for clearMemory(const unsigned char*, unsigned)
+    vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z11clearMemoryPKh) for clearMemory(const unsigned char*)
     vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z6getCmdPc) for getCmd(char*)
     vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(i._Z8saveCodePKhS0_j) for saveCode(const unsigned char*, const unsigned char*, unsigned)
     vex_loader.o(i._Z8loadGamePcPh) refers to rt_memclr.o(.text) for __aeabi_memclr
-    vex_loader.o(i._Z8loadGamePcPh) refers to mem.o(.data) for fileRom
     vex_loader.o(i._Z8loadGamePcPh) refers to mem.o(.bss) for ram
     vex_loader.o(i._Z8loadGamePcPh) refers to vex_loader.o(.data) for entryPoint
     vex_loader.o(i._Z8saveCodePKhS0_j) refers to vex_loader.o(i._Z11flash_readyv) for flash_ready()
@@ -249,9 +266,9 @@ Section Cross References
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z8saveCodePKhS0_j) for i._Z8saveCodePKhS0_j
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z4sCmpPKcS0_) for i._Z4sCmpPKcS0_
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z6getCmdPc) for i._Z6getCmdPc
-    vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z11clearMemoryPKhj) for i._Z11clearMemoryPKhj
+    vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z11clearMemoryPKh) for i._Z11clearMemoryPKh
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z12unlockMemoryv) for i._Z12unlockMemoryv
-    vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z11checkHeaderP13VexMainHeaderi) for i._Z11checkHeaderP13VexMainHeaderi
+    vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z11checkHeaderP13VexMainHeader) for i._Z11checkHeaderP13VexMainHeader
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z8loadGamePcPh) for i._Z8loadGamePcPh
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z3runPcPh) for i._Z3runPcPh
     vex_loader.o(.ARM.exidx) refers to vex_loader.o(i._Z13debugInternalv) for i._Z13debugInternalv
@@ -427,6 +444,23 @@ Section Cross References
     sound.o(.ARM.exidx) refers to sound.o(i._Z15enableSoundMonothPFtvE) for i._Z15enableSoundMonothPFtvE
     sound.o(.ARM.exidx) refers to sound.o(i.TIM3_IRQHandler) for i.TIM3_IRQHandler
     sound.o(.ARM.exidx) refers to sound.o(i._Z12disableSoundv) for i._Z12disableSoundv
+    config.o(i._Z10configInitv) refers to config.o(i._Z10readConfigP10CoreConfigj) for readConfig(CoreConfig*, unsigned)
+    config.o(i._Z10configInitv) refers to config.o(.data) for sysConfig
+    config.o(i._Z10readConfigP10CoreConfigj) refers to sdcard.o(i._Z10FSReadFilePcP10FileWorker) for FSReadFile(char*, FileWorker*)
+    config.o(i._Z10readConfigP10CoreConfigj) refers to sdcard.o(i._Z6FSReadP10FileWorkerPvj) for FSRead(FileWorker*, void*, unsigned)
+    config.o(i._Z10saveConfigv) refers to sdcard.o(i._Z11FSWriteFilePKcP10FileWorker) for FSWriteFile(const char*, FileWorker*)
+    config.o(i._Z10saveConfigv) refers to sdcard.o(i._Z7FSWriteP10FileWorkerPKvi) for FSWrite(FileWorker*, const void*, int)
+    config.o(i._Z10saveConfigv) refers to sdcard.o(i._Z7FSCloseP10FileWorker) for FSClose(FileWorker*)
+    config.o(i._Z10saveConfigv) refers to config.o(.data) for sysConfig
+    config.o(i._Z11applyConfigP10CoreConfigj) refers to rt_memcpy_v6.o(.text) for __aeabi_memcpy
+    config.o(i._Z11applyConfigP10CoreConfigj) refers to config.o(.data) for sysConfig
+    config.o(i._Z9getConfigP10CoreConfigj) refers to rt_memcpy_v6.o(.text) for __aeabi_memcpy
+    config.o(i._Z9getConfigP10CoreConfigj) refers to config.o(.data) for sysConfig
+    config.o(.ARM.exidx) refers to config.o(i._Z10readConfigP10CoreConfigj) for i._Z10readConfigP10CoreConfigj
+    config.o(.ARM.exidx) refers to config.o(i._Z10configInitv) for i._Z10configInitv
+    config.o(.ARM.exidx) refers to config.o(i._Z9getConfigP10CoreConfigj) for i._Z9getConfigP10CoreConfigj
+    config.o(.ARM.exidx) refers to config.o(i._Z11applyConfigP10CoreConfigj) for i._Z11applyConfigP10CoreConfigj
+    config.o(.ARM.exidx) refers to config.o(i._Z10saveConfigv) for i._Z10saveConfigv
     stm32f10x_adc.o(i.ADC_DeInit) refers to stm32f10x_rcc.o(i.RCC_APB2PeriphResetCmd) for RCC_APB2PeriphResetCmd
     stm32f10x_flash.o(i.FLASH_EnableWriteProtection) refers to stm32f10x_flash.o(i.FLASH_WaitForLastOperation) for FLASH_WaitForLastOperation
     stm32f10x_flash.o(i.FLASH_EraseAllBank1Pages) refers to stm32f10x_flash.o(i.FLASH_WaitForLastBank1Operation) for FLASH_WaitForLastBank1Operation
@@ -911,6 +945,11 @@ Removing Unused input sections from the image.
     Removing helpers.o(.ARM.exidx), (8 bytes).
     Removing helpers.o(.ARM.exidx), (8 bytes).
     Removing helpers.o(.ARM.exidx), (8 bytes).
+    Removing helpers.o(.ARM.exidx), (8 bytes).
+    Removing helpers.o(.ARM.exidx), (8 bytes).
+    Removing helpers.o(.ARM.exidx), (8 bytes).
+    Removing helpers.o(.ARM.exidx), (8 bytes).
+    Removing helpers.o(.ARM.exidx), (8 bytes).
     Removing input.o(.rev16_text), (4 bytes).
     Removing input.o(.revsh_text), (4 bytes).
     Removing input.o(.rrx_text), (6 bytes).
@@ -950,8 +989,10 @@ Removing Unused input sections from the image.
     Removing terminal.o(.rrx_text), (6 bytes).
     Removing terminal.o(i._ZN8Terminal10sendNumberEibb), (96 bytes).
     Removing terminal.o(i._ZN8Terminal10sendStringEPKcb), (140 bytes).
+    Removing terminal.o(i._ZN8Terminal11clearMemoryEv), (40 bytes).
     Removing terminal.o(i._ZN8Terminal4drawEv), (80 bytes).
     Removing terminal.o(i._ZN8Terminal6scrollEv), (72 bytes).
+    Removing terminal.o(i._ZN8Terminal9setMemoryEPh), (20 bytes).
     Removing terminal.o(.ARM.exidx), (8 bytes).
     Removing terminal.o(.ARM.exidx), (8 bytes).
     Removing terminal.o(.ARM.exidx), (8 bytes).
@@ -959,6 +1000,7 @@ Removing Unused input sections from the image.
     Removing terminal.o(.ARM.exidx), (8 bytes).
     Removing terminal.o(.ARM.exidx), (8 bytes).
     Removing terminal.o(.constdata), (16 bytes).
+    Removing terminal.o(.data), (4 bytes).
     Removing sdcard.o(.rev16_text), (4 bytes).
     Removing sdcard.o(.revsh_text), (4 bytes).
     Removing sdcard.o(.rrx_text), (6 bytes).
@@ -1006,6 +1048,11 @@ Removing Unused input sections from the image.
     Removing sound.o(.ARM.exidx), (8 bytes).
     Removing sound.o(.ARM.exidx), (8 bytes).
     Removing sound.o(.ARM.exidx), (8 bytes).
+    Removing config.o(.ARM.exidx), (8 bytes).
+    Removing config.o(.ARM.exidx), (8 bytes).
+    Removing config.o(.ARM.exidx), (8 bytes).
+    Removing config.o(.ARM.exidx), (8 bytes).
+    Removing config.o(.ARM.exidx), (8 bytes).
     Removing misc.o(.rev16_text), (4 bytes).
     Removing misc.o(.revsh_text), (4 bytes).
     Removing misc.o(.rrx_text), (6 bytes).
@@ -1092,6 +1139,7 @@ Removing Unused input sections from the image.
     Removing stm32f10x_gpio.o(i.GPIO_EventOutputCmd), (12 bytes).
     Removing stm32f10x_gpio.o(i.GPIO_EventOutputConfig), (32 bytes).
     Removing stm32f10x_gpio.o(i.GPIO_PinLockConfig), (18 bytes).
+    Removing stm32f10x_gpio.o(i.GPIO_PinRemapConfig), (144 bytes).
     Removing stm32f10x_gpio.o(i.GPIO_ReadInputData), (8 bytes).
     Removing stm32f10x_gpio.o(i.GPIO_ReadInputDataBit), (18 bytes).
     Removing stm32f10x_gpio.o(i.GPIO_ReadOutputData), (8 bytes).
@@ -1295,7 +1343,7 @@ Removing Unused input sections from the image.
     Removing display_ili9341.o(.constdata__ZTI15Display_ILI9341), (12 bytes).
     Removing display_ili9341.o(.constdata__ZTS15Display_ILI9341), (18 bytes).
 
-451 unused section(s) (total 12457 bytes) removed from the image.
+465 unused section(s) (total 12745 bytes) removed from the image.
 
 ==============================================================================
 
@@ -1305,103 +1353,103 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_callterm.o ABSOLUTE
-    ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_globs.o ABSOLUTE
-    ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_mem.o ABSOLUTE
     ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_support.o ABSOLUTE
+    ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_globs.o ABSOLUTE
+    ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_callterm.o ABSOLUTE
+    ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_mem.o ABSOLUTE
     ../../../edgfe/lib_src/arm_exceptions.c  0x00000000   Number         0  arm_exceptions_terminate.o ABSOLUTE
     ../../../edgfe/lib_src/arm_noexceptions.c 0x00000000   Number         0  arm_begincatch_noexceptions.o ABSOLUTE
     ../../../edgfe/lib_src/typeinfo.c        0x00000000   Number         0  lib_rtti_impl.o ABSOLUTE
     ../../../edgfe/lib_src/typeinfo.c        0x00000000   Number         0  type_info_dtor.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_heap_descriptor_intlibspace.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
-    ../clib/angel/rt.s                       0x00000000   Number         0  rt_eh_globals_addr.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_eh_globals_addr_intlibspace.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_eh_globals_addr.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_heap_descriptor.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_heap_descriptor_intlibspace.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  mutex_dummy.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
-    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  mutex_dummy.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
     ../clib/arm_runtime.c                    0x00000000   Number         0  init_aeabi.o ABSOLUTE
     ../clib/arm_runtime.c                    0x00000000   Number         0  init_aeabi.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  _get_argv.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_final.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_extend.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_extend_mt.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_alloc.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_alloc_mt.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_free_mt.o ABSOLUTE
-    ../clib/heap1.c                          0x00000000   Number         0  h1_free.o ABSOLUTE
     ../clib/heap1.c                          0x00000000   Number         0  h1_init.o ABSOLUTE
     ../clib/heap1.c                          0x00000000   Number         0  h1_init_mt.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_free_mt.o ABSOLUTE
     ../clib/heap1.c                          0x00000000   Number         0  h1_final_mt.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_final.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_alloc.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_alloc_mt.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_extend.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_free.o ABSOLUTE
+    ../clib/heap1.c                          0x00000000   Number         0  h1_extend_mt.o ABSOLUTE
+    ../clib/heap2.c                          0x00000000   Number         0  fdtree.o ABSOLUTE
     ../clib/heap2.c                          0x00000000   Number         0  heap2mt.o ABSOLUTE
     ../clib/heap2.c                          0x00000000   Number         0  heap2.o ABSOLUTE
-    ../clib/heap2.c                          0x00000000   Number         0  fdtree.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  maybetermalloc1.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  term_alloc.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  malloc.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  hguard.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  heapstubs.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  free.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  maybetermalloc2.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  init_alloc.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  maybetermalloc1.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  free.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  term_alloc.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  malloc.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  heapstubs.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  hguard.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  maybetermalloc1.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  maybetermalloc2.o ABSOLUTE
-    ../clib/heapalloc.c                      0x00000000   Number         0  maybetermalloc2.o ABSOLUTE
-    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxa.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  aeabi_memset.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_v6.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  memset.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  memcpy.o ABSOLUTE
-    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_v6.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  aeabi_memset.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memclr_w.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_formal.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
-    ../clib/stdlib.c                         0x00000000   Number         0  abort.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  abort.o ABSOLUTE
     ../clib/string.c                         0x00000000   Number         0  strlen.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
     D:\\keil_v5\\Packs\\Keil\\STM32F1xx_DFP\\2.3.0\\Device\\StdPeriph_Driver\\src\\misc.c 0x00000000   Number         0  misc.o ABSOLUTE
@@ -1427,6 +1475,7 @@ Image Symbol Table
     RTE\Device\STM32F103C8\startup_stm32f10x_md.s 0x00000000   Number         0  startup_stm32f10x_md.o ABSOLUTE
     RTE\Device\STM32F103C8\system_stm32f10x.c 0x00000000   Number         0  system_stm32f10x.o ABSOLUTE
     RTE\\Device\\STM32F103C8\\system_stm32f10x.c 0x00000000   Number         0  system_stm32f10x.o ABSOLUTE
+    config.cpp                               0x00000000   Number         0  config.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     display.cpp                              0x00000000   Number         0  display.o ABSOLUTE
     display.cpp                              0x00000000   Number         0  display.o ABSOLUTE
@@ -1535,152 +1584,159 @@ Image Symbol Table
     i.DMA_ITConfig                           0x08000650   Section        0  stm32f10x_dma.o(i.DMA_ITConfig)
     i.DMA_Init                               0x08000662   Section        0  stm32f10x_dma.o(i.DMA_Init)
     i.GPIO_Init                              0x0800069e   Section        0  stm32f10x_gpio.o(i.GPIO_Init)
-    i.GPIO_PinRemapConfig                    0x080007b4   Section        0  stm32f10x_gpio.o(i.GPIO_PinRemapConfig)
-    i.GPIO_WriteBit                          0x08000844   Section        0  stm32f10x_gpio.o(i.GPIO_WriteBit)
-    i.RCC_ADCCLKConfig                       0x08000850   Section        0  stm32f10x_rcc.o(i.RCC_ADCCLKConfig)
-    i.RCC_AHBPeriphClockCmd                  0x08000868   Section        0  stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd)
-    i.RCC_APB1PeriphClockCmd                 0x08000888   Section        0  stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd)
-    i.RCC_APB2PeriphClockCmd                 0x080008a8   Section        0  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
-    i.RCC_GetClocksFreq                      0x080008c8   Section        0  stm32f10x_rcc.o(i.RCC_GetClocksFreq)
-    i.SPI_Cmd                                0x0800099c   Section        0  stm32f10x_spi.o(i.SPI_Cmd)
-    i.SPI_I2S_DMACmd                         0x080009b4   Section        0  stm32f10x_spi.o(i.SPI_I2S_DMACmd)
-    i.SPI_I2S_GetFlagStatus                  0x080009c6   Section        0  stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus)
-    i.SPI_Init                               0x080009d8   Section        0  stm32f10x_spi.o(i.SPI_Init)
-    i.SetSysClock                            0x08000a14   Section        0  system_stm32f10x.o(i.SetSysClock)
-    SetSysClock                              0x08000a15   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
-    i.SetSysClockTo72                        0x08000a1c   Section        0  system_stm32f10x.o(i.SetSysClockTo72)
-    SetSysClockTo72                          0x08000a1d   Thumb Code   214  system_stm32f10x.o(i.SetSysClockTo72)
-    i.SystemInit                             0x08000afc   Section        0  system_stm32f10x.o(i.SystemInit)
-    i.TIM2_IRQHandler                        0x08000b5c   Section        0  hardware.o(i.TIM2_IRQHandler)
-    i.TIM3_IRQHandler                        0x08000b7c   Section        0  sound.o(i.TIM3_IRQHandler)
-    i.TIM4_IRQHandler                        0x08000bd0   Section        0  display_ili9341.o(i.TIM4_IRQHandler)
-    i._Z10FSReadFilePcP10FileWorker          0x08000bec   Section        0  sdcard.o(i._Z10FSReadFilePcP10FileWorker)
-    i._Z10SDGetDWordj                        0x08000c34   Section        0  sdcard.o(i._Z10SDGetDWordj)
-    i._Z10SDSetDWordji                       0x08000c68   Section        0  sdcard.o(i._Z10SDSetDWordji)
-    i._Z10clearTimerv                        0x08000c98   Section        0  hardware.o(i._Z10clearTimerv)
-    i._Z11FSWriteFilePKcP10FileWorker        0x08000ca4   Section        0  sdcard.o(i._Z11FSWriteFilePKcP10FileWorker)
-    i._Z11checkHeaderP13VexMainHeaderi       0x08000e58   Section        0  vex_loader.o(i._Z11checkHeaderP13VexMainHeaderi)
-    i._Z11clearMemoryPKhj                    0x08000e90   Section        0  vex_loader.o(i._Z11clearMemoryPKhj)
-    i._Z11delayByLoopj                       0x08000ed8   Section        0  helpers.o(i._Z11delayByLoopj)
-    i._Z11displaySyncv                       0x08000ee4   Section        0  vex_loader.o(i._Z11displaySyncv)
-    i._Z11flash_readyv                       0x08000ef4   Section        0  vex_loader.o(i._Z11flash_readyv)
-    i._Z12FSGetClusterPKcP8FileInfoPiS3_     0x08000f08   Section        0  sdcard.o(i._Z12FSGetClusterPKcP8FileInfoPiS3_)
-    i._Z12SDReadSectorj                      0x0800107c   Section        0  sdcard.o(i._Z12SDReadSectorj)
-    i._Z12disableSoundv                      0x08001114   Section        0  sound.o(i._Z12disableSoundv)
-    i._Z12initHardwarev                      0x0800115c   Section        0  hardware.o(i._Z12initHardwarev)
-    i._Z12unlockMemoryv                      0x08001394   Section        0  vex_loader.o(i._Z12unlockMemoryv)
-    i._Z13SDSendCommandhj                    0x080013ac   Section        0  sdcard.o(i._Z13SDSendCommandhj)
-    i._Z13SDWriteSectorj                     0x08001450   Section        0  sdcard.o(i._Z13SDWriteSectorj)
-    i._Z13debugInternalv                     0x08001520   Section        0  vex_loader.o(i._Z13debugInternalv)
-    i._Z14FSClearClusteri                    0x08001574   Section        0  sdcard.o(i._Z14FSClearClusteri)
-    i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo 0x080015ac   Section        0  sdcard.o(i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo)
-    i._Z15enableSoundMonothPFtvE             0x080016f4   Section        0  sound.o(i._Z15enableSoundMonothPFtvE)
-    i._Z16FSGetStartSectori                  0x080017b8   Section        0  sdcard.o(i._Z16FSGetStartSectori)
-    i._Z16FSMakeNewClusterv                  0x080017d4   Section        0  sdcard.o(i._Z16FSMakeNewClusterv)
-    i._Z16__NVIC_EnableIRQ4IRQn              0x08001820   Section        0  display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn)
-    __NVIC_EnableIRQ(IRQn)                   0x08001821   Thumb Code    26  display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn)
-    i._Z17FSGetClusterValuei                 0x0800183c   Section        0  sdcard.o(i._Z17FSGetClusterValuei)
-    i._Z17FSSetClusterValueii                0x08001870   Section        0  sdcard.o(i._Z17FSSetClusterValueii)
-    i._Z17getTimerWithClearv                 0x080018b0   Section        0  hardware.o(i._Z17getTimerWithClearv)
-    i._Z19FSGetEmptyFilePlaceiPiS_           0x080018c0   Section        0  sdcard.o(i._Z19FSGetEmptyFilePlaceiPiS_)
-    i._Z19getAdcValueForXAxisv               0x08001940   Section        0  hardware.o(i._Z19getAdcValueForXAxisv)
-    i._Z19getAdcValueForYAxisv               0x08001958   Section        0  hardware.o(i._Z19getAdcValueForYAxisv)
-    i._Z20FSRemoveClusterChaini              0x08001970   Section        0  sdcard.o(i._Z20FSRemoveClusterChaini)
-    i._Z23FSGetNameFromFileStructPhPc        0x0800199a   Section        0  sdcard.o(i._Z23FSGetNameFromFileStructPhPc)
-    i._Z3cmpPcS_                             0x08001a08   Section        0  helpers.o(i._Z3cmpPcS_)
-    i._Z3runPcPh                             0x08001a24   Section        0  vex_loader.o(i._Z3runPcPh)
-    i._Z4cmpiPcS_                            0x08001a42   Section        0  helpers.o(i._Z4cmpiPcS_)
-    i._Z4itoaiPc                             0x08001a6c   Section        0  helpers.o(i._Z4itoaiPc)
-    i._Z4sCmpPKcS0_                          0x08001ab6   Section        0  vex_loader.o(i._Z4sCmpPKcS0_)
-    i._Z6FSReadP10FileWorkerPvj              0x08001ae4   Section        0  sdcard.o(i._Z6FSReadP10FileWorkerPvj)
-    i._Z6SDInitv                             0x08001b98   Section        0  sdcard.o(i._Z6SDInitv)
-    i._Z6getCmdPc                            0x08001c58   Section        0  vex_loader.o(i._Z6getCmdPc)
-    i._Z6setFPSt                             0x08002064   Section        0  vex_loader.o(i._Z6setFPSt)
-    i._Z7FSCloseP10FileWorker                0x08002078   Section        0  sdcard.o(i._Z7FSCloseP10FileWorker)
-    i._Z7FSWriteP10FileWorkerPKvi            0x080020a4   Section        0  sdcard.o(i._Z7FSWriteP10FileWorkerPKvi)
-    i._Z7messagePc                           0x08002150   Section        0  main.o(i._Z7messagePc)
-    i._Z7reversePc                           0x08002170   Section        0  helpers.o(i._Z7reversePc)
-    i._Z7runGamev                            0x08002198   Section        0  vex_loader.o(i._Z7runGamev)
-    i._Z7spiReadv                            0x080021b0   Section        0  sdcard.o(i._Z7spiReadv)
-    i._Z7spiSendh                            0x080021bc   Section        0  sdcard.o(i._Z7spiSendh)
-    i._Z7toUpperc                            0x080021f0   Section        0  helpers.o(i._Z7toUpperc)
-    i._Z8SDEnablePh                          0x08002208   Section        0  sdcard.o(i._Z8SDEnablePh)
-    i._Z8getTimerv                           0x080022e0   Section        0  hardware.o(i._Z8getTimerv)
-    i._Z8loadGamePcPh                        0x080022ec   Section        0  vex_loader.o(i._Z8loadGamePcPh)
-    i._Z8saveCodePKhS0_j                     0x08002500   Section        0  vex_loader.o(i._Z8saveCodePKhS0_j)
-    i._Z9FSReadDirPcP15DirectoryReader       0x08002558   Section        0  sdcard.o(i._Z9FSReadDirPcP15DirectoryReader)
-    i._Z9SDGetBytej                          0x08002590   Section        0  sdcard.o(i._Z9SDGetBytej)
-    i._Z9SDGetWordj                          0x080025a0   Section        0  sdcard.o(i._Z9SDGetWordj)
-    i._Z9SDSetWordjs                         0x080025bc   Section        0  sdcard.o(i._Z9SDSetWordjs)
-    i._ZN15Display_ILI934110writeData8Eh     0x080025d8   Section        0  display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh)
-    i._ZN15Display_ILI934111writeData16Et    0x08002604   Section        0  display_ili9341.o(i._ZN15Display_ILI934111writeData16Et)
-    i._ZN15Display_ILI934112displayClearEh   0x08002648   Section        0  display_ili9341.o(i._ZN15Display_ILI934112displayClearEh)
-    i._ZN15Display_ILI934112initFPSTimerEt   0x080026d4   Section        0  display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt)
-    i._ZN15Display_ILI93414drawEv            0x08002734   Section        0  display_ili9341.o(i._ZN15Display_ILI93414drawEv)
-    i._ZN15Display_ILI93414initEv            0x080027d4   Section        0  display_ili9341.o(i._ZN15Display_ILI93414initEv)
-    i._ZN15Display_ILI93416setColEtt         0x08002aec   Section        0  display_ili9341.o(i._ZN15Display_ILI93416setColEtt)
-    i._ZN15Display_ILI93416setFPSEt          0x08002b0e   Section        0  display_ili9341.o(i._ZN15Display_ILI93416setFPSEt)
-    i._ZN15Display_ILI93417initDMAEPt        0x08002b20   Section        0  display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt)
-    i._ZN15Display_ILI93417sendCMDEh         0x08002b88   Section        0  display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh)
-    i._ZN15Display_ILI93417setPageEtt        0x08002bc8   Section        0  display_ili9341.o(i._ZN15Display_ILI93417setPageEtt)
-    i._ZN4Text13displayStringEPKchttb        0x08002bec   Section        0  text.o(i._ZN4Text13displayStringEPKchttb)
-    i._ZN5Input8getStateEh                   0x08002cec   Section        0  input.o(i._ZN5Input8getStateEh)
-    i._ZN5Input8getXAxisEv                   0x08002d1c   Section        0  input.o(i._ZN5Input8getXAxisEv)
-    i._ZN5Input8getYAxisEv                   0x08002d36   Section        0  input.o(i._ZN5Input8getYAxisEv)
-    i._ZN6Engine10setPaletteEPKt             0x08002d50   Section        0  engine.o(i._ZN6Engine10setPaletteEPKt)
-    i._ZN6Engine12setFillColorEh             0x08002d5c   Section        0  engine.o(i._ZN6Engine12setFillColorEh)
-    i._ZN6Engine12setLineClearEb             0x08002d78   Section        0  engine.o(i._ZN6Engine12setLineClearEb)
-    i._ZN6Engine13displaySpriteEPKhsssshb    0x08002d84   Section        0  engine.o(i._ZN6Engine13displaySpriteEPKhsssshb)
-    i._ZN6Engine15setSpriteMemoryEPhj        0x08002e88   Section        0  engine.o(i._ZN6Engine15setSpriteMemoryEPhj)
-    i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb 0x08002eb8   Section        0  engine.o(i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb)
-    i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb 0x08003044   Section        0  engine.o(i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb)
-    i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb 0x0800317c   Section        0  engine.o(i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb)
-    i._ZN6Engine5clearEv                     0x080032b8   Section        0  engine.o(i._ZN6Engine5clearEv)
-    i._ZN6Engine9parseLineEsPt               0x080032c4   Section        0  engine.o(i._ZN6Engine9parseLineEsPt)
-    i._ZN8Terminal11clearMemoryEv            0x08003844   Section        0  terminal.o(i._ZN8Terminal11clearMemoryEv)
-    i._ZN8Terminal9setMemoryEPh              0x0800386c   Section        0  terminal.o(i._ZN8Terminal9setMemoryEPh)
-    i.__sti___8_main_cpp_display             0x08003880   Section        0  main.o(i.__sti___8_main_cpp_display)
-    __sti___8_main_cpp_display               0x08003881   Thumb Code    10  main.o(i.__sti___8_main_cpp_display)
-    i.main                                   0x08003898   Section        0  main.o(i.main)
-    .constdata                               0x08003a14   Section       20  engine.o(.constdata)
-    defColorPallete                          0x08003a14   Data          20  engine.o(.constdata)
-    .constdata                               0x08003a28   Section       12  input.o(.constdata)
-    butEqPin                                 0x08003a28   Data          12  input.o(.constdata)
-    .constdata                               0x08003a34   Section      528  text.o(.constdata)
-    symbols                                  0x08003a34   Data         432  text.o(.constdata)
-    minus                                    0x08003be4   Data          12  text.o(.constdata)
-    plus                                     0x08003bf0   Data          12  text.o(.constdata)
-    quote                                    0x08003bfc   Data          12  text.o(.constdata)
-    dot                                      0x08003c08   Data          12  text.o(.constdata)
-    comma                                    0x08003c14   Data          12  text.o(.constdata)
-    ground                                   0x08003c20   Data          12  text.o(.constdata)
-    tilda                                    0x08003c2c   Data          12  text.o(.constdata)
-    slash                                    0x08003c38   Data          12  text.o(.constdata)
-    .constdata__ZTV15Display_ILI9341         0x08003c44   Section       28  display_ili9341.o(.constdata__ZTV15Display_ILI9341)
-    .constdata__ZTV7Display                  0x08003c60   Section       28  display.o(.constdata__ZTV7Display)
-    .init_array                              0x08003c9c   Section        4  main.o(.init_array)
-    .init_array                              0x08003ca0   Section        0  init_aeabi.o(.init_array)
+    i.GPIO_WriteBit                          0x080007b4   Section        0  stm32f10x_gpio.o(i.GPIO_WriteBit)
+    i.RCC_ADCCLKConfig                       0x080007c0   Section        0  stm32f10x_rcc.o(i.RCC_ADCCLKConfig)
+    i.RCC_AHBPeriphClockCmd                  0x080007d8   Section        0  stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd)
+    i.RCC_APB1PeriphClockCmd                 0x080007f8   Section        0  stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd)
+    i.RCC_APB2PeriphClockCmd                 0x08000818   Section        0  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
+    i.RCC_GetClocksFreq                      0x08000838   Section        0  stm32f10x_rcc.o(i.RCC_GetClocksFreq)
+    i.SPI_Cmd                                0x0800090c   Section        0  stm32f10x_spi.o(i.SPI_Cmd)
+    i.SPI_I2S_DMACmd                         0x08000924   Section        0  stm32f10x_spi.o(i.SPI_I2S_DMACmd)
+    i.SPI_I2S_GetFlagStatus                  0x08000936   Section        0  stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus)
+    i.SPI_Init                               0x08000948   Section        0  stm32f10x_spi.o(i.SPI_Init)
+    i.SetSysClock                            0x08000984   Section        0  system_stm32f10x.o(i.SetSysClock)
+    SetSysClock                              0x08000985   Thumb Code     8  system_stm32f10x.o(i.SetSysClock)
+    i.SetSysClockTo72                        0x0800098c   Section        0  system_stm32f10x.o(i.SetSysClockTo72)
+    SetSysClockTo72                          0x0800098d   Thumb Code   214  system_stm32f10x.o(i.SetSysClockTo72)
+    i.SystemInit                             0x08000a6c   Section        0  system_stm32f10x.o(i.SystemInit)
+    i.TIM2_IRQHandler                        0x08000acc   Section        0  hardware.o(i.TIM2_IRQHandler)
+    i.TIM3_IRQHandler                        0x08000aec   Section        0  sound.o(i.TIM3_IRQHandler)
+    i.TIM4_IRQHandler                        0x08000b40   Section        0  display_ili9341.o(i.TIM4_IRQHandler)
+    i._Z10FSReadFilePcP10FileWorker          0x08000b5c   Section        0  sdcard.o(i._Z10FSReadFilePcP10FileWorker)
+    i._Z10SDGetDWordj                        0x08000ba4   Section        0  sdcard.o(i._Z10SDGetDWordj)
+    i._Z10SDSetDWordji                       0x08000bd8   Section        0  sdcard.o(i._Z10SDSetDWordji)
+    i._Z10clearTimerv                        0x08000c08   Section        0  hardware.o(i._Z10clearTimerv)
+    i._Z10configInitv                        0x08000c14   Section        0  config.o(i._Z10configInitv)
+    i._Z10readConfigP10CoreConfigj           0x08000c2c   Section        0  config.o(i._Z10readConfigP10CoreConfigj)
+    i._Z10saveConfigv                        0x08000c78   Section        0  config.o(i._Z10saveConfigv)
+    i._Z11FSWriteFilePKcP10FileWorker        0x08000cc8   Section        0  sdcard.o(i._Z11FSWriteFilePKcP10FileWorker)
+    i._Z11applyConfigP10CoreConfigj          0x08000e7c   Section        0  config.o(i._Z11applyConfigP10CoreConfigj)
+    i._Z11checkHeaderP13VexMainHeader        0x08000ea0   Section        0  vex_loader.o(i._Z11checkHeaderP13VexMainHeader)
+    i._Z11clearMemoryPKh                     0x08000edc   Section        0  vex_loader.o(i._Z11clearMemoryPKh)
+    i._Z11delayByLoopj                       0x08000f24   Section        0  helpers.o(i._Z11delayByLoopj)
+    i._Z11displaySyncv                       0x08000f30   Section        0  vex_loader.o(i._Z11displaySyncv)
+    i._Z11flash_readyv                       0x08000f40   Section        0  vex_loader.o(i._Z11flash_readyv)
+    i._Z12FSGetClusterPKcP8FileInfoPiS3_     0x08000f54   Section        0  sdcard.o(i._Z12FSGetClusterPKcP8FileInfoPiS3_)
+    i._Z12SDReadSectorj                      0x080010dc   Section        0  sdcard.o(i._Z12SDReadSectorj)
+    i._Z12disableSoundv                      0x08001174   Section        0  sound.o(i._Z12disableSoundv)
+    i._Z12initHardwarev                      0x080011bc   Section        0  hardware.o(i._Z12initHardwarev)
+    i._Z12unlockMemoryv                      0x080013f0   Section        0  vex_loader.o(i._Z12unlockMemoryv)
+    i._Z13SDSendCommandhj                    0x08001408   Section        0  sdcard.o(i._Z13SDSendCommandhj)
+    i._Z13SDWriteSectorj                     0x080014ac   Section        0  sdcard.o(i._Z13SDWriteSectorj)
+    i._Z13debugInternalv                     0x0800157c   Section        0  vex_loader.o(i._Z13debugInternalv)
+    i._Z14FSClearClusteri                    0x080015c8   Section        0  sdcard.o(i._Z14FSClearClusteri)
+    i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo 0x08001600   Section        0  sdcard.o(i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo)
+    i._Z15enableSoundMonothPFtvE             0x08001748   Section        0  sound.o(i._Z15enableSoundMonothPFtvE)
+    i._Z16FSGetStartSectori                  0x0800180c   Section        0  sdcard.o(i._Z16FSGetStartSectori)
+    i._Z16FSMakeNewClusterv                  0x08001828   Section        0  sdcard.o(i._Z16FSMakeNewClusterv)
+    i._Z16__NVIC_EnableIRQ4IRQn              0x08001874   Section        0  display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn)
+    __NVIC_EnableIRQ(IRQn)                   0x08001875   Thumb Code    26  display_ili9341.o(i._Z16__NVIC_EnableIRQ4IRQn)
+    i._Z17FSGetClusterValuei                 0x08001890   Section        0  sdcard.o(i._Z17FSGetClusterValuei)
+    i._Z17FSSetClusterValueii                0x080018c4   Section        0  sdcard.o(i._Z17FSSetClusterValueii)
+    i._Z17getTimerWithClearv                 0x08001904   Section        0  hardware.o(i._Z17getTimerWithClearv)
+    i._Z19FSGetEmptyFilePlaceiPiS_           0x08001914   Section        0  sdcard.o(i._Z19FSGetEmptyFilePlaceiPiS_)
+    i._Z19getAdcValueForXAxisv               0x08001994   Section        0  hardware.o(i._Z19getAdcValueForXAxisv)
+    i._Z19getAdcValueForYAxisv               0x080019ac   Section        0  hardware.o(i._Z19getAdcValueForYAxisv)
+    i._Z20FSRemoveClusterChaini              0x080019c4   Section        0  sdcard.o(i._Z20FSRemoveClusterChaini)
+    i._Z23FSGetNameFromFileStructPhPc        0x080019ee   Section        0  sdcard.o(i._Z23FSGetNameFromFileStructPhPc)
+    i._Z3cmpPcS_                             0x08001a5c   Section        0  helpers.o(i._Z3cmpPcS_)
+    i._Z3runPcPh                             0x08001a78   Section        0  vex_loader.o(i._Z3runPcPh)
+    i._Z4cmpiPcS_                            0x08001a96   Section        0  helpers.o(i._Z4cmpiPcS_)
+    i._Z4itoaiPc                             0x08001ac0   Section        0  helpers.o(i._Z4itoaiPc)
+    i._Z4randv                               0x08001b0a   Section        0  helpers.o(i._Z4randv)
+    i._Z4sCmpPKcS0_                          0x08001b4e   Section        0  vex_loader.o(i._Z4sCmpPKcS0_)
+    i._Z6FSReadP10FileWorkerPvj              0x08001b7c   Section        0  sdcard.o(i._Z6FSReadP10FileWorkerPvj)
+    i._Z6SDInitv                             0x08001c30   Section        0  sdcard.o(i._Z6SDInitv)
+    i._Z6getCmdPc                            0x08001cf0   Section        0  vex_loader.o(i._Z6getCmdPc)
+    i._Z6setFPSt                             0x080021e0   Section        0  vex_loader.o(i._Z6setFPSt)
+    i._Z7FSCloseP10FileWorker                0x080021f4   Section        0  sdcard.o(i._Z7FSCloseP10FileWorker)
+    i._Z7FSWriteP10FileWorkerPKvi            0x08002220   Section        0  sdcard.o(i._Z7FSWriteP10FileWorkerPKvi)
+    i._Z7messagePc                           0x080022cc   Section        0  main.o(i._Z7messagePc)
+    i._Z7reversePc                           0x080022ec   Section        0  helpers.o(i._Z7reversePc)
+    i._Z7runGamev                            0x08002314   Section        0  vex_loader.o(i._Z7runGamev)
+    i._Z7spiReadv                            0x0800232c   Section        0  sdcard.o(i._Z7spiReadv)
+    i._Z7spiSendh                            0x08002338   Section        0  sdcard.o(i._Z7spiSendh)
+    i._Z7toUpperc                            0x0800236c   Section        0  helpers.o(i._Z7toUpperc)
+    i._Z8SDEnablePh                          0x08002384   Section        0  sdcard.o(i._Z8SDEnablePh)
+    i._Z8__divsi3ii                          0x0800245c   Section        0  helpers.o(i._Z8__divsi3ii)
+    i._Z8__modsi3ii                          0x08002464   Section        0  helpers.o(i._Z8__modsi3ii)
+    i._Z8getTimerv                           0x08002470   Section        0  hardware.o(i._Z8getTimerv)
+    i._Z8loadGamePcPh                        0x0800247c   Section        0  vex_loader.o(i._Z8loadGamePcPh)
+    i._Z8saveCodePKhS0_j                     0x08002680   Section        0  vex_loader.o(i._Z8saveCodePKhS0_j)
+    i._Z9FSReadDirPcP15DirectoryReader       0x080026d8   Section        0  sdcard.o(i._Z9FSReadDirPcP15DirectoryReader)
+    i._Z9SDGetBytej                          0x08002710   Section        0  sdcard.o(i._Z9SDGetBytej)
+    i._Z9SDGetWordj                          0x08002720   Section        0  sdcard.o(i._Z9SDGetWordj)
+    i._Z9SDSetWordjs                         0x0800273c   Section        0  sdcard.o(i._Z9SDSetWordjs)
+    i._Z9__udivsi3jj                         0x08002758   Section        0  helpers.o(i._Z9__udivsi3jj)
+    i._Z9__umodsi3jj                         0x08002760   Section        0  helpers.o(i._Z9__umodsi3jj)
+    i._Z9getConfigP10CoreConfigj             0x0800276c   Section        0  config.o(i._Z9getConfigP10CoreConfigj)
+    i._ZN15Display_ILI934110writeData8Eh     0x08002790   Section        0  display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh)
+    i._ZN15Display_ILI934111writeData16Et    0x080027bc   Section        0  display_ili9341.o(i._ZN15Display_ILI934111writeData16Et)
+    i._ZN15Display_ILI934112displayClearEh   0x08002800   Section        0  display_ili9341.o(i._ZN15Display_ILI934112displayClearEh)
+    i._ZN15Display_ILI934112initFPSTimerEt   0x0800288c   Section        0  display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt)
+    i._ZN15Display_ILI93414drawEv            0x080028ec   Section        0  display_ili9341.o(i._ZN15Display_ILI93414drawEv)
+    i._ZN15Display_ILI93414initEv            0x080029a0   Section        0  display_ili9341.o(i._ZN15Display_ILI93414initEv)
+    i._ZN15Display_ILI93416setColEtt         0x08002cd0   Section        0  display_ili9341.o(i._ZN15Display_ILI93416setColEtt)
+    i._ZN15Display_ILI93416setFPSEt          0x08002cf2   Section        0  display_ili9341.o(i._ZN15Display_ILI93416setFPSEt)
+    i._ZN15Display_ILI93417initDMAEPt        0x08002d04   Section        0  display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt)
+    i._ZN15Display_ILI93417sendCMDEh         0x08002d64   Section        0  display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh)
+    i._ZN15Display_ILI93417setPageEtt        0x08002da4   Section        0  display_ili9341.o(i._ZN15Display_ILI93417setPageEtt)
+    i._ZN4Text13displayStringEPKchttb        0x08002dc8   Section        0  text.o(i._ZN4Text13displayStringEPKchttb)
+    i._ZN5Input8getStateEh                   0x08002ed4   Section        0  input.o(i._ZN5Input8getStateEh)
+    i._ZN5Input8getXAxisEv                   0x08002f00   Section        0  input.o(i._ZN5Input8getXAxisEv)
+    i._ZN5Input8getYAxisEv                   0x08002f2c   Section        0  input.o(i._ZN5Input8getYAxisEv)
+    i._ZN6Engine10setPaletteEPKt             0x08002f58   Section        0  engine.o(i._ZN6Engine10setPaletteEPKt)
+    i._ZN6Engine12setFillColorEh             0x08002f64   Section        0  engine.o(i._ZN6Engine12setFillColorEh)
+    i._ZN6Engine12setLineClearEb             0x08002f80   Section        0  engine.o(i._ZN6Engine12setLineClearEb)
+    i._ZN6Engine13displaySpriteEPKhsssshb    0x08002f8c   Section        0  engine.o(i._ZN6Engine13displaySpriteEPKhsssshb)
+    i._ZN6Engine15setSpriteMemoryEPhj        0x08003090   Section        0  engine.o(i._ZN6Engine15setSpriteMemoryEPhj)
+    i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb 0x080030c0   Section        0  engine.o(i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb)
+    i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb 0x0800324c   Section        0  engine.o(i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb)
+    i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb 0x08003384   Section        0  engine.o(i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb)
+    i._ZN6Engine5clearEv                     0x080034c0   Section        0  engine.o(i._ZN6Engine5clearEv)
+    i._ZN6Engine9parseLineEsPt               0x080034cc   Section        0  engine.o(i._ZN6Engine9parseLineEsPt)
+    i.__sti___8_main_cpp_display             0x08003b54   Section        0  main.o(i.__sti___8_main_cpp_display)
+    __sti___8_main_cpp_display               0x08003b55   Thumb Code    10  main.o(i.__sti___8_main_cpp_display)
+    i.main                                   0x08003b6c   Section        0  main.o(i.main)
+    .constdata                               0x08003cf0   Section       20  engine.o(.constdata)
+    defColorPallete                          0x08003cf0   Data          20  engine.o(.constdata)
+    .constdata                               0x08003d04   Section       12  input.o(.constdata)
+    butEqPin                                 0x08003d04   Data          12  input.o(.constdata)
+    .constdata                               0x08003d10   Section      540  text.o(.constdata)
+    symbols                                  0x08003d10   Data         432  text.o(.constdata)
+    minus                                    0x08003ec0   Data          12  text.o(.constdata)
+    plus                                     0x08003ecc   Data          12  text.o(.constdata)
+    quote                                    0x08003ed8   Data          12  text.o(.constdata)
+    dot                                      0x08003ee4   Data          12  text.o(.constdata)
+    comma                                    0x08003ef0   Data          12  text.o(.constdata)
+    ground                                   0x08003efc   Data          12  text.o(.constdata)
+    tilda                                    0x08003f08   Data          12  text.o(.constdata)
+    slash                                    0x08003f14   Data          12  text.o(.constdata)
+    exclamation                              0x08003f20   Data          12  text.o(.constdata)
+    .constdata__ZTV15Display_ILI9341         0x08003f2c   Section       28  display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+    .constdata__ZTV7Display                  0x08003f48   Section       28  display.o(.constdata__ZTV7Display)
+    .init_array                              0x08003f84   Section        4  main.o(.init_array)
+    .init_array                              0x08003f88   Section        0  init_aeabi.o(.init_array)
     .data                                    0x20000000   Section        2  display_ili9341.o(.data)
     .data                                    0x20000004   Section       16  engine.o(.data)
     .data                                    0x20000014   Section        4  hardware.o(.data)
     .data                                    0x20000018   Section       24  input.o(.data)
     .data                                    0x20000030   Section        8  main.o(.data)
-    .data                                    0x20000038   Section        8  mem.o(.data)
-    .data                                    0x20000040   Section        4  vex_loader.o(.data)
-    .data                                    0x20000044   Section        4  terminal.o(.data)
-    .data                                    0x20000048   Section       36  sdcard.o(.data)
-    .data                                    0x2000006c   Section        7  sound.o(.data)
-    .data                                    0x20000073   Section       20  stm32f10x_rcc.o(.data)
-    APBAHBPrescTable                         0x20000073   Data          16  stm32f10x_rcc.o(.data)
-    ADCPrescTable                            0x20000083   Data           4  stm32f10x_rcc.o(.data)
-    .bss                                     0x20000088   Section     1284  display_ili9341.o(.bss)
-    .bss                                     0x2000058c   Section    16384  mem.o(.bss)
-    .bss                                     0x2000458c   Section       96  libspace.o(.bss)
-    HEAP                                     0x200045f0   Section      512  startup_stm32f10x_md.o(HEAP)
-    Heap_Mem                                 0x200045f0   Data         512  startup_stm32f10x_md.o(HEAP)
-    STACK                                    0x200047f0   Section     1024  startup_stm32f10x_md.o(STACK)
-    Stack_Mem                                0x200047f0   Data        1024  startup_stm32f10x_md.o(STACK)
-    __initial_sp                             0x20004bf0   Data           0  startup_stm32f10x_md.o(STACK)
+    .data                                    0x20000038   Section        4  vex_loader.o(.data)
+    .data                                    0x2000003c   Section       36  sdcard.o(.data)
+    .data                                    0x20000060   Section        7  sound.o(.data)
+    .data                                    0x20000067   Section        5  config.o(.data)
+    .data                                    0x2000006c   Section       20  stm32f10x_rcc.o(.data)
+    APBAHBPrescTable                         0x2000006c   Data          16  stm32f10x_rcc.o(.data)
+    ADCPrescTable                            0x2000007c   Data           4  stm32f10x_rcc.o(.data)
+    .bss                                     0x20000080   Section     1284  display_ili9341.o(.bss)
+    .bss                                     0x20000584   Section    16384  mem.o(.bss)
+    .bss                                     0x20004584   Section       96  libspace.o(.bss)
+    HEAP                                     0x200045e8   Section      512  startup_stm32f10x_md.o(HEAP)
+    Heap_Mem                                 0x200045e8   Data         512  startup_stm32f10x_md.o(HEAP)
+    STACK                                    0x200047e8   Section     1024  startup_stm32f10x_md.o(STACK)
+    Stack_Mem                                0x200047e8   Data        1024  startup_stm32f10x_md.o(STACK)
+    __initial_sp                             0x20004be8   Data           0  startup_stm32f10x_md.o(STACK)
 
     Global Symbols
 
@@ -1868,111 +1924,118 @@ Image Symbol Table
     DMA_ITConfig                             0x08000651   Thumb Code    18  stm32f10x_dma.o(i.DMA_ITConfig)
     DMA_Init                                 0x08000663   Thumb Code    60  stm32f10x_dma.o(i.DMA_Init)
     GPIO_Init                                0x0800069f   Thumb Code   278  stm32f10x_gpio.o(i.GPIO_Init)
-    GPIO_PinRemapConfig                      0x080007b5   Thumb Code   138  stm32f10x_gpio.o(i.GPIO_PinRemapConfig)
-    GPIO_WriteBit                            0x08000845   Thumb Code    10  stm32f10x_gpio.o(i.GPIO_WriteBit)
-    RCC_ADCCLKConfig                         0x08000851   Thumb Code    18  stm32f10x_rcc.o(i.RCC_ADCCLKConfig)
-    RCC_AHBPeriphClockCmd                    0x08000869   Thumb Code    26  stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd)
-    RCC_APB1PeriphClockCmd                   0x08000889   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd)
-    RCC_APB2PeriphClockCmd                   0x080008a9   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
-    RCC_GetClocksFreq                        0x080008c9   Thumb Code   192  stm32f10x_rcc.o(i.RCC_GetClocksFreq)
-    SPI_Cmd                                  0x0800099d   Thumb Code    24  stm32f10x_spi.o(i.SPI_Cmd)
-    SPI_I2S_DMACmd                           0x080009b5   Thumb Code    18  stm32f10x_spi.o(i.SPI_I2S_DMACmd)
-    SPI_I2S_GetFlagStatus                    0x080009c7   Thumb Code    18  stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus)
-    SPI_Init                                 0x080009d9   Thumb Code    60  stm32f10x_spi.o(i.SPI_Init)
-    SystemInit                               0x08000afd   Thumb Code    78  system_stm32f10x.o(i.SystemInit)
-    TIM2_IRQHandler                          0x08000b5d   Thumb Code    28  hardware.o(i.TIM2_IRQHandler)
-    TIM3_IRQHandler                          0x08000b7d   Thumb Code    58  sound.o(i.TIM3_IRQHandler)
-    TIM4_IRQHandler                          0x08000bd1   Thumb Code    20  display_ili9341.o(i.TIM4_IRQHandler)
-    FSReadFile(char*, FileWorker*)           0x08000bed   Thumb Code    66  sdcard.o(i._Z10FSReadFilePcP10FileWorker)
-    SDGetDWord(unsigned)                     0x08000c35   Thumb Code    46  sdcard.o(i._Z10SDGetDWordj)
-    SDSetDWord(unsigned, int)                0x08000c69   Thumb Code    44  sdcard.o(i._Z10SDSetDWordji)
-    clearTimer()                             0x08000c99   Thumb Code     8  hardware.o(i._Z10clearTimerv)
-    FSWriteFile(const char*, FileWorker*)    0x08000ca5   Thumb Code   432  sdcard.o(i._Z11FSWriteFilePKcP10FileWorker)
-    checkHeader(VexMainHeader*, int)         0x08000e59   Thumb Code    56  vex_loader.o(i._Z11checkHeaderP13VexMainHeaderi)
-    clearMemory(const unsigned char*, unsigned) 0x08000e91   Thumb Code    68  vex_loader.o(i._Z11clearMemoryPKhj)
-    delayByLoop(unsigned)                    0x08000ed9   Thumb Code    12  helpers.o(i._Z11delayByLoopj)
-    displaySync()                            0x08000ee5   Thumb Code    10  vex_loader.o(i._Z11displaySyncv)
-    flash_ready()                            0x08000ef5   Thumb Code    14  vex_loader.o(i._Z11flash_readyv)
-    FSGetCluster(const char*, FileInfo*, int*, int*) 0x08000f09   Thumb Code   356  sdcard.o(i._Z12FSGetClusterPKcP8FileInfoPiS3_)
-    SDReadSector(unsigned)                   0x0800107d   Thumb Code   140  sdcard.o(i._Z12SDReadSectorj)
-    disableSound()                           0x08001115   Thumb Code    68  sound.o(i._Z12disableSoundv)
-    initHardware()                           0x0800115d   Thumb Code   538  hardware.o(i._Z12initHardwarev)
-    unlockMemory()                           0x08001395   Thumb Code    12  vex_loader.o(i._Z12unlockMemoryv)
-    SDSendCommand(unsigned char, unsigned)   0x080013ad   Thumb Code   158  sdcard.o(i._Z13SDSendCommandhj)
-    SDWriteSector(unsigned)                  0x08001451   Thumb Code   198  sdcard.o(i._Z13SDWriteSectorj)
-    debugInternal()                          0x08001521   Thumb Code    68  vex_loader.o(i._Z13debugInternalv)
-    FSClearCluster(int)                      0x08001575   Thumb Code    46  sdcard.o(i._Z14FSClearClusteri)
-    FSReadNextFile(char*, int, DirectoryReader*, FileInfo*) 0x080015ad   Thumb Code   314  sdcard.o(i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo)
-    enableSoundMono(unsigned short, unsigned char, unsigned short(*)()) 0x080016f5   Thumb Code   176  sound.o(i._Z15enableSoundMonothPFtvE)
-    FSGetStartSector(int)                    0x080017b9   Thumb Code    18  sdcard.o(i._Z16FSGetStartSectori)
-    FSMakeNewCluster()                       0x080017d5   Thumb Code    70  sdcard.o(i._Z16FSMakeNewClusterv)
-    FSGetClusterValue(int)                   0x0800183d   Thumb Code    46  sdcard.o(i._Z17FSGetClusterValuei)
-    FSSetClusterValue(int, int)              0x08001871   Thumb Code    60  sdcard.o(i._Z17FSSetClusterValueii)
-    getTimerWithClear()                      0x080018b1   Thumb Code    12  hardware.o(i._Z17getTimerWithClearv)
-    FSGetEmptyFilePlace(int, int*, int*)     0x080018c1   Thumb Code   120  sdcard.o(i._Z19FSGetEmptyFilePlaceiPiS_)
-    getAdcValueForXAxis()                    0x08001941   Thumb Code    18  hardware.o(i._Z19getAdcValueForXAxisv)
-    getAdcValueForYAxis()                    0x08001959   Thumb Code    18  hardware.o(i._Z19getAdcValueForYAxisv)
-    FSRemoveClusterChain(int)                0x08001971   Thumb Code    42  sdcard.o(i._Z20FSRemoveClusterChaini)
-    FSGetNameFromFileStruct(unsigned char*, char*) 0x0800199b   Thumb Code   110  sdcard.o(i._Z23FSGetNameFromFileStructPhPc)
-    cmp(char*, char*)                        0x08001a09   Thumb Code    28  helpers.o(i._Z3cmpPcS_)
-    run(char*, unsigned char*)               0x08001a25   Thumb Code    30  vex_loader.o(i._Z3runPcPh)
-    cmpi(char*, char*)                       0x08001a43   Thumb Code    42  helpers.o(i._Z4cmpiPcS_)
-    itoa(int, char*)                         0x08001a6d   Thumb Code    74  helpers.o(i._Z4itoaiPc)
-    sCmp(const char*, const char*)           0x08001ab7   Thumb Code    46  vex_loader.o(i._Z4sCmpPKcS0_)
-    FSRead(FileWorker*, void*, unsigned)     0x08001ae5   Thumb Code   172  sdcard.o(i._Z6FSReadP10FileWorkerPvj)
-    SDInit()                                 0x08001b99   Thumb Code   184  sdcard.o(i._Z6SDInitv)
-    getCmd(char*)                            0x08001c59   Thumb Code   470  vex_loader.o(i._Z6getCmdPc)
-    setFPS(unsigned short)                   0x08002065   Thumb Code    14  vex_loader.o(i._Z6setFPSt)
-    FSClose(FileWorker*)                     0x08002079   Thumb Code    44  sdcard.o(i._Z7FSCloseP10FileWorker)
-    FSWrite(FileWorker*, const void*, int)   0x080020a5   Thumb Code   164  sdcard.o(i._Z7FSWriteP10FileWorkerPKvi)
-    message(char*)                           0x08002151   Thumb Code    28  main.o(i._Z7messagePc)
-    reverse(char*)                           0x08002171   Thumb Code    38  helpers.o(i._Z7reversePc)
-    runGame()                                0x08002199   Thumb Code    18  vex_loader.o(i._Z7runGamev)
-    spiRead()                                0x080021b1   Thumb Code    10  sdcard.o(i._Z7spiReadv)
-    spiSend(unsigned char)                   0x080021bd   Thumb Code    46  sdcard.o(i._Z7spiSendh)
-    toUpper(char)                            0x080021f1   Thumb Code    22  helpers.o(i._Z7toUpperc)
-    SDEnable(unsigned char*)                 0x08002209   Thumb Code   180  sdcard.o(i._Z8SDEnablePh)
-    getTimer()                               0x080022e1   Thumb Code     6  hardware.o(i._Z8getTimerv)
-    loadGame(char*, unsigned char*)          0x080022ed   Thumb Code   520  vex_loader.o(i._Z8loadGamePcPh)
-    saveCode(const unsigned char*, const unsigned char*, unsigned) 0x08002501   Thumb Code    84  vex_loader.o(i._Z8saveCodePKhS0_j)
-    FSReadDir(char*, DirectoryReader*)       0x08002559   Thumb Code    50  sdcard.o(i._Z9FSReadDirPcP15DirectoryReader)
-    SDGetByte(unsigned)                      0x08002591   Thumb Code    10  sdcard.o(i._Z9SDGetBytej)
-    SDGetWord(unsigned)                      0x080025a1   Thumb Code    24  sdcard.o(i._Z9SDGetWordj)
-    SDSetWord(unsigned, short)               0x080025bd   Thumb Code    22  sdcard.o(i._Z9SDSetWordjs)
-    Display_ILI9341::writeData8(unsigned char) 0x080025d9   Thumb Code    36  display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh)
-    Display_ILI9341::writeData16(unsigned short) 0x08002605   Thumb Code    58  display_ili9341.o(i._ZN15Display_ILI934111writeData16Et)
-    Display_ILI9341::displayClear(unsigned char) 0x08002649   Thumb Code   124  display_ili9341.o(i._ZN15Display_ILI934112displayClearEh)
-    Display_ILI9341::initFPSTimer(unsigned short) 0x080026d5   Thumb Code    92  display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt)
-    Display_ILI9341::draw()                  0x08002735   Thumb Code   134  display_ili9341.o(i._ZN15Display_ILI93414drawEv)
-    Display_ILI9341::init()                  0x080027d5   Thumb Code   782  display_ili9341.o(i._ZN15Display_ILI93414initEv)
-    Display_ILI9341::setCol(unsigned short, unsigned short) 0x08002aed   Thumb Code    34  display_ili9341.o(i._ZN15Display_ILI93416setColEtt)
-    Display_ILI9341::setFPS(unsigned short)  0x08002b0f   Thumb Code    18  display_ili9341.o(i._ZN15Display_ILI93416setFPSEt)
-    Display_ILI9341::initDMA(unsigned short*) 0x08002b21   Thumb Code    96  display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt)
-    Display_ILI9341::sendCMD(unsigned char)  0x08002b89   Thumb Code    56  display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh)
-    Display_ILI9341::setPage(unsigned short, unsigned short) 0x08002bc9   Thumb Code    34  display_ili9341.o(i._ZN15Display_ILI93417setPageEtt)
-    Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool) 0x08002bed   Thumb Code   218  text.o(i._ZN4Text13displayStringEPKchttb)
-    Input::getState(unsigned char)           0x08002ced   Thumb Code    40  input.o(i._ZN5Input8getStateEh)
-    Input::getXAxis()                        0x08002d1d   Thumb Code    26  input.o(i._ZN5Input8getXAxisEv)
-    Input::getYAxis()                        0x08002d37   Thumb Code    26  input.o(i._ZN5Input8getYAxisEv)
-    Engine::setPalette(const unsigned short*) 0x08002d51   Thumb Code     6  engine.o(i._ZN6Engine10setPaletteEPKt)
-    Engine::setFillColor(unsigned char)      0x08002d5d   Thumb Code    24  engine.o(i._ZN6Engine12setFillColorEh)
-    Engine::setLineClear(bool)               0x08002d79   Thumb Code     6  engine.o(i._ZN6Engine12setLineClearEb)
-    Engine::displaySprite(const unsigned char*, short, short, short, short, unsigned char, bool) 0x08002d85   Thumb Code   248  engine.o(i._ZN6Engine13displaySpriteEPKhsssshb)
-    Engine::setSpriteMemory(unsigned char*, unsigned) 0x08002e89   Thumb Code    26  engine.o(i._ZN6Engine15setSpriteMemoryEPhj)
-    Engine::displaySpriteMatrix(const Matrix*, signed char, short, short, short, short, unsigned char, bool) 0x08002eb9   Thumb Code   384  engine.o(i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb)
-    Engine::displaySpriteBitMask(const unsigned char*, unsigned char, short, short, unsigned char, short, unsigned char, bool) 0x08003045   Thumb Code   300  engine.o(i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb)
-    Engine::displaySpriteByteMask(const unsigned char*, unsigned char, short, short, short, short, unsigned char, bool) 0x0800317d   Thumb Code   302  engine.o(i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb)
-    Engine::clear()                          0x080032b9   Thumb Code     8  engine.o(i._ZN6Engine5clearEv)
-    Engine::parseLine(short, unsigned short*) 0x080032c5   Thumb Code  1400  engine.o(i._ZN6Engine9parseLineEsPt)
-    Terminal::clearMemory()                  0x08003845   Thumb Code    34  terminal.o(i._ZN8Terminal11clearMemoryEv)
-    Terminal::setMemory(unsigned char*)      0x0800386d   Thumb Code    14  terminal.o(i._ZN8Terminal9setMemoryEPh)
-    main                                     0x08003899   Thumb Code   204  main.o(i.main)
-    vtable for Display_ILI9341               0x08003c44   Data          28  display_ili9341.o(.constdata__ZTV15Display_ILI9341)
-    vtable for Display                       0x08003c60   Data          28  display.o(.constdata__ZTV7Display)
-    Region$$Table$$Base                      0x08003c7c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08003c9c   Number         0  anon$$obj.o(Region$$Table)
-    SHT$$INIT_ARRAY$$Base                    0x08003c9c   Number         0  main.o(.init_array)
-    SHT$$INIT_ARRAY$$Limit                   0x08003ca0   Number         0  init_aeabi.o(.init_array)
+    GPIO_WriteBit                            0x080007b5   Thumb Code    10  stm32f10x_gpio.o(i.GPIO_WriteBit)
+    RCC_ADCCLKConfig                         0x080007c1   Thumb Code    18  stm32f10x_rcc.o(i.RCC_ADCCLKConfig)
+    RCC_AHBPeriphClockCmd                    0x080007d9   Thumb Code    26  stm32f10x_rcc.o(i.RCC_AHBPeriphClockCmd)
+    RCC_APB1PeriphClockCmd                   0x080007f9   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB1PeriphClockCmd)
+    RCC_APB2PeriphClockCmd                   0x08000819   Thumb Code    26  stm32f10x_rcc.o(i.RCC_APB2PeriphClockCmd)
+    RCC_GetClocksFreq                        0x08000839   Thumb Code   192  stm32f10x_rcc.o(i.RCC_GetClocksFreq)
+    SPI_Cmd                                  0x0800090d   Thumb Code    24  stm32f10x_spi.o(i.SPI_Cmd)
+    SPI_I2S_DMACmd                           0x08000925   Thumb Code    18  stm32f10x_spi.o(i.SPI_I2S_DMACmd)
+    SPI_I2S_GetFlagStatus                    0x08000937   Thumb Code    18  stm32f10x_spi.o(i.SPI_I2S_GetFlagStatus)
+    SPI_Init                                 0x08000949   Thumb Code    60  stm32f10x_spi.o(i.SPI_Init)
+    SystemInit                               0x08000a6d   Thumb Code    78  system_stm32f10x.o(i.SystemInit)
+    TIM2_IRQHandler                          0x08000acd   Thumb Code    28  hardware.o(i.TIM2_IRQHandler)
+    TIM3_IRQHandler                          0x08000aed   Thumb Code    58  sound.o(i.TIM3_IRQHandler)
+    TIM4_IRQHandler                          0x08000b41   Thumb Code    20  display_ili9341.o(i.TIM4_IRQHandler)
+    FSReadFile(char*, FileWorker*)           0x08000b5d   Thumb Code    66  sdcard.o(i._Z10FSReadFilePcP10FileWorker)
+    SDGetDWord(unsigned)                     0x08000ba5   Thumb Code    46  sdcard.o(i._Z10SDGetDWordj)
+    SDSetDWord(unsigned, int)                0x08000bd9   Thumb Code    44  sdcard.o(i._Z10SDSetDWordji)
+    clearTimer()                             0x08000c09   Thumb Code     8  hardware.o(i._Z10clearTimerv)
+    configInit()                             0x08000c15   Thumb Code    18  config.o(i._Z10configInitv)
+    readConfig(CoreConfig*, unsigned)        0x08000c2d   Thumb Code    64  config.o(i._Z10readConfigP10CoreConfigj)
+    saveConfig()                             0x08000c79   Thumb Code    62  config.o(i._Z10saveConfigv)
+    FSWriteFile(const char*, FileWorker*)    0x08000cc9   Thumb Code   432  sdcard.o(i._Z11FSWriteFilePKcP10FileWorker)
+    applyConfig(CoreConfig*, unsigned)       0x08000e7d   Thumb Code    30  config.o(i._Z11applyConfigP10CoreConfigj)
+    checkHeader(VexMainHeader*)              0x08000ea1   Thumb Code    58  vex_loader.o(i._Z11checkHeaderP13VexMainHeader)
+    clearMemory(const unsigned char*)        0x08000edd   Thumb Code    68  vex_loader.o(i._Z11clearMemoryPKh)
+    delayByLoop(unsigned)                    0x08000f25   Thumb Code    12  helpers.o(i._Z11delayByLoopj)
+    displaySync()                            0x08000f31   Thumb Code    10  vex_loader.o(i._Z11displaySyncv)
+    flash_ready()                            0x08000f41   Thumb Code    14  vex_loader.o(i._Z11flash_readyv)
+    FSGetCluster(const char*, FileInfo*, int*, int*) 0x08000f55   Thumb Code   374  sdcard.o(i._Z12FSGetClusterPKcP8FileInfoPiS3_)
+    SDReadSector(unsigned)                   0x080010dd   Thumb Code   140  sdcard.o(i._Z12SDReadSectorj)
+    disableSound()                           0x08001175   Thumb Code    68  sound.o(i._Z12disableSoundv)
+    initHardware()                           0x080011bd   Thumb Code   538  hardware.o(i._Z12initHardwarev)
+    unlockMemory()                           0x080013f1   Thumb Code    12  vex_loader.o(i._Z12unlockMemoryv)
+    SDSendCommand(unsigned char, unsigned)   0x08001409   Thumb Code   158  sdcard.o(i._Z13SDSendCommandhj)
+    SDWriteSector(unsigned)                  0x080014ad   Thumb Code   198  sdcard.o(i._Z13SDWriteSectorj)
+    debugInternal()                          0x0800157d   Thumb Code    60  vex_loader.o(i._Z13debugInternalv)
+    FSClearCluster(int)                      0x080015c9   Thumb Code    46  sdcard.o(i._Z14FSClearClusteri)
+    FSReadNextFile(char*, int, DirectoryReader*, FileInfo*) 0x08001601   Thumb Code   314  sdcard.o(i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo)
+    enableSoundMono(unsigned short, unsigned char, unsigned short(*)()) 0x08001749   Thumb Code   176  sound.o(i._Z15enableSoundMonothPFtvE)
+    FSGetStartSector(int)                    0x0800180d   Thumb Code    18  sdcard.o(i._Z16FSGetStartSectori)
+    FSMakeNewCluster()                       0x08001829   Thumb Code    70  sdcard.o(i._Z16FSMakeNewClusterv)
+    FSGetClusterValue(int)                   0x08001891   Thumb Code    46  sdcard.o(i._Z17FSGetClusterValuei)
+    FSSetClusterValue(int, int)              0x080018c5   Thumb Code    60  sdcard.o(i._Z17FSSetClusterValueii)
+    getTimerWithClear()                      0x08001905   Thumb Code    12  hardware.o(i._Z17getTimerWithClearv)
+    FSGetEmptyFilePlace(int, int*, int*)     0x08001915   Thumb Code   120  sdcard.o(i._Z19FSGetEmptyFilePlaceiPiS_)
+    getAdcValueForXAxis()                    0x08001995   Thumb Code    18  hardware.o(i._Z19getAdcValueForXAxisv)
+    getAdcValueForYAxis()                    0x080019ad   Thumb Code    18  hardware.o(i._Z19getAdcValueForYAxisv)
+    FSRemoveClusterChain(int)                0x080019c5   Thumb Code    42  sdcard.o(i._Z20FSRemoveClusterChaini)
+    FSGetNameFromFileStruct(unsigned char*, char*) 0x080019ef   Thumb Code   110  sdcard.o(i._Z23FSGetNameFromFileStructPhPc)
+    cmp(char*, char*)                        0x08001a5d   Thumb Code    28  helpers.o(i._Z3cmpPcS_)
+    run(char*, unsigned char*)               0x08001a79   Thumb Code    30  vex_loader.o(i._Z3runPcPh)
+    cmpi(char*, char*)                       0x08001a97   Thumb Code    42  helpers.o(i._Z4cmpiPcS_)
+    itoa(int, char*)                         0x08001ac1   Thumb Code    74  helpers.o(i._Z4itoaiPc)
+    rand()                                   0x08001b0b   Thumb Code    68  helpers.o(i._Z4randv)
+    sCmp(const char*, const char*)           0x08001b4f   Thumb Code    46  vex_loader.o(i._Z4sCmpPKcS0_)
+    FSRead(FileWorker*, void*, unsigned)     0x08001b7d   Thumb Code   172  sdcard.o(i._Z6FSReadP10FileWorkerPvj)
+    SDInit()                                 0x08001c31   Thumb Code   184  sdcard.o(i._Z6SDInitv)
+    getCmd(char*)                            0x08001cf1   Thumb Code   582  vex_loader.o(i._Z6getCmdPc)
+    setFPS(unsigned short)                   0x080021e1   Thumb Code    14  vex_loader.o(i._Z6setFPSt)
+    FSClose(FileWorker*)                     0x080021f5   Thumb Code    44  sdcard.o(i._Z7FSCloseP10FileWorker)
+    FSWrite(FileWorker*, const void*, int)   0x08002221   Thumb Code   164  sdcard.o(i._Z7FSWriteP10FileWorkerPKvi)
+    message(char*)                           0x080022cd   Thumb Code    28  main.o(i._Z7messagePc)
+    reverse(char*)                           0x080022ed   Thumb Code    38  helpers.o(i._Z7reversePc)
+    runGame()                                0x08002315   Thumb Code    18  vex_loader.o(i._Z7runGamev)
+    spiRead()                                0x0800232d   Thumb Code    10  sdcard.o(i._Z7spiReadv)
+    spiSend(unsigned char)                   0x08002339   Thumb Code    46  sdcard.o(i._Z7spiSendh)
+    toUpper(char)                            0x0800236d   Thumb Code    22  helpers.o(i._Z7toUpperc)
+    SDEnable(unsigned char*)                 0x08002385   Thumb Code   180  sdcard.o(i._Z8SDEnablePh)
+    __divsi3(int, int)                       0x0800245d   Thumb Code     8  helpers.o(i._Z8__divsi3ii)
+    __modsi3(int, int)                       0x08002465   Thumb Code    12  helpers.o(i._Z8__modsi3ii)
+    getTimer()                               0x08002471   Thumb Code     6  hardware.o(i._Z8getTimerv)
+    loadGame(char*, unsigned char*)          0x0800247d   Thumb Code   502  vex_loader.o(i._Z8loadGamePcPh)
+    saveCode(const unsigned char*, const unsigned char*, unsigned) 0x08002681   Thumb Code    84  vex_loader.o(i._Z8saveCodePKhS0_j)
+    FSReadDir(char*, DirectoryReader*)       0x080026d9   Thumb Code    50  sdcard.o(i._Z9FSReadDirPcP15DirectoryReader)
+    SDGetByte(unsigned)                      0x08002711   Thumb Code    10  sdcard.o(i._Z9SDGetBytej)
+    SDGetWord(unsigned)                      0x08002721   Thumb Code    24  sdcard.o(i._Z9SDGetWordj)
+    SDSetWord(unsigned, short)               0x0800273d   Thumb Code    22  sdcard.o(i._Z9SDSetWordjs)
+    __udivsi3(unsigned, unsigned)            0x08002759   Thumb Code     8  helpers.o(i._Z9__udivsi3jj)
+    __umodsi3(unsigned, unsigned)            0x08002761   Thumb Code    12  helpers.o(i._Z9__umodsi3jj)
+    getConfig(CoreConfig*, unsigned)         0x0800276d   Thumb Code    30  config.o(i._Z9getConfigP10CoreConfigj)
+    Display_ILI9341::writeData8(unsigned char) 0x08002791   Thumb Code    36  display_ili9341.o(i._ZN15Display_ILI934110writeData8Eh)
+    Display_ILI9341::writeData16(unsigned short) 0x080027bd   Thumb Code    58  display_ili9341.o(i._ZN15Display_ILI934111writeData16Et)
+    Display_ILI9341::displayClear(unsigned char) 0x08002801   Thumb Code   124  display_ili9341.o(i._ZN15Display_ILI934112displayClearEh)
+    Display_ILI9341::initFPSTimer(unsigned short) 0x0800288d   Thumb Code    92  display_ili9341.o(i._ZN15Display_ILI934112initFPSTimerEt)
+    Display_ILI9341::draw()                  0x080028ed   Thumb Code   156  display_ili9341.o(i._ZN15Display_ILI93414drawEv)
+    Display_ILI9341::init()                  0x080029a1   Thumb Code   806  display_ili9341.o(i._ZN15Display_ILI93414initEv)
+    Display_ILI9341::setCol(unsigned short, unsigned short) 0x08002cd1   Thumb Code    34  display_ili9341.o(i._ZN15Display_ILI93416setColEtt)
+    Display_ILI9341::setFPS(unsigned short)  0x08002cf3   Thumb Code    18  display_ili9341.o(i._ZN15Display_ILI93416setFPSEt)
+    Display_ILI9341::initDMA(unsigned short*) 0x08002d05   Thumb Code    88  display_ili9341.o(i._ZN15Display_ILI93417initDMAEPt)
+    Display_ILI9341::sendCMD(unsigned char)  0x08002d65   Thumb Code    56  display_ili9341.o(i._ZN15Display_ILI93417sendCMDEh)
+    Display_ILI9341::setPage(unsigned short, unsigned short) 0x08002da5   Thumb Code    34  display_ili9341.o(i._ZN15Display_ILI93417setPageEtt)
+    Text::displayString(const char*, unsigned char, unsigned short, unsigned short, bool) 0x08002dc9   Thumb Code   226  text.o(i._ZN4Text13displayStringEPKchttb)
+    Input::getState(unsigned char)           0x08002ed5   Thumb Code    36  input.o(i._ZN5Input8getStateEh)
+    Input::getXAxis()                        0x08002f01   Thumb Code    38  input.o(i._ZN5Input8getXAxisEv)
+    Input::getYAxis()                        0x08002f2d   Thumb Code    38  input.o(i._ZN5Input8getYAxisEv)
+    Engine::setPalette(const unsigned short*) 0x08002f59   Thumb Code     6  engine.o(i._ZN6Engine10setPaletteEPKt)
+    Engine::setFillColor(unsigned char)      0x08002f65   Thumb Code    24  engine.o(i._ZN6Engine12setFillColorEh)
+    Engine::setLineClear(bool)               0x08002f81   Thumb Code     6  engine.o(i._ZN6Engine12setLineClearEb)
+    Engine::displaySprite(const unsigned char*, short, short, short, short, unsigned char, bool) 0x08002f8d   Thumb Code   248  engine.o(i._ZN6Engine13displaySpriteEPKhsssshb)
+    Engine::setSpriteMemory(unsigned char*, unsigned) 0x08003091   Thumb Code    26  engine.o(i._ZN6Engine15setSpriteMemoryEPhj)
+    Engine::displaySpriteMatrix(const Matrix*, signed char, short, short, short, short, unsigned char, bool) 0x080030c1   Thumb Code   384  engine.o(i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb)
+    Engine::displaySpriteBitMask(const unsigned char*, unsigned char, short, short, unsigned char, short, unsigned char, bool) 0x0800324d   Thumb Code   300  engine.o(i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb)
+    Engine::displaySpriteByteMask(const unsigned char*, unsigned char, short, short, short, short, unsigned char, bool) 0x08003385   Thumb Code   302  engine.o(i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb)
+    Engine::clear()                          0x080034c1   Thumb Code     8  engine.o(i._ZN6Engine5clearEv)
+    Engine::parseLine(short, unsigned short*) 0x080034cd   Thumb Code  1662  engine.o(i._ZN6Engine9parseLineEsPt)
+    main                                     0x08003b6d   Thumb Code   202  main.o(i.main)
+    vtable for Display_ILI9341               0x08003f2c   Data          28  display_ili9341.o(.constdata__ZTV15Display_ILI9341)
+    vtable for Display                       0x08003f48   Data          28  display.o(.constdata__ZTV7Display)
+    Region$$Table$$Base                      0x08003f64   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08003f84   Number         0  anon$$obj.o(Region$$Table)
+    SHT$$INIT_ARRAY$$Base                    0x08003f84   Number         0  main.o(.init_array)
+    SHT$$INIT_ARRAY$$Limit                   0x08003f88   Number         0  init_aeabi.o(.init_array)
     sendLineDone                             0x20000000   Data           1  display_ili9341.o(.data)
     allowFrame                               0x20000001   Data           1  display_ili9341.o(.data)
     spriteCash                               0x20000004   Data           4  engine.o(.data)
@@ -1984,30 +2047,28 @@ Image Symbol Table
     tmrCounter                               0x20000014   Data           4  hardware.o(.data)
     butEqPort                                0x20000018   Data          24  input.o(.data)
     display                                  0x20000030   Data           8  main.o(.data)
-    fileRom                                  0x20000038   Data           4  mem.o(.data)
-    gameRom                                  0x2000003c   Data           4  mem.o(.data)
-    entryPoint                               0x20000040   Data           4  vex_loader.o(.data)
-    termAddress                              0x20000044   Data           4  terminal.o(.data)
-    buffer                                   0x20000048   Data           4  sdcard.o(.data)
-    SDHC                                     0x2000004c   Data           1  sdcard.o(.data)
-    SDError                                  0x2000004d   Data           1  sdcard.o(.data)
-    currentSector                            0x20000050   Data           4  sdcard.o(.data)
-    sectorsPerCluster                        0x20000054   Data           1  sdcard.o(.data)
-    fatCount                                 0x20000055   Data           1  sdcard.o(.data)
-    fatSize                                  0x20000058   Data           4  sdcard.o(.data)
-    fatStartAddr                             0x2000005c   Data           4  sdcard.o(.data)
-    cluster2Addr                             0x20000060   Data           4  sdcard.o(.data)
-    rootClusterAddr                          0x20000064   Data           4  sdcard.o(.data)
-    rootAddr                                 0x20000068   Data           4  sdcard.o(.data)
-    _callback                                0x2000006c   Data           4  sound.o(.data)
-    sample                                   0x20000070   Data           1  sound.o(.data)
-    shLeft                                   0x20000071   Data           1  sound.o(.data)
-    shRight                                  0x20000072   Data           1  sound.o(.data)
-    line1                                    0x20000088   Data         642  display_ili9341.o(.bss)
-    line2                                    0x2000030a   Data         642  display_ili9341.o(.bss)
-    ram                                      0x2000058c   Data       16384  mem.o(.bss)
-    __libspace_start                         0x2000458c   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x200045ec   Data           0  libspace.o(.bss)
+    entryPoint                               0x20000038   Data           4  vex_loader.o(.data)
+    buffer                                   0x2000003c   Data           4  sdcard.o(.data)
+    SDHC                                     0x20000040   Data           1  sdcard.o(.data)
+    SDError                                  0x20000041   Data           1  sdcard.o(.data)
+    currentSector                            0x20000044   Data           4  sdcard.o(.data)
+    sectorsPerCluster                        0x20000048   Data           1  sdcard.o(.data)
+    fatCount                                 0x20000049   Data           1  sdcard.o(.data)
+    fatSize                                  0x2000004c   Data           4  sdcard.o(.data)
+    fatStartAddr                             0x20000050   Data           4  sdcard.o(.data)
+    cluster2Addr                             0x20000054   Data           4  sdcard.o(.data)
+    rootClusterAddr                          0x20000058   Data           4  sdcard.o(.data)
+    rootAddr                                 0x2000005c   Data           4  sdcard.o(.data)
+    _callback                                0x20000060   Data           4  sound.o(.data)
+    sample                                   0x20000064   Data           1  sound.o(.data)
+    shLeft                                   0x20000065   Data           1  sound.o(.data)
+    shRight                                  0x20000066   Data           1  sound.o(.data)
+    sysConfig                                0x20000067   Data           5  config.o(.data)
+    line1                                    0x20000080   Data         642  display_ili9341.o(.bss)
+    line2                                    0x20000302   Data         642  display_ili9341.o(.bss)
+    ram                                      0x20000584   Data       16384  mem.o(.bss)
+    __libspace_start                         0x20004584   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x200045e4   Data           0  libspace.o(.bss)
 
 
 
@@ -2017,245 +2078,252 @@ Memory Map of the image
 
   Image Entry point : 0x0800018d
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00003d28, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00004008, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00003ca0, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00003f88, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x08000000   0x08000000   0x000000ec   Data   RO         2996    RESET               startup_stm32f10x_md.o
-    0x080000ec   0x080000ec   0x00000008   Code   RO         3063  * !!!main             c_w.l(__main.o)
-    0x080000f4   0x080000f4   0x00000034   Code   RO         3482    !!!scatter          c_w.l(__scatter.o)
-    0x08000128   0x08000128   0x0000001a   Code   RO         3484    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x08000000   0x08000000   0x000000ec   Data   RO         3084    RESET               startup_stm32f10x_md.o
+    0x080000ec   0x080000ec   0x00000008   Code   RO         3151  * !!!main             c_w.l(__main.o)
+    0x080000f4   0x080000f4   0x00000034   Code   RO         3570    !!!scatter          c_w.l(__scatter.o)
+    0x08000128   0x08000128   0x0000001a   Code   RO         3572    !!handler_copy      c_w.l(__scatter_copy.o)
     0x08000142   0x08000142   0x00000002   PAD
-    0x08000144   0x08000144   0x0000001c   Code   RO         3486    !!handler_zi        c_w.l(__scatter_zi.o)
-    0x08000160   0x08000160   0x00000002   Code   RO         3348    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3183    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3185    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3188    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3190    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3192    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3195    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3197    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3199    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3201    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3203    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3205    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3207    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3209    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3211    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3213    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3215    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3219    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3221    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000000   Code   RO         3223    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
-    0x08000162   0x08000162   0x00000004   Code   RO         3224    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
-    0x08000166   0x08000166   0x00000000   Code   RO         3225    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
-    0x08000166   0x08000166   0x00000002   Code   RO         3226    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
-    0x08000168   0x08000168   0x00000002   Code   RO         3441    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO         3451    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO         3453    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO         3456    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO         3459    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO         3461    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
-    0x0800016a   0x0800016a   0x00000000   Code   RO         3464    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
-    0x0800016a   0x0800016a   0x00000002   Code   RO         3465    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
-    0x0800016c   0x0800016c   0x00000000   Code   RO         3177    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
-    0x0800016c   0x0800016c   0x00000000   Code   RO         3241    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
-    0x0800016c   0x0800016c   0x00000006   Code   RO         3253    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
-    0x08000172   0x08000172   0x00000000   Code   RO         3243    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
-    0x08000172   0x08000172   0x00000004   Code   RO         3244    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
-    0x08000176   0x08000176   0x00000000   Code   RO         3246    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
-    0x08000176   0x08000176   0x00000008   Code   RO         3247    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
-    0x0800017e   0x0800017e   0x00000002   Code   RO         3361    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
-    0x08000180   0x08000180   0x00000000   Code   RO         3410    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
-    0x08000180   0x08000180   0x00000004   Code   RO         3411    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
-    0x08000184   0x08000184   0x00000006   Code   RO         3412    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x08000144   0x08000144   0x0000001c   Code   RO         3574    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x08000160   0x08000160   0x00000002   Code   RO         3436    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3271    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3273    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3276    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3278    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3280    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3283    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3285    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3287    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3289    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3291    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3293    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3295    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3297    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3299    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3301    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3303    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3307    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3309    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000000   Code   RO         3311    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x08000162   0x08000162   0x00000004   Code   RO         3312    .ARM.Collect$$libinit$$00000031  c_w.l(libinit2.o)
+    0x08000166   0x08000166   0x00000000   Code   RO         3313    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x08000166   0x08000166   0x00000002   Code   RO         3314    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x08000168   0x08000168   0x00000002   Code   RO         3529    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x0800016a   0x0800016a   0x00000000   Code   RO         3539    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x0800016a   0x0800016a   0x00000000   Code   RO         3541    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x0800016a   0x0800016a   0x00000000   Code   RO         3544    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x0800016a   0x0800016a   0x00000000   Code   RO         3547    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x0800016a   0x0800016a   0x00000000   Code   RO         3549    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x0800016a   0x0800016a   0x00000000   Code   RO         3552    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x0800016a   0x0800016a   0x00000002   Code   RO         3553    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x0800016c   0x0800016c   0x00000000   Code   RO         3265    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x0800016c   0x0800016c   0x00000000   Code   RO         3329    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x0800016c   0x0800016c   0x00000006   Code   RO         3341    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x08000172   0x08000172   0x00000000   Code   RO         3331    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x08000172   0x08000172   0x00000004   Code   RO         3332    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x08000176   0x08000176   0x00000000   Code   RO         3334    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x08000176   0x08000176   0x00000008   Code   RO         3335    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x0800017e   0x0800017e   0x00000002   Code   RO         3449    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x08000180   0x08000180   0x00000000   Code   RO         3498    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x08000180   0x08000180   0x00000004   Code   RO         3499    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x08000184   0x08000184   0x00000006   Code   RO         3500    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0800018a   0x0800018a   0x00000002   PAD
-    0x0800018c   0x0800018c   0x00000040   Code   RO         2997  * .text               startup_stm32f10x_md.o
-    0x080001cc   0x080001cc   0x0000003e   Code   RO         3049    .text               c_w.l(strlen.o)
-    0x0800020a   0x0800020a   0x0000008a   Code   RO         3051    .text               c_w.l(rt_memcpy_v6.o)
-    0x08000294   0x08000294   0x00000008   Code   RO         3053    .text               c_w.l(memcpy.o)
-    0x0800029c   0x0800029c   0x00000016   Code   RO         3055    .text               c_w.l(memset.o)
-    0x080002b2   0x080002b2   0x00000010   Code   RO         3057    .text               c_w.l(aeabi_memset.o)
-    0x080002c2   0x080002c2   0x00000044   Code   RO         3059    .text               c_w.l(rt_memclr.o)
-    0x08000306   0x08000306   0x00000006   Code   RO         3061    .text               c_w.l(heapauxi.o)
-    0x0800030c   0x0800030c   0x00000024   Code   RO         3068    .text               c_w.l(init_aeabi.o)
-    0x08000330   0x08000330   0x00000064   Code   RO         3178    .text               c_w.l(rt_memcpy_w.o)
-    0x08000394   0x08000394   0x0000004e   Code   RO         3180    .text               c_w.l(rt_memclr_w.o)
-    0x080003e2   0x080003e2   0x0000004a   Code   RO         3272    .text               c_w.l(sys_stackheap_outer.o)
-    0x0800042c   0x0800042c   0x00000012   Code   RO         3335    .text               c_w.l(exit.o)
+    0x0800018c   0x0800018c   0x00000040   Code   RO         3085  * .text               startup_stm32f10x_md.o
+    0x080001cc   0x080001cc   0x0000003e   Code   RO         3137    .text               c_w.l(strlen.o)
+    0x0800020a   0x0800020a   0x0000008a   Code   RO         3139    .text               c_w.l(rt_memcpy_v6.o)
+    0x08000294   0x08000294   0x00000008   Code   RO         3141    .text               c_w.l(memcpy.o)
+    0x0800029c   0x0800029c   0x00000016   Code   RO         3143    .text               c_w.l(memset.o)
+    0x080002b2   0x080002b2   0x00000010   Code   RO         3145    .text               c_w.l(aeabi_memset.o)
+    0x080002c2   0x080002c2   0x00000044   Code   RO         3147    .text               c_w.l(rt_memclr.o)
+    0x08000306   0x08000306   0x00000006   Code   RO         3149    .text               c_w.l(heapauxi.o)
+    0x0800030c   0x0800030c   0x00000024   Code   RO         3156    .text               c_w.l(init_aeabi.o)
+    0x08000330   0x08000330   0x00000064   Code   RO         3266    .text               c_w.l(rt_memcpy_w.o)
+    0x08000394   0x08000394   0x0000004e   Code   RO         3268    .text               c_w.l(rt_memclr_w.o)
+    0x080003e2   0x080003e2   0x0000004a   Code   RO         3360    .text               c_w.l(sys_stackheap_outer.o)
+    0x0800042c   0x0800042c   0x00000012   Code   RO         3423    .text               c_w.l(exit.o)
     0x0800043e   0x0800043e   0x00000002   PAD
-    0x08000440   0x08000440   0x0000000c   Code   RO         3354    .text               c_w.l(sys_exit.o)
-    0x0800044c   0x0800044c   0x00000008   Code   RO         3356    .text               c_w.l(libspace.o)
-    0x08000454   0x08000454   0x00000002   Code   RO         3406    .text               c_w.l(use_no_semi.o)
-    0x08000456   0x08000456   0x00000000   Code   RO         3408    .text               c_w.l(indicate_semi.o)
-    0x08000456   0x08000456   0x00000016   Code   RO         1202    i.ADC_AutoInjectedConvCmd  stm32f10x_adc.o
-    0x0800046c   0x0800046c   0x00000016   Code   RO         1205    i.ADC_Cmd           stm32f10x_adc.o
-    0x08000482   0x08000482   0x00000010   Code   RO         1212    i.ADC_ExternalTrigInjectedConvConfig  stm32f10x_adc.o
-    0x08000492   0x08000492   0x00000014   Code   RO         1213    i.ADC_GetCalibrationStatus  stm32f10x_adc.o
-    0x080004a6   0x080004a6   0x0000001c   Code   RO         1218    i.ADC_GetInjectedConversionValue  stm32f10x_adc.o
-    0x080004c2   0x080004c2   0x00000014   Code   RO         1219    i.ADC_GetResetCalibrationStatus  stm32f10x_adc.o
+    0x08000440   0x08000440   0x0000000c   Code   RO         3442    .text               c_w.l(sys_exit.o)
+    0x0800044c   0x0800044c   0x00000008   Code   RO         3444    .text               c_w.l(libspace.o)
+    0x08000454   0x08000454   0x00000002   Code   RO         3494    .text               c_w.l(use_no_semi.o)
+    0x08000456   0x08000456   0x00000000   Code   RO         3496    .text               c_w.l(indicate_semi.o)
+    0x08000456   0x08000456   0x00000016   Code   RO         1290    i.ADC_AutoInjectedConvCmd  stm32f10x_adc.o
+    0x0800046c   0x0800046c   0x00000016   Code   RO         1293    i.ADC_Cmd           stm32f10x_adc.o
+    0x08000482   0x08000482   0x00000010   Code   RO         1300    i.ADC_ExternalTrigInjectedConvConfig  stm32f10x_adc.o
+    0x08000492   0x08000492   0x00000014   Code   RO         1301    i.ADC_GetCalibrationStatus  stm32f10x_adc.o
+    0x080004a6   0x080004a6   0x0000001c   Code   RO         1306    i.ADC_GetInjectedConversionValue  stm32f10x_adc.o
+    0x080004c2   0x080004c2   0x00000014   Code   RO         1307    i.ADC_GetResetCalibrationStatus  stm32f10x_adc.o
     0x080004d6   0x080004d6   0x00000002   PAD
-    0x080004d8   0x080004d8   0x00000050   Code   RO         1223    i.ADC_Init          stm32f10x_adc.o
-    0x08000528   0x08000528   0x00000082   Code   RO         1224    i.ADC_InjectedChannelConfig  stm32f10x_adc.o
-    0x080005aa   0x080005aa   0x00000018   Code   RO         1226    i.ADC_InjectedSequencerLengthConfig  stm32f10x_adc.o
-    0x080005c2   0x080005c2   0x0000000a   Code   RO         1228    i.ADC_ResetCalibration  stm32f10x_adc.o
-    0x080005cc   0x080005cc   0x00000016   Code   RO         1231    i.ADC_SoftwareStartInjectedConvCmd  stm32f10x_adc.o
-    0x080005e2   0x080005e2   0x0000000a   Code   RO         1232    i.ADC_StartCalibration  stm32f10x_adc.o
+    0x080004d8   0x080004d8   0x00000050   Code   RO         1311    i.ADC_Init          stm32f10x_adc.o
+    0x08000528   0x08000528   0x00000082   Code   RO         1312    i.ADC_InjectedChannelConfig  stm32f10x_adc.o
+    0x080005aa   0x080005aa   0x00000018   Code   RO         1314    i.ADC_InjectedSequencerLengthConfig  stm32f10x_adc.o
+    0x080005c2   0x080005c2   0x0000000a   Code   RO         1316    i.ADC_ResetCalibration  stm32f10x_adc.o
+    0x080005cc   0x080005cc   0x00000016   Code   RO         1319    i.ADC_SoftwareStartInjectedConvCmd  stm32f10x_adc.o
+    0x080005e2   0x080005e2   0x0000000a   Code   RO         1320    i.ADC_StartCalibration  stm32f10x_adc.o
     0x080005ec   0x080005ec   0x00000030   Code   RO          121    i.DMA1_Channel3_IRQHandler  display_ili9341.o
-    0x0800061c   0x0800061c   0x0000001c   Code   RO         1434    i.DMA_ClearITPendingBit  stm32f10x_dma.o
-    0x08000638   0x08000638   0x00000018   Code   RO         1435    i.DMA_Cmd           stm32f10x_dma.o
-    0x08000650   0x08000650   0x00000012   Code   RO         1440    i.DMA_ITConfig      stm32f10x_dma.o
-    0x08000662   0x08000662   0x0000003c   Code   RO         1441    i.DMA_Init          stm32f10x_dma.o
-    0x0800069e   0x0800069e   0x00000116   Code   RO         1709    i.GPIO_Init         stm32f10x_gpio.o
-    0x080007b4   0x080007b4   0x00000090   Code   RO         1711    i.GPIO_PinRemapConfig  stm32f10x_gpio.o
-    0x08000844   0x08000844   0x0000000a   Code   RO         1720    i.GPIO_WriteBit     stm32f10x_gpio.o
-    0x0800084e   0x0800084e   0x00000002   PAD
-    0x08000850   0x08000850   0x00000018   Code   RO         1829    i.RCC_ADCCLKConfig  stm32f10x_rcc.o
-    0x08000868   0x08000868   0x00000020   Code   RO         1830    i.RCC_AHBPeriphClockCmd  stm32f10x_rcc.o
-    0x08000888   0x08000888   0x00000020   Code   RO         1831    i.RCC_APB1PeriphClockCmd  stm32f10x_rcc.o
-    0x080008a8   0x080008a8   0x00000020   Code   RO         1833    i.RCC_APB2PeriphClockCmd  stm32f10x_rcc.o
-    0x080008c8   0x080008c8   0x000000d4   Code   RO         1841    i.RCC_GetClocksFreq  stm32f10x_rcc.o
-    0x0800099c   0x0800099c   0x00000018   Code   RO         2046    i.SPI_Cmd           stm32f10x_spi.o
-    0x080009b4   0x080009b4   0x00000012   Code   RO         2052    i.SPI_I2S_DMACmd    stm32f10x_spi.o
-    0x080009c6   0x080009c6   0x00000012   Code   RO         2054    i.SPI_I2S_GetFlagStatus  stm32f10x_spi.o
-    0x080009d8   0x080009d8   0x0000003c   Code   RO         2059    i.SPI_Init          stm32f10x_spi.o
-    0x08000a14   0x08000a14   0x00000008   Code   RO         3004    i.SetSysClock       system_stm32f10x.o
-    0x08000a1c   0x08000a1c   0x000000e0   Code   RO         3005    i.SetSysClockTo72   system_stm32f10x.o
-    0x08000afc   0x08000afc   0x00000060   Code   RO         3007    i.SystemInit        system_stm32f10x.o
-    0x08000b5c   0x08000b5c   0x00000020   Code   RO          353    i.TIM2_IRQHandler   hardware.o
-    0x08000b7c   0x08000b7c   0x00000054   Code   RO         1048    i.TIM3_IRQHandler   sound.o
-    0x08000bd0   0x08000bd0   0x0000001c   Code   RO          122    i.TIM4_IRQHandler   display_ili9341.o
-    0x08000bec   0x08000bec   0x00000048   Code   RO          795    i._Z10FSReadFilePcP10FileWorker  sdcard.o
-    0x08000c34   0x08000c34   0x00000034   Code   RO          796    i._Z10SDGetDWordj   sdcard.o
-    0x08000c68   0x08000c68   0x00000030   Code   RO          797    i._Z10SDSetDWordji  sdcard.o
-    0x08000c98   0x08000c98   0x0000000c   Code   RO          354    i._Z10clearTimerv   hardware.o
-    0x08000ca4   0x08000ca4   0x000001b4   Code   RO          799    i._Z11FSWriteFilePKcP10FileWorker  sdcard.o
-    0x08000e58   0x08000e58   0x00000038   Code   RO          616    i._Z11checkHeaderP13VexMainHeaderi  vex_loader.o
-    0x08000e90   0x08000e90   0x00000048   Code   RO          617    i._Z11clearMemoryPKhj  vex_loader.o
-    0x08000ed8   0x08000ed8   0x0000000c   Code   RO          424    i._Z11delayByLoopj  helpers.o
-    0x08000ee4   0x08000ee4   0x00000010   Code   RO          618    i._Z11displaySyncv  vex_loader.o
-    0x08000ef4   0x08000ef4   0x00000014   Code   RO          619    i._Z11flash_readyv  vex_loader.o
-    0x08000f08   0x08000f08   0x00000174   Code   RO          800    i._Z12FSGetClusterPKcP8FileInfoPiS3_  sdcard.o
-    0x0800107c   0x0800107c   0x00000098   Code   RO          801    i._Z12SDReadSectorj  sdcard.o
-    0x08001114   0x08001114   0x00000048   Code   RO         1049    i._Z12disableSoundv  sound.o
-    0x0800115c   0x0800115c   0x00000238   Code   RO          355    i._Z12initHardwarev  hardware.o
-    0x08001394   0x08001394   0x00000018   Code   RO          620    i._Z12unlockMemoryv  vex_loader.o
-    0x080013ac   0x080013ac   0x000000a4   Code   RO          802    i._Z13SDSendCommandhj  sdcard.o
-    0x08001450   0x08001450   0x000000d0   Code   RO          803    i._Z13SDWriteSectorj  sdcard.o
-    0x08001520   0x08001520   0x00000054   Code   RO          621    i._Z13debugInternalv  vex_loader.o
-    0x08001574   0x08001574   0x00000038   Code   RO          804    i._Z14FSClearClusteri  sdcard.o
-    0x080015ac   0x080015ac   0x00000148   Code   RO          805    i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo  sdcard.o
-    0x080016f4   0x080016f4   0x000000c4   Code   RO         1050    i._Z15enableSoundMonothPFtvE  sound.o
-    0x080017b8   0x080017b8   0x0000001c   Code   RO          806    i._Z16FSGetStartSectori  sdcard.o
-    0x080017d4   0x080017d4   0x0000004c   Code   RO          807    i._Z16FSMakeNewClusterv  sdcard.o
-    0x08001820   0x08001820   0x0000001a   Code   RO          123    i._Z16__NVIC_EnableIRQ4IRQn  display_ili9341.o
-    0x0800183a   0x0800183a   0x00000002   PAD
-    0x0800183c   0x0800183c   0x00000034   Code   RO          808    i._Z17FSGetClusterValuei  sdcard.o
-    0x08001870   0x08001870   0x00000040   Code   RO          809    i._Z17FSSetClusterValueii  sdcard.o
-    0x080018b0   0x080018b0   0x00000010   Code   RO          356    i._Z17getTimerWithClearv  hardware.o
-    0x080018c0   0x080018c0   0x00000080   Code   RO          810    i._Z19FSGetEmptyFilePlaceiPiS_  sdcard.o
-    0x08001940   0x08001940   0x00000018   Code   RO          357    i._Z19getAdcValueForXAxisv  hardware.o
-    0x08001958   0x08001958   0x00000018   Code   RO          358    i._Z19getAdcValueForYAxisv  hardware.o
-    0x08001970   0x08001970   0x0000002a   Code   RO          811    i._Z20FSRemoveClusterChaini  sdcard.o
-    0x0800199a   0x0800199a   0x0000006e   Code   RO          812    i._Z23FSGetNameFromFileStructPhPc  sdcard.o
-    0x08001a08   0x08001a08   0x0000001c   Code   RO          425    i._Z3cmpPcS_        helpers.o
-    0x08001a24   0x08001a24   0x0000001e   Code   RO          622    i._Z3runPcPh        vex_loader.o
-    0x08001a42   0x08001a42   0x0000002a   Code   RO          426    i._Z4cmpiPcS_       helpers.o
-    0x08001a6c   0x08001a6c   0x0000004a   Code   RO          427    i._Z4itoaiPc        helpers.o
-    0x08001ab6   0x08001ab6   0x0000002e   Code   RO          623    i._Z4sCmpPKcS0_     vex_loader.o
-    0x08001ae4   0x08001ae4   0x000000b4   Code   RO          813    i._Z6FSReadP10FileWorkerPvj  sdcard.o
-    0x08001b98   0x08001b98   0x000000c0   Code   RO          815    i._Z6SDInitv        sdcard.o
-    0x08001c58   0x08001c58   0x0000040c   Code   RO          624    i._Z6getCmdPc       vex_loader.o
-    0x08002064   0x08002064   0x00000014   Code   RO          626    i._Z6setFPSt        vex_loader.o
-    0x08002078   0x08002078   0x0000002c   Code   RO          817    i._Z7FSCloseP10FileWorker  sdcard.o
-    0x080020a4   0x080020a4   0x000000ac   Code   RO          818    i._Z7FSWriteP10FileWorkerPKvi  sdcard.o
-    0x08002150   0x08002150   0x00000020   Code   RO          528    i._Z7messagePc      main.o
-    0x08002170   0x08002170   0x00000026   Code   RO          428    i._Z7reversePc      helpers.o
-    0x08002196   0x08002196   0x00000002   PAD
-    0x08002198   0x08002198   0x00000018   Code   RO          627    i._Z7runGamev       vex_loader.o
-    0x080021b0   0x080021b0   0x0000000a   Code   RO          819    i._Z7spiReadv       sdcard.o
-    0x080021ba   0x080021ba   0x00000002   PAD
-    0x080021bc   0x080021bc   0x00000034   Code   RO          820    i._Z7spiSendh       sdcard.o
-    0x080021f0   0x080021f0   0x00000016   Code   RO          429    i._Z7toUpperc       helpers.o
-    0x08002206   0x08002206   0x00000002   PAD
-    0x08002208   0x08002208   0x000000d8   Code   RO          821    i._Z8SDEnablePh     sdcard.o
-    0x080022e0   0x080022e0   0x0000000c   Code   RO          359    i._Z8getTimerv      hardware.o
-    0x080022ec   0x080022ec   0x00000214   Code   RO          628    i._Z8loadGamePcPh   vex_loader.o
-    0x08002500   0x08002500   0x00000058   Code   RO          629    i._Z8saveCodePKhS0_j  vex_loader.o
-    0x08002558   0x08002558   0x00000038   Code   RO          822    i._Z9FSReadDirPcP15DirectoryReader  sdcard.o
-    0x08002590   0x08002590   0x00000010   Code   RO          824    i._Z9SDGetBytej     sdcard.o
-    0x080025a0   0x080025a0   0x0000001c   Code   RO          825    i._Z9SDGetWordj     sdcard.o
-    0x080025bc   0x080025bc   0x0000001c   Code   RO          827    i._Z9SDSetWordjs    sdcard.o
-    0x080025d8   0x080025d8   0x0000002c   Code   RO          124    i._ZN15Display_ILI934110writeData8Eh  display_ili9341.o
-    0x08002604   0x08002604   0x00000044   Code   RO          125    i._ZN15Display_ILI934111writeData16Et  display_ili9341.o
-    0x08002648   0x08002648   0x0000008c   Code   RO          126    i._ZN15Display_ILI934112displayClearEh  display_ili9341.o
-    0x080026d4   0x080026d4   0x00000060   Code   RO          127    i._ZN15Display_ILI934112initFPSTimerEt  display_ili9341.o
-    0x08002734   0x08002734   0x000000a0   Code   RO          129    i._ZN15Display_ILI93414drawEv  display_ili9341.o
-    0x080027d4   0x080027d4   0x00000318   Code   RO          130    i._ZN15Display_ILI93414initEv  display_ili9341.o
-    0x08002aec   0x08002aec   0x00000022   Code   RO          132    i._ZN15Display_ILI93416setColEtt  display_ili9341.o
-    0x08002b0e   0x08002b0e   0x00000012   Code   RO          133    i._ZN15Display_ILI93416setFPSEt  display_ili9341.o
-    0x08002b20   0x08002b20   0x00000068   Code   RO          134    i._ZN15Display_ILI93417initDMAEPt  display_ili9341.o
-    0x08002b88   0x08002b88   0x00000040   Code   RO          135    i._ZN15Display_ILI93417sendCMDEh  display_ili9341.o
-    0x08002bc8   0x08002bc8   0x00000022   Code   RO          136    i._ZN15Display_ILI93417setPageEtt  display_ili9341.o
-    0x08002bea   0x08002bea   0x00000002   PAD
-    0x08002bec   0x08002bec   0x00000100   Code   RO          577    i._ZN4Text13displayStringEPKchttb  text.o
-    0x08002cec   0x08002cec   0x00000030   Code   RO          484    i._ZN5Input8getStateEh  input.o
-    0x08002d1c   0x08002d1c   0x0000001a   Code   RO          485    i._ZN5Input8getXAxisEv  input.o
-    0x08002d36   0x08002d36   0x0000001a   Code   RO          486    i._ZN5Input8getYAxisEv  input.o
-    0x08002d50   0x08002d50   0x0000000c   Code   RO          264    i._ZN6Engine10setPaletteEPKt  engine.o
-    0x08002d5c   0x08002d5c   0x0000001c   Code   RO          265    i._ZN6Engine12setFillColorEh  engine.o
-    0x08002d78   0x08002d78   0x0000000c   Code   RO          266    i._ZN6Engine12setLineClearEb  engine.o
-    0x08002d84   0x08002d84   0x00000104   Code   RO          267    i._ZN6Engine13displaySpriteEPKhsssshb  engine.o
-    0x08002e88   0x08002e88   0x00000030   Code   RO          268    i._ZN6Engine15setSpriteMemoryEPhj  engine.o
-    0x08002eb8   0x08002eb8   0x0000018c   Code   RO          269    i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb  engine.o
-    0x08003044   0x08003044   0x00000138   Code   RO          270    i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb  engine.o
-    0x0800317c   0x0800317c   0x0000013c   Code   RO          271    i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb  engine.o
-    0x080032b8   0x080032b8   0x0000000c   Code   RO          272    i._ZN6Engine5clearEv  engine.o
-    0x080032c4   0x080032c4   0x00000580   Code   RO          273    i._ZN6Engine9parseLineEsPt  engine.o
-    0x08003844   0x08003844   0x00000028   Code   RO          738    i._ZN8Terminal11clearMemoryEv  terminal.o
-    0x0800386c   0x0800386c   0x00000014   Code   RO          741    i._ZN8Terminal9setMemoryEPh  terminal.o
-    0x08003880   0x08003880   0x00000018   Code   RO          529    i.__sti___8_main_cpp_display  main.o
-    0x08003898   0x08003898   0x0000017c   Code   RO          530    i.main              main.o
-    0x08003a14   0x08003a14   0x00000014   Data   RO          284    .constdata          engine.o
-    0x08003a28   0x08003a28   0x0000000c   Data   RO          490    .constdata          input.o
-    0x08003a34   0x08003a34   0x00000210   Data   RO          579    .constdata          text.o
-    0x08003c44   0x08003c44   0x0000001c   Data   RO          242    .constdata__ZTV15Display_ILI9341  display_ili9341.o
-    0x08003c60   0x08003c60   0x0000001c   Data   RO           48    .constdata__ZTV7Display  display.o
-    0x08003c7c   0x08003c7c   0x00000020   Data   RO         3480    Region$$Table       anon$$obj.o
-    0x08003c9c   0x08003c9c   0x00000004   Data   RO          535    .init_array         main.o
-    0x08003ca0   0x08003c9c   0x00000000   Data   RO         3066    .init_array         c_w.l(init_aeabi.o)
+    0x0800061c   0x0800061c   0x0000001c   Code   RO         1522    i.DMA_ClearITPendingBit  stm32f10x_dma.o
+    0x08000638   0x08000638   0x00000018   Code   RO         1523    i.DMA_Cmd           stm32f10x_dma.o
+    0x08000650   0x08000650   0x00000012   Code   RO         1528    i.DMA_ITConfig      stm32f10x_dma.o
+    0x08000662   0x08000662   0x0000003c   Code   RO         1529    i.DMA_Init          stm32f10x_dma.o
+    0x0800069e   0x0800069e   0x00000116   Code   RO         1797    i.GPIO_Init         stm32f10x_gpio.o
+    0x080007b4   0x080007b4   0x0000000a   Code   RO         1808    i.GPIO_WriteBit     stm32f10x_gpio.o
+    0x080007be   0x080007be   0x00000002   PAD
+    0x080007c0   0x080007c0   0x00000018   Code   RO         1917    i.RCC_ADCCLKConfig  stm32f10x_rcc.o
+    0x080007d8   0x080007d8   0x00000020   Code   RO         1918    i.RCC_AHBPeriphClockCmd  stm32f10x_rcc.o
+    0x080007f8   0x080007f8   0x00000020   Code   RO         1919    i.RCC_APB1PeriphClockCmd  stm32f10x_rcc.o
+    0x08000818   0x08000818   0x00000020   Code   RO         1921    i.RCC_APB2PeriphClockCmd  stm32f10x_rcc.o
+    0x08000838   0x08000838   0x000000d4   Code   RO         1929    i.RCC_GetClocksFreq  stm32f10x_rcc.o
+    0x0800090c   0x0800090c   0x00000018   Code   RO         2134    i.SPI_Cmd           stm32f10x_spi.o
+    0x08000924   0x08000924   0x00000012   Code   RO         2140    i.SPI_I2S_DMACmd    stm32f10x_spi.o
+    0x08000936   0x08000936   0x00000012   Code   RO         2142    i.SPI_I2S_GetFlagStatus  stm32f10x_spi.o
+    0x08000948   0x08000948   0x0000003c   Code   RO         2147    i.SPI_Init          stm32f10x_spi.o
+    0x08000984   0x08000984   0x00000008   Code   RO         3092    i.SetSysClock       system_stm32f10x.o
+    0x0800098c   0x0800098c   0x000000e0   Code   RO         3093    i.SetSysClockTo72   system_stm32f10x.o
+    0x08000a6c   0x08000a6c   0x00000060   Code   RO         3095    i.SystemInit        system_stm32f10x.o
+    0x08000acc   0x08000acc   0x00000020   Code   RO          353    i.TIM2_IRQHandler   hardware.o
+    0x08000aec   0x08000aec   0x00000054   Code   RO         1086    i.TIM3_IRQHandler   sound.o
+    0x08000b40   0x08000b40   0x0000001c   Code   RO          122    i.TIM4_IRQHandler   display_ili9341.o
+    0x08000b5c   0x08000b5c   0x00000048   Code   RO          833    i._Z10FSReadFilePcP10FileWorker  sdcard.o
+    0x08000ba4   0x08000ba4   0x00000034   Code   RO          834    i._Z10SDGetDWordj   sdcard.o
+    0x08000bd8   0x08000bd8   0x00000030   Code   RO          835    i._Z10SDSetDWordji  sdcard.o
+    0x08000c08   0x08000c08   0x0000000c   Code   RO          354    i._Z10clearTimerv   hardware.o
+    0x08000c14   0x08000c14   0x00000018   Code   RO         1129    i._Z10configInitv   config.o
+    0x08000c2c   0x08000c2c   0x0000004c   Code   RO         1130    i._Z10readConfigP10CoreConfigj  config.o
+    0x08000c78   0x08000c78   0x00000050   Code   RO         1131    i._Z10saveConfigv   config.o
+    0x08000cc8   0x08000cc8   0x000001b4   Code   RO          837    i._Z11FSWriteFilePKcP10FileWorker  sdcard.o
+    0x08000e7c   0x08000e7c   0x00000024   Code   RO         1132    i._Z11applyConfigP10CoreConfigj  config.o
+    0x08000ea0   0x08000ea0   0x0000003a   Code   RO          654    i._Z11checkHeaderP13VexMainHeader  vex_loader.o
+    0x08000eda   0x08000eda   0x00000002   PAD
+    0x08000edc   0x08000edc   0x00000048   Code   RO          655    i._Z11clearMemoryPKh  vex_loader.o
+    0x08000f24   0x08000f24   0x0000000c   Code   RO          424    i._Z11delayByLoopj  helpers.o
+    0x08000f30   0x08000f30   0x00000010   Code   RO          656    i._Z11displaySyncv  vex_loader.o
+    0x08000f40   0x08000f40   0x00000014   Code   RO          657    i._Z11flash_readyv  vex_loader.o
+    0x08000f54   0x08000f54   0x00000188   Code   RO          838    i._Z12FSGetClusterPKcP8FileInfoPiS3_  sdcard.o
+    0x080010dc   0x080010dc   0x00000098   Code   RO          839    i._Z12SDReadSectorj  sdcard.o
+    0x08001174   0x08001174   0x00000048   Code   RO         1087    i._Z12disableSoundv  sound.o
+    0x080011bc   0x080011bc   0x00000234   Code   RO          355    i._Z12initHardwarev  hardware.o
+    0x080013f0   0x080013f0   0x00000018   Code   RO          658    i._Z12unlockMemoryv  vex_loader.o
+    0x08001408   0x08001408   0x000000a4   Code   RO          840    i._Z13SDSendCommandhj  sdcard.o
+    0x080014ac   0x080014ac   0x000000d0   Code   RO          841    i._Z13SDWriteSectorj  sdcard.o
+    0x0800157c   0x0800157c   0x0000004c   Code   RO          659    i._Z13debugInternalv  vex_loader.o
+    0x080015c8   0x080015c8   0x00000038   Code   RO          842    i._Z14FSClearClusteri  sdcard.o
+    0x08001600   0x08001600   0x00000148   Code   RO          843    i._Z14FSReadNextFilePciP15DirectoryReaderP8FileInfo  sdcard.o
+    0x08001748   0x08001748   0x000000c4   Code   RO         1088    i._Z15enableSoundMonothPFtvE  sound.o
+    0x0800180c   0x0800180c   0x0000001c   Code   RO          844    i._Z16FSGetStartSectori  sdcard.o
+    0x08001828   0x08001828   0x0000004c   Code   RO          845    i._Z16FSMakeNewClusterv  sdcard.o
+    0x08001874   0x08001874   0x0000001a   Code   RO          123    i._Z16__NVIC_EnableIRQ4IRQn  display_ili9341.o
+    0x0800188e   0x0800188e   0x00000002   PAD
+    0x08001890   0x08001890   0x00000034   Code   RO          846    i._Z17FSGetClusterValuei  sdcard.o
+    0x080018c4   0x080018c4   0x00000040   Code   RO          847    i._Z17FSSetClusterValueii  sdcard.o
+    0x08001904   0x08001904   0x00000010   Code   RO          356    i._Z17getTimerWithClearv  hardware.o
+    0x08001914   0x08001914   0x00000080   Code   RO          848    i._Z19FSGetEmptyFilePlaceiPiS_  sdcard.o
+    0x08001994   0x08001994   0x00000018   Code   RO          357    i._Z19getAdcValueForXAxisv  hardware.o
+    0x080019ac   0x080019ac   0x00000018   Code   RO          358    i._Z19getAdcValueForYAxisv  hardware.o
+    0x080019c4   0x080019c4   0x0000002a   Code   RO          849    i._Z20FSRemoveClusterChaini  sdcard.o
+    0x080019ee   0x080019ee   0x0000006e   Code   RO          850    i._Z23FSGetNameFromFileStructPhPc  sdcard.o
+    0x08001a5c   0x08001a5c   0x0000001c   Code   RO          425    i._Z3cmpPcS_        helpers.o
+    0x08001a78   0x08001a78   0x0000001e   Code   RO          660    i._Z3runPcPh        vex_loader.o
+    0x08001a96   0x08001a96   0x0000002a   Code   RO          426    i._Z4cmpiPcS_       helpers.o
+    0x08001ac0   0x08001ac0   0x0000004a   Code   RO          427    i._Z4itoaiPc        helpers.o
+    0x08001b0a   0x08001b0a   0x00000044   Code   RO          428    i._Z4randv          helpers.o
+    0x08001b4e   0x08001b4e   0x0000002e   Code   RO          661    i._Z4sCmpPKcS0_     vex_loader.o
+    0x08001b7c   0x08001b7c   0x000000b4   Code   RO          851    i._Z6FSReadP10FileWorkerPvj  sdcard.o
+    0x08001c30   0x08001c30   0x000000c0   Code   RO          853    i._Z6SDInitv        sdcard.o
+    0x08001cf0   0x08001cf0   0x000004f0   Code   RO          662    i._Z6getCmdPc       vex_loader.o
+    0x080021e0   0x080021e0   0x00000014   Code   RO          664    i._Z6setFPSt        vex_loader.o
+    0x080021f4   0x080021f4   0x0000002c   Code   RO          855    i._Z7FSCloseP10FileWorker  sdcard.o
+    0x08002220   0x08002220   0x000000ac   Code   RO          856    i._Z7FSWriteP10FileWorkerPKvi  sdcard.o
+    0x080022cc   0x080022cc   0x00000020   Code   RO          567    i._Z7messagePc      main.o
+    0x080022ec   0x080022ec   0x00000026   Code   RO          429    i._Z7reversePc      helpers.o
+    0x08002312   0x08002312   0x00000002   PAD
+    0x08002314   0x08002314   0x00000018   Code   RO          665    i._Z7runGamev       vex_loader.o
+    0x0800232c   0x0800232c   0x0000000a   Code   RO          857    i._Z7spiReadv       sdcard.o
+    0x08002336   0x08002336   0x00000002   PAD
+    0x08002338   0x08002338   0x00000034   Code   RO          858    i._Z7spiSendh       sdcard.o
+    0x0800236c   0x0800236c   0x00000016   Code   RO          430    i._Z7toUpperc       helpers.o
+    0x08002382   0x08002382   0x00000002   PAD
+    0x08002384   0x08002384   0x000000d8   Code   RO          859    i._Z8SDEnablePh     sdcard.o
+    0x0800245c   0x0800245c   0x00000008   Code   RO          431    i._Z8__divsi3ii     helpers.o
+    0x08002464   0x08002464   0x0000000c   Code   RO          432    i._Z8__modsi3ii     helpers.o
+    0x08002470   0x08002470   0x0000000c   Code   RO          359    i._Z8getTimerv      hardware.o
+    0x0800247c   0x0800247c   0x00000204   Code   RO          666    i._Z8loadGamePcPh   vex_loader.o
+    0x08002680   0x08002680   0x00000058   Code   RO          667    i._Z8saveCodePKhS0_j  vex_loader.o
+    0x080026d8   0x080026d8   0x00000038   Code   RO          860    i._Z9FSReadDirPcP15DirectoryReader  sdcard.o
+    0x08002710   0x08002710   0x00000010   Code   RO          862    i._Z9SDGetBytej     sdcard.o
+    0x08002720   0x08002720   0x0000001c   Code   RO          863    i._Z9SDGetWordj     sdcard.o
+    0x0800273c   0x0800273c   0x0000001c   Code   RO          865    i._Z9SDSetWordjs    sdcard.o
+    0x08002758   0x08002758   0x00000008   Code   RO          433    i._Z9__udivsi3jj    helpers.o
+    0x08002760   0x08002760   0x0000000c   Code   RO          434    i._Z9__umodsi3jj    helpers.o
+    0x0800276c   0x0800276c   0x00000024   Code   RO         1133    i._Z9getConfigP10CoreConfigj  config.o
+    0x08002790   0x08002790   0x0000002c   Code   RO          124    i._ZN15Display_ILI934110writeData8Eh  display_ili9341.o
+    0x080027bc   0x080027bc   0x00000044   Code   RO          125    i._ZN15Display_ILI934111writeData16Et  display_ili9341.o
+    0x08002800   0x08002800   0x0000008c   Code   RO          126    i._ZN15Display_ILI934112displayClearEh  display_ili9341.o
+    0x0800288c   0x0800288c   0x00000060   Code   RO          127    i._ZN15Display_ILI934112initFPSTimerEt  display_ili9341.o
+    0x080028ec   0x080028ec   0x000000b4   Code   RO          129    i._ZN15Display_ILI93414drawEv  display_ili9341.o
+    0x080029a0   0x080029a0   0x00000330   Code   RO          130    i._ZN15Display_ILI93414initEv  display_ili9341.o
+    0x08002cd0   0x08002cd0   0x00000022   Code   RO          132    i._ZN15Display_ILI93416setColEtt  display_ili9341.o
+    0x08002cf2   0x08002cf2   0x00000012   Code   RO          133    i._ZN15Display_ILI93416setFPSEt  display_ili9341.o
+    0x08002d04   0x08002d04   0x00000060   Code   RO          134    i._ZN15Display_ILI93417initDMAEPt  display_ili9341.o
+    0x08002d64   0x08002d64   0x00000040   Code   RO          135    i._ZN15Display_ILI93417sendCMDEh  display_ili9341.o
+    0x08002da4   0x08002da4   0x00000022   Code   RO          136    i._ZN15Display_ILI93417setPageEtt  display_ili9341.o
+    0x08002dc6   0x08002dc6   0x00000002   PAD
+    0x08002dc8   0x08002dc8   0x0000010c   Code   RO          616    i._ZN4Text13displayStringEPKchttb  text.o
+    0x08002ed4   0x08002ed4   0x0000002c   Code   RO          519    i._ZN5Input8getStateEh  input.o
+    0x08002f00   0x08002f00   0x0000002c   Code   RO          520    i._ZN5Input8getXAxisEv  input.o
+    0x08002f2c   0x08002f2c   0x0000002c   Code   RO          521    i._ZN5Input8getYAxisEv  input.o
+    0x08002f58   0x08002f58   0x0000000c   Code   RO          264    i._ZN6Engine10setPaletteEPKt  engine.o
+    0x08002f64   0x08002f64   0x0000001c   Code   RO          265    i._ZN6Engine12setFillColorEh  engine.o
+    0x08002f80   0x08002f80   0x0000000c   Code   RO          266    i._ZN6Engine12setLineClearEb  engine.o
+    0x08002f8c   0x08002f8c   0x00000104   Code   RO          267    i._ZN6Engine13displaySpriteEPKhsssshb  engine.o
+    0x08003090   0x08003090   0x00000030   Code   RO          268    i._ZN6Engine15setSpriteMemoryEPhj  engine.o
+    0x080030c0   0x080030c0   0x0000018c   Code   RO          269    i._ZN6Engine19displaySpriteMatrixEPK6Matrixasssshb  engine.o
+    0x0800324c   0x0800324c   0x00000138   Code   RO          270    i._ZN6Engine20displaySpriteBitMaskEPKhhsshshb  engine.o
+    0x08003384   0x08003384   0x0000013c   Code   RO          271    i._ZN6Engine21displaySpriteByteMaskEPKhhsssshb  engine.o
+    0x080034c0   0x080034c0   0x0000000c   Code   RO          272    i._ZN6Engine5clearEv  engine.o
+    0x080034cc   0x080034cc   0x00000688   Code   RO          273    i._ZN6Engine9parseLineEsPt  engine.o
+    0x08003b54   0x08003b54   0x00000018   Code   RO          568    i.__sti___8_main_cpp_display  main.o
+    0x08003b6c   0x08003b6c   0x00000184   Code   RO          569    i.main              main.o
+    0x08003cf0   0x08003cf0   0x00000014   Data   RO          284    .constdata          engine.o
+    0x08003d04   0x08003d04   0x0000000c   Data   RO          525    .constdata          input.o
+    0x08003d10   0x08003d10   0x0000021c   Data   RO          618    .constdata          text.o
+    0x08003f2c   0x08003f2c   0x0000001c   Data   RO          242    .constdata__ZTV15Display_ILI9341  display_ili9341.o
+    0x08003f48   0x08003f48   0x0000001c   Data   RO           48    .constdata__ZTV7Display  display.o
+    0x08003f64   0x08003f64   0x00000020   Data   RO         3568    Region$$Table       anon$$obj.o
+    0x08003f84   0x08003f84   0x00000004   Data   RO          574    .init_array         main.o
+    0x08003f88   0x08003f84   0x00000000   Data   RO         3154    .init_array         c_w.l(init_aeabi.o)
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08003ca0, Size: 0x00000088, Max: 0xffffffff, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x20000000   0x08003ca0   0x00000002   Data   RW          156    .data               display_ili9341.o
-    0x20000002   0x08003ca2   0x00000002   PAD
-    0x20000004   0x08003ca4   0x00000010   Data   RW          285    .data               engine.o
-    0x20000014   0x08003cb4   0x00000004   Data   RW          367    .data               hardware.o
-    0x20000018   0x08003cb8   0x00000018   Data   RW          491    .data               input.o
-    0x20000030   0x08003cd0   0x00000008   Data   RW          534    .data               main.o
-    0x20000038   0x08003cd8   0x00000008   Data   RW          601    .data               mem.o
-    0x20000040   0x08003ce0   0x00000004   Data   RW          644    .data               vex_loader.o
-    0x20000044   0x08003ce4   0x00000004   Data   RW          749    .data               terminal.o
-    0x20000048   0x08003ce8   0x00000024   Data   RW          861    .data               sdcard.o
-    0x2000006c   0x08003d0c   0x00000007   Data   RW         1054    .data               sound.o
-    0x20000073   0x08003d13   0x00000014   Data   RW         1861    .data               stm32f10x_rcc.o
-
-
-    Execution Region ER_ZI (Exec base: 0x20000088, Load base: 0x08003d28, Size: 0x00004b68, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08003f88, Size: 0x00000080, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000088        -       0x00000504   Zero   RW          155    .bss                display_ili9341.o
-    0x2000058c        -       0x00004000   Zero   RW          600    .bss                mem.o
-    0x2000458c        -       0x00000060   Zero   RW         3357    .bss                c_w.l(libspace.o)
-    0x200045ec   0x08003d28   0x00000004   PAD
-    0x200045f0        -       0x00000200   Zero   RW         2995    HEAP                startup_stm32f10x_md.o
-    0x200047f0        -       0x00000400   Zero   RW         2994    STACK               startup_stm32f10x_md.o
+    0x20000000   0x08003f88   0x00000002   Data   RW          156    .data               display_ili9341.o
+    0x20000002   0x08003f8a   0x00000002   PAD
+    0x20000004   0x08003f8c   0x00000010   Data   RW          285    .data               engine.o
+    0x20000014   0x08003f9c   0x00000004   Data   RW          367    .data               hardware.o
+    0x20000018   0x08003fa0   0x00000018   Data   RW          526    .data               input.o
+    0x20000030   0x08003fb8   0x00000008   Data   RW          573    .data               main.o
+    0x20000038   0x08003fc0   0x00000004   Data   RW          682    .data               vex_loader.o
+    0x2000003c   0x08003fc4   0x00000024   Data   RW          899    .data               sdcard.o
+    0x20000060   0x08003fe8   0x00000007   Data   RW         1092    .data               sound.o
+    0x20000067   0x08003fef   0x00000005   Data   RW         1139    .data               config.o
+    0x2000006c   0x08003ff4   0x00000014   Data   RW         1949    .data               stm32f10x_rcc.o
+
+
+    Execution Region ER_ZI (Exec base: 0x20000080, Load base: 0x08004008, Size: 0x00004b68, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x20000080        -       0x00000504   Zero   RW          155    .bss                display_ili9341.o
+    0x20000584        -       0x00004000   Zero   RW          639    .bss                mem.o
+    0x20004584        -       0x00000060   Zero   RW         3445    .bss                c_w.l(libspace.o)
+    0x200045e4   0x08004008   0x00000004   PAD
+    0x200045e8        -       0x00000200   Zero   RW         3083    HEAP                startup_stm32f10x_md.o
+    0x200047e8        -       0x00000400   Zero   RW         3082    STACK               startup_stm32f10x_md.o
 
 
 ==============================================================================
@@ -2265,32 +2333,32 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
+       252         48          0          5          0       3537   config.o
          0          0         28          0          0     251288   display.o
-      1656        110         28          2       1284      35102   display_ili9341.o
-      2804        116         20         16          0       8745   engine.o
-       688         60          0          4          0       4602   hardware.o
-       216          0          0          0          0       2970   helpers.o
-       100          8         12         24          0       2620   input.o
-       436        194          4          8          0       2671   main.o
-         0          0          0          8      16384        506   mem.o
+      1692        108         28          2       1284      35114   display_ili9341.o
+      3068        120         20         16          0       8561   engine.o
+       684         56          0          4          0       4606   hardware.o
+       324          0          0          0          0       5367   helpers.o
+       132         20         12         24          0       2656   input.o
+       444        204          4          8          0       2671   main.o
+         0          0          0          0      16384        410   mem.o
          0          0          0          0          0     249692   misc.o
-      3382        210          0         36          0      20695   sdcard.o
+      3402        212          0         36          0      20867   sdcard.o
        352         50          0          7          0      27160   sound.o
         64         26        236          0       1536        788   startup_stm32f10x_md.o
        404         10          0          0          0       9753   stm32f10x_adc.o
        130         10          0          0          0       4080   stm32f10x_dma.o
-       432          6          0          0          0       3534   stm32f10x_gpio.o
+       288          0          0          0          0       2668   stm32f10x_gpio.o
        332         44          0         20          0       5753   stm32f10x_rcc.o
        120          0          0          0          0       3530   stm32f10x_spi.o
        328         28          0          0          0       1881   system_stm32f10x.o
-        60         12          0          4          0       2224   terminal.o
-       256         38        528          0          0       1724   text.o
-      2048        638          0          4          0       9913   vex_loader.o
+       268         42        540          0          0       1768   text.o
+      2254        756          0          4          0       9973   vex_loader.o
 
     ----------------------------------------------------------------------
-     13822       1560        888        136      19204     649231   Object Totals
+     14554       1734        900        128      19204     652123   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        14          0          0          3          0          0   (incl. Padding)
+        16          0          0          2          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -2346,15 +2414,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     14632       1586        888        136      19304     643775   Grand Totals
-     14632       1586        888        136      19304     643775   ELF Image Totals
-     14632       1586        888        136          0          0   ROM Totals
+     15364       1760        900        128      19304     646303   Grand Totals
+     15364       1760        900        128      19304     646303   ELF Image Totals
+     15364       1760        900        128          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                15520 (  15.16kB)
-    Total RW  Size (RW Data + ZI Data)             19440 (  18.98kB)
-    Total ROM Size (Code + RO Data + RW Data)      15656 (  15.29kB)
+    Total RO  Size (Code + RO Data)                16264 (  15.88kB)
+    Total RW  Size (RW Data + ZI Data)             19432 (  18.98kB)
+    Total ROM Size (Code + RO Data + RW Data)      16392 (  16.01kB)
 
 ==============================================================================
 

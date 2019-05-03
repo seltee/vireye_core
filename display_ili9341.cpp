@@ -36,13 +36,16 @@ void Display_ILI9341::init(){
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 		
 	// Display comands
-	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_SET);		
-	GPIO_WriteBit(GPIOA,PIN_LCD_RESET,Bit_RESET);			
+	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_SET);	
+	delayByLoop(20000);	
+	GPIO_WriteBit(GPIOA,PIN_LCD_RESET,Bit_RESET);	
+	delayByLoop(20000);
 	GPIO_WriteBit(GPIOA,PIN_LCD_RESET,Bit_SET);	
+	delayByLoop(20000);
 	
-	delayByLoop(30000);
+	delayByLoop(20000);
 	sendCMD(0x01);        // Software Reset
-	delayByLoop(30000);
+	delayByLoop(20000);
 	
 	sendCMD(0xCB);
 	writeData8(0x39);
@@ -159,15 +162,16 @@ void Display_ILI9341::init(){
 }
 
 void Display_ILI9341::draw(){
-	uint16_t *cLine;
-	
-	sendCMD(0x2c);
-
-	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
-	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_RESET);
-	cLine = line1;
-
+	uint16_t *cLine = line1;
 	Engine::parseLine(0, cLine);
+	
+	setPage(0, 240);
+	setCol(0, 320);
+	sendCMD(0x2c);
+	
+	GPIO_WriteBit(GPIOA, PIN_LCD_DC, Bit_SET);
+	GPIO_WriteBit(GPIOA, PIN_LCD_CS, Bit_RESET);
+
 	for(uint16_t lineNum=1; lineNum<=240; lineNum++)
 	{
 		sendLineDone = false;
@@ -184,22 +188,23 @@ void Display_ILI9341::draw(){
 }
 
 void Display_ILI9341::sendCMD(uint8_t cmd){
+	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
 	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_SET);
 	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_RESET);
 	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_RESET);
-	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	
 	SPI1->DR = cmd;
 }
 
 void Display_ILI9341::writeData8(uint8_t data){
-	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
 	SPI1->DR = data;
 }
 
 void Display_ILI9341::writeData16(uint16_t data){
-	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
+	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
 	SPI1->DR = data >> 8;
 	while (SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_TXE) == RESET);
 	SPI1->DR = data & 0x00ff;
@@ -209,6 +214,7 @@ void Display_ILI9341::displayClear(uint8_t color){
 	setCol(0, 320);
 	setPage(0, 240);
 	sendCMD(0x2c);
+	
 	GPIO_WriteBit(GPIOA,PIN_LCD_DC,Bit_SET);
 	GPIO_WriteBit(GPIOA,PIN_LCD_CS,Bit_RESET);
 
@@ -250,7 +256,6 @@ void Display_ILI9341::setPixel(uint16_t positionX, uint16_t positionY, uint8_t c
 
 void Display_ILI9341::initDMA(uint16_t *cLine){
 	DMA_InitTypeDef DMA_InitStructure;
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 	
 	//DMA
   DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(&(SPI1->DR));
@@ -267,7 +272,6 @@ void Display_ILI9341::initDMA(uint16_t *cLine){
   DMA_Init(DMA1_Channel3, &DMA_InitStructure);
 	
   SPI_I2S_DMACmd(SPI1, SPI_I2S_DMAReq_Tx, ENABLE);
-	
   DMA_ITConfig(DMA1_Channel3, DMA_IT_TC, ENABLE);
   NVIC_EnableIRQ(DMA1_Channel3_IRQn);	
 }

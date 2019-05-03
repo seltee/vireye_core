@@ -14,22 +14,25 @@ bool initHardware(){
 	GPIO_InitTypeDef GPIO_InitStructure;
 	ADC_InitTypeDef ADC_InitStructure;
 	
-	//clock all the peripherals
+	// Clock all the peripherals
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 	
-	//enable ADC system clock
+	// Enable ADC system clock
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC2, ENABLE);
 	
-	//clock for ADC
+	// Clock for ADC
   RCC_ADCCLKConfig (RCC_PCLK2_Div8);
-		
-	//Remap config pf PB3
-	GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
 	
-	//GPIO for input
+	// Clock for DMA
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+	
+	// Remap config pf PB3
+	//GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
+	
+	// GPIO for input
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IPU;
 	GPIO_InitStructure.GPIO_Pin   =  GPIO_Pin_8 |  GPIO_Pin_12 |  GPIO_Pin_0;
@@ -103,7 +106,7 @@ bool initHardware(){
 	
 	SPI_Init(SPI1, &SPI_InitStructure);
 	SPI_Cmd(SPI1, ENABLE);
-		
+			
 	// Spi2	- Flash
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_12;
@@ -119,6 +122,8 @@ bool initHardware(){
 		
 	SPI_Init(SPI2, &SPI_InitStructure);
 	SPI_Cmd(SPI2, ENABLE);
+	
+	
 	return true;
 }
 

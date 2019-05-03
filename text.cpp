@@ -594,6 +594,21 @@ const uint8_t slash[12] = {
 	BINARY(00000000),
 };
 
+const uint8_t exclamation[12] = {
+	BINARY(00000000), 
+	BINARY(01100000), 
+	BINARY(01100000), 
+	BINARY(01100000), 
+	BINARY(01100000), 
+	BINARY(01100000), 
+	BINARY(01100000), 
+	BINARY(00000000), 
+	BINARY(01100000),
+	BINARY(01100000),
+	BINARY(00000000),
+	BINARY(00000000),
+};
+
 void Text::displayString(const char *string, uint8_t color, uint16_t x, uint16_t y, bool upscale){
 	int len = strlen(string);
 	for (int i = 0; i < len; i++){
@@ -642,6 +657,10 @@ void Text::displayString(const char *string, uint8_t color, uint16_t x, uint16_t
 		
 		if (c == '/'){
 			sym = slash;
+		}
+		
+		if (c == '!'){
+			sym = exclamation;
 		}
 		
 		if (sym){
