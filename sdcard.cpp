@@ -94,7 +94,6 @@ uint8_t SDInit(void)
   for(i=0;i<40;i++) spiRead();      //send > 74 bits  
  
   // Soft CD reset
-  GPIOB->BSRR = GPIO_BSRR_BR12;
   while(SDSendCommand(GO_IDLE_STATE, 0) != 0x01)                                   
     if(retry++>0x40) return 1;  
 	

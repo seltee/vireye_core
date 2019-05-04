@@ -11,11 +11,11 @@ bool enableSoundMono(unsigned short freq, unsigned char bitPerSample, uint16_t (
 	}
 
 	if (bitPerSample < 8){
-		shRight = 8 - bitPerSample;
-		shLeft = 0;
-	} else {
-		shLeft = bitPerSample - 8;
+		shLeft= 8 - bitPerSample;
 		shRight = 0;
+	} else {
+		shRight = bitPerSample - 8;
+		shLeft = 0;
 	}
 
 	_callback = callback;
@@ -35,8 +35,8 @@ bool enableSoundMono(unsigned short freq, unsigned char bitPerSample, uint16_t (
 
 extern "C" void TIM3_IRQHandler(void)
 {
-	GPIOB->ODR = (GPIOB->ODR & 0xfffff00f) | (sample << 4);
-	sample = _callback() >> shRight << shLeft;
+	GPIOB->ODR = (GPIOB->ODR & 0xffffe01f) | (sample << 5);
+	sample = ((_callback() >> shRight) << shLeft);
   TIM3->SR &= ~TIM_SR_UIF;
 }
 
