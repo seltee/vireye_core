@@ -1,9 +1,5 @@
 #include "display.h"
 
-bool Display::setDimentions(){
-	return false;
-}
-
 void Display::init(){
 	fpsLimit = 0;
 }

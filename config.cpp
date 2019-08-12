@@ -6,10 +6,10 @@ CoreConfig sysConfig;
 
 bool readConfig(CoreConfig *config, unsigned int cfgSize){
 	CoreConfigHeader header;
-	FileWorker worker;
-	if (FSReadFile(CFG_FILE, &worker)){
-		FSRead(&worker, &header, sizeof(CoreConfigHeader));
-		FSRead(&worker, config, header.size > cfgSize ? cfgSize : header.size);	
+	FileWorker *worker = FSReadFile(CFG_FILE);
+	if (worker){
+		FSRead(worker, &header, sizeof(CoreConfigHeader));
+		FSRead(worker, config, header.size > cfgSize ? cfgSize : header.size);	
 		return true;
 	}
 	return false;
@@ -32,13 +32,13 @@ bool applyConfig(CoreConfig *config, unsigned int cfgSize){
 
 bool saveConfig(){
 	CoreConfigHeader header;
-	FileWorker worker;
-	if (FSWriteFile(CFG_FILE, &worker)){
+	FileWorker *worker = FSWriteFile(CFG_FILE);
+	if (worker){
 		header.coreConfigVersion = 1;
 		header.size = sizeof(CoreConfig);
-		FSWrite(&worker, &header, sizeof(CoreConfigHeader));
-		FSWrite(&worker, &sysConfig, sizeof(CoreConfig));
-		FSClose(&worker);
+		FSWrite(worker, &header, sizeof(CoreConfigHeader));
+		FSWrite(worker, &sysConfig, sizeof(CoreConfig));
+		FSClose(worker);
 		return true;
 	}
 	return false;

@@ -4,7 +4,6 @@
 
 class Display{
 	public:
-		virtual bool setDimentions();
 		virtual unsigned short getFPS();
 		virtual void setFPS(unsigned short limit);
 		virtual void init();

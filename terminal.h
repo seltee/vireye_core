@@ -7,7 +7,7 @@ struct TerminalInfo{
 
 class Terminal{
 	public:
-	static void setMemory(unsigned char *address);
+	static void setMemory(char *address);
 	static void clearMemory();
 	static void scroll();
 	static void draw();

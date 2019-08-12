@@ -2,14 +2,15 @@
 #include "string.h"
 #include "helpers.h"
 #include "terminal.h"
+#include "mem.h"
 
 struct SpriteCash *spriteCash = 0;
 unsigned char spriteCount = 0;
 unsigned char fillColor = 0x00;
-unsigned short maxSprites;
+unsigned short maxSprites = 0;
 bool lineClear = true;
 
-unsigned short *colorPallete = 0;
+const unsigned short *colorPallete = 0;
 
 #define RED             0x07e0   
 #define GREEN           0x001f   
@@ -25,7 +26,11 @@ const unsigned short defColorPallete[] = {
 };
 
 void Engine::setPalette(const unsigned short *colors){
-	colorPallete = (unsigned short *)colors;
+	if (colors){
+		colorPallete = (unsigned short *)colors;
+	}else{
+		colorPallete = defColorPallete;
+	}
 }	
 
 void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
@@ -347,6 +352,69 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 						}
 					}
 				break;
+					
+				case SPRITE_TYPE_FILLED_RECT:
+					targetPixel = sprTarget->x;
+					spriteIterator = sprTarget->x + sprTarget->width;
+				
+					if (targetPixel < 0) targetPixel = 0;
+					if (targetPixel >= 320) break;
+					if (spriteIterator < 0) break;
+					if (spriteIterator >= 320) spriteIterator = 320;
+				
+					color = colorPallete[sprTarget->color];
+					
+					for (; targetPixel < spriteIterator; targetPixel++){
+						*(uint16_t*)(&cLine[targetPixel]) = color;
+					}
+					break;
+				
+				case SPRITE_TYPE_RECT:
+					color = colorPallete[sprTarget->color];
+					
+					targetPixel = sprTarget->x;
+					spriteIterator = sprTarget->x + sprTarget->width;
+
+					if (upScale){
+						if (lineNum == sprTarget->y || lineNum == sprTarget->y + 1 || lineNum == sprTarget->y + sprTarget->height - 1 || lineNum == sprTarget->y + sprTarget->height - 2){
+							if (targetPixel < 0) targetPixel = 0;
+							if (targetPixel >= 320) break;
+							if (spriteIterator < 0) break;
+							if (spriteIterator >= 320) spriteIterator = 320;
+							
+							for (; targetPixel < spriteIterator; targetPixel++){
+								*(uint16_t*)(&cLine[targetPixel]) = color;
+							}
+						} else {
+							targetPixel = sprTarget->x;
+							spriteIterator = sprTarget->x + sprTarget->width - 1;
+							
+							if (targetPixel >= 0 && targetPixel < 320) *(uint16_t*)(&cLine[targetPixel]) = color;
+							targetPixel++;
+							if (targetPixel >= 0 && targetPixel < 320) *(uint16_t*)(&cLine[targetPixel]) = color;
+							
+							if (spriteIterator >= 0 && spriteIterator < 320) *(uint16_t*)(&cLine[spriteIterator]) = color;
+							spriteIterator--;
+							if (spriteIterator >= 0 && spriteIterator < 320) *(uint16_t*)(&cLine[spriteIterator]) = color;
+						}
+					} else {
+						if (lineNum == sprTarget->y || lineNum == sprTarget->y + sprTarget->height - 1){
+							if (targetPixel < 0) targetPixel = 0;
+							if (targetPixel >= 320) break;
+							if (spriteIterator < 0) break;
+							if (spriteIterator >= 320) spriteIterator = 320;
+							
+							for (; targetPixel < spriteIterator; targetPixel++){
+								*(uint16_t*)(&cLine[targetPixel]) = color;
+							}
+						} else {
+							targetPixel = sprTarget->x;
+							spriteIterator = sprTarget->x + sprTarget->width - 1;
+							if (targetPixel >= 0 && targetPixel < 320) *(uint16_t*)(&cLine[targetPixel]) = color;
+							if (spriteIterator >= 0 && spriteIterator < 320) *(uint16_t*)(&cLine[spriteIterator]) = color;
+						}
+						break;
+					}
 			}
 		}
 	}
@@ -371,11 +439,17 @@ void Engine::setFillColor(unsigned char fillNum){
 	}
 }
 
-void Engine::setSpriteMemory(unsigned char *address, unsigned int size){
-	maxSprites = size / sizeof(SpriteCash);
-	spriteCash = (SpriteCash*)address;
-	spriteCount = 0;
-	colorPallete = (unsigned short *)defColorPallete;
+bool Engine::setSpriteLimit(unsigned short spriteCount){
+	disableGraphics();
+	if (spriteCount){
+		spriteCash = (SpriteCash *)malloc(spriteCount * sizeof(SpriteCash));
+		if (spriteCash){
+			maxSprites = spriteCount;
+			spriteCount = 0;
+			return true;
+		}
+	}
+	return false;
 }
 
 void Engine::displaySprite(const uint8_t *sprite, int16_t x, int16_t y, int16_t width, int16_t height, uint8_t flags, bool upScale){
@@ -426,8 +500,8 @@ void Engine::displaySpriteByteMask(const uint8_t *sprite, uint8_t color, int16_t
 	
 
 void Engine::displaySpriteMatrix(const Matrix *matrix, int8_t size, int16_t x, int16_t y, int16_t width, int16_t height, uint8_t flags, bool upScale){
-	unsigned char shift = 0;
 	if (spriteCount < maxSprites){
+		unsigned char shift = 0;
 		switch(size){
 			case 1:
 				shift = 0;
@@ -468,9 +542,39 @@ void Engine::displaySpriteMatrix(const Matrix *matrix, int8_t size, int16_t x, i
 }
 
 
+void Engine::displayFilledRect(uint8_t color, int16_t x, int16_t y, int16_t width, int16_t height, bool upScale){
+	if (spriteCount < maxSprites){
+		spriteCash[spriteCount].type = SPRITE_TYPE_FILLED_RECT;
+		spriteCash[spriteCount].x = x;
+		spriteCash[spriteCount].y = y;
+		spriteCash[spriteCount].width = upScale ? width * 2 : width;
+		spriteCash[spriteCount].height = upScale ? height * 2 : height;
+		spriteCash[spriteCount].upScale = upScale;
+		spriteCash[spriteCount].color = color;
+		spriteCash[spriteCount].flags = 0;
+		spriteCount++;
+	}
+}
 
+void Engine::displayRect(uint8_t color, int16_t x, int16_t y, int16_t width, int16_t height, bool upScale){
+	if (spriteCount < maxSprites){
+		spriteCash[spriteCount].type = SPRITE_TYPE_RECT;
+		spriteCash[spriteCount].x = x;
+		spriteCash[spriteCount].y = y;
+		spriteCash[spriteCount].width = upScale ? width * 2 : width;
+		spriteCash[spriteCount].height = upScale ? height * 2 : height;
+		spriteCash[spriteCount].upScale = upScale;
+		spriteCash[spriteCount].color = color;
+		spriteCash[spriteCount].flags = 0;
+		spriteCount++;
+	}
+}
 
-
-
-
-
+void Engine::disableGraphics(){
+	if (spriteCash){
+		maxSprites = 0;
+		spriteCount = 0;
+		free(spriteCash);
+		spriteCash = 0;
+	}
+}

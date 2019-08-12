@@ -10,6 +10,8 @@
 #include "hardware.h"
 #include "terminal.h"
 #include "helpers.h"
+#include "mem.h"
+#include "text.h"
 
 #define GO_IDLE_STATE 0 											// Software reboot
 #define SEND_IF_COND 8 												// SDC V2 - check voltage range
@@ -23,9 +25,9 @@
 extern Display_ILI9341 display;
 
 unsigned char *buffer = 0;
-uint8_t  SDHC;  
-uint8_t SDError = 0;
-unsigned int currentSector = 0xffffffff;
+unsigned int currentSector;
+unsigned char SDHC;  
+unsigned char SDError = 0;
 
 unsigned char sectorsPerCluster;
 unsigned char fatCount;
@@ -131,6 +133,21 @@ uint8_t SDInit(void)
 	return 0; 
 }
 
+bool SDControlBuffer(){
+	if (buffer == 0){
+		currentSector = 0xffffffff;
+		buffer = (unsigned char*)malloc(640);
+	}
+	return buffer != 0;
+}
+
+void SDClearBuffer(){
+	if (buffer){
+		free(buffer);
+		buffer = 0;
+	}
+}
+
 bool SDReadSector(unsigned int sector){ 
 	uint32_t retry = 0, i, resp;
 	if (buffer){
@@ -210,10 +227,10 @@ bool SDWriteSector(unsigned int sector){
 	return false;
 }
 
-bool SDEnable(unsigned char *newBuffer){
+bool SDEnable(){
 	SDError = SDInit();
 	if (SDError == 0){
-		buffer = newBuffer;
+		SDControlBuffer();
 		
 		if (!SDReadSector(0)) return false;
 		if (SDGetWord(0x1fe) != 0xaa55) return false;
@@ -235,7 +252,7 @@ bool SDEnable(unsigned char *newBuffer){
 }
 
 void SDDisable(){
-	buffer = 0;
+	SDControlBuffer();
 }
 
 unsigned char SDGetByte(unsigned int address){
@@ -280,14 +297,14 @@ void FSGetNameFromFileStruct(unsigned char* fStruct, char *fileName){
 		fileName[i] = fStruct[i];
 	}
 	nameCounter=8;
-			
+
 	// Remove spaces
 	while(nameCounter > 0){
 		nameCounter--;
 		if (fileName[nameCounter] != ' ') break;
 	}
 	nameCounter++;
-	
+
 	// Extention
 	if (fStruct[8] != ' '){
 		fileName[nameCounter] = '.';
@@ -297,7 +314,7 @@ void FSGetNameFromFileStruct(unsigned char* fStruct, char *fileName){
 			fileName[nameCounter] = fStruct[i+8];
 			nameCounter++;
 		}
-				
+
 		// Remove spaces
 		while(nameCounter > 0){
 			nameCounter--;
@@ -316,7 +333,7 @@ int FSGetCluster(const char *filePath, FileInfo *fileInfo, int *targetSector, in
 	unsigned int sectorStart, sectorCounter, inSectorShift;
 	int cluster = -1;
 	
-	if (buffer){
+	if (SDControlBuffer()){
 		if (filePath[0] == '/'){
 			cluster = rootClusterAddr;
 			searcher = 1;
@@ -392,28 +409,27 @@ unsigned int FSGetStartSector(int cluster){
 	return rootAddr+((cluster-2)*sectorsPerCluster);
 }
 
-bool FSReadDir(char *path, DirectoryReader *dirReader){
-	if (buffer){
+DirectoryReader *FSReadDir(char *path){
+	if (SDControlBuffer()){
 		int cluster = FSGetCluster(path);
-		if (cluster == -1) return false;
+		if (cluster == -1) return 0;
+		
+		DirectoryReader *dirReader = (DirectoryReader *)malloc(sizeof(DirectoryReader));
 		dirReader->currentCluster = cluster;
 		dirReader->sectorShift = 0;
 		dirReader->inSectorShift = 0;
-		return true;
+		memset(&dirReader->fileInfo, 0, sizeof(FileInfo));
+		dirReader->fileInfo.fileName = malloc(32);
+		return dirReader;
 	}
-	return false;
+	return 0;
 }
 
-bool FSReadNextFile(char *fileName, int fileNameLength, DirectoryReader *dirReader, FileInfo *fileInfo){
+FileInfo *FSReadNextFile(DirectoryReader *dirReader){
 	char len;
 	unsigned short shift;
-	fileNameLength--;
 	
-	if (fileNameLength < 13){
-		return false;
-	}	
-	
-	if (buffer && dirReader->currentCluster != -1){
+	if (SDControlBuffer() && dirReader->currentCluster != -1){
 		while(1){
 			shift = dirReader->inSectorShift;
 			
@@ -423,7 +439,7 @@ bool FSReadNextFile(char *fileName, int fileNameLength, DirectoryReader *dirRead
 				dirReader->sectorShift++;
 				if (dirReader->sectorShift >= sectorsPerCluster){
 					dirReader->currentCluster = -1;
-					return false;
+					return 0;
 				}
 			}
 			
@@ -440,54 +456,62 @@ bool FSReadNextFile(char *fileName, int fileNameLength, DirectoryReader *dirRead
 				// TODO - do it
 			} else {
 				// File info
-				FSGetNameFromFileStruct(buffer+shift, fileName);
-				len = strlen(fileName);
+				FSGetNameFromFileStruct(buffer+shift, dirReader->fileInfo.fileName);
+				len = strlen(dirReader->fileInfo.fileName);
 				
-				fileInfo->fileSize = SDGetDWord(shift+0x1C);
-				fileInfo->permissions = SDGetWord(shift+0x14);
-				fileInfo->flags = 0;
+				dirReader->fileInfo.fileSize = SDGetDWord(shift+0x1C);
+				dirReader->fileInfo.permissions = SDGetWord(shift+0x14);
+				dirReader->fileInfo.flags = 0;
 				
 				if (SDGetByte(shift+0x0B) & 0x02){
-					fileInfo->flags |= FILE_FLAGS_HIDDEN;
+					dirReader->fileInfo.flags |= FILE_FLAGS_HIDDEN;
 				}
 				
 				if (SDGetByte(shift+0x0B) & 0x04){
-					fileInfo->flags |= (FILE_FLAGS_HIDDEN | FILE_FLAGS_SYSTEM);
+					dirReader->fileInfo.flags |= (FILE_FLAGS_HIDDEN | FILE_FLAGS_SYSTEM);
 				}
 				
-				if (cmpi(&fileName[len-3], "VEX")){
-					fileInfo->fileType = FILE_TYPE_RUNNABLE;
+				if (cmpi(&dirReader->fileInfo.fileName[len-3], "VEX")){
+					dirReader->fileInfo.fileType = FILE_TYPE_RUNNABLE;
 				}else{
 					if (SDGetByte(shift+0x0B) & 0x10){
-						fileInfo->fileType = FILE_TYPE_DIRECTORY;
+						dirReader->fileInfo.fileType = FILE_TYPE_DIRECTORY;
 					} else {
-						fileInfo->fileType = FILE_TYPE_UNKNOWN;
+						dirReader->fileInfo.fileType = FILE_TYPE_UNKNOWN;
 					}
 				}
-				return true;
+				return &dirReader->fileInfo;
 			}
 		}
 	}
-	return false;
+	return 0;
 }
 
-bool FSReadFile(char *filePath, FileWorker *fileWorker){
-	if (buffer){
+void FSCloseDir(DirectoryReader *dirReader){
+	if (dirReader){
+		free(dirReader->fileInfo.fileName);
+		free(dirReader);
+	}
+}
+
+FileWorker *FSReadFile(char *filePath){
+	if (SDControlBuffer()){
 		FileInfo fileInfo;
 		int cluster = FSGetCluster(filePath, &fileInfo);
-		if (cluster == -1) return false;
+		if (cluster == -1) return 0;
+		FileWorker *fileWorker = (FileWorker *)malloc(sizeof(FileWorker));
 		fileWorker->currentCluster = cluster;
 		fileWorker->inSectorShift = 0;
 		fileWorker->sectorShift = 0;
 		fileWorker->fileSize = fileInfo.fileSize;
 		fileWorker->readed = 0;
 		fileWorker->mode = 'r';
-		return true;
+		return fileWorker;
 	}	
-	return false;
+	return 0;
 }
 
-bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
+FileWorker *FSWriteFile(const char *filePath){
 	const char *fileName;
 	char realFileName[8];
 	char realFileExt[3];
@@ -498,14 +522,14 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 	int fileSector, fileInSectorShift;
 	char i;
 	
-	if (buffer){
+	if (SDControlBuffer()){
 		// Getting file name and path to folder
 		fileName = &filePath[strlen(filePath) - 1];
 		
 		while(fileName != filePath && *fileName != '/' && *fileName) fileName--;
 		if (*fileName == '/') fileName++;
-		if (strlen(fileName) == 0) return false;
-		if (fileName - filePath >= 64) return false; //???
+		if (strlen(fileName) == 0) return 0;
+		if (fileName - filePath >= 64) return 0; //???
 		
 		memcpy(filePathFull, filePath, fileName - filePath);
 		filePathFull[fileName - filePath] = 0;
@@ -538,13 +562,13 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 			// Adding file
 			// First, let's find place in the folder
 			cluster = FSGetCluster(filePathFull, &fileInfo);
-			if (cluster == -1) return false;
+			if (cluster == -1) return 0;
 
 			FSGetEmptyFilePlace(cluster, &fileSector, &fileInSectorShift);
 
 			// New cluster for file
 			cluster = FSMakeNewCluster();
-			if (cluster == -1) return false;
+			if (cluster == -1) return 0;
 		} else {
 			// Using existing file
 			FSRemoveClusterChain(cluster);
@@ -560,8 +584,8 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 		SDSetWord(fileInSectorShift+0x1A, cluster & 0xffff);
 		SDSetWord(fileInSectorShift+0x14, cluster >> 16);
 			
-		if (!SDWriteSector(fileSector)) return false;
-		
+		if (!SDWriteSector(fileSector)) return 0;
+		FileWorker *fileWorker = (FileWorker *)malloc(sizeof(FileWorker));
 		fileWorker->startCluster = cluster;
 		fileWorker->currentCluster = cluster;
 		fileWorker->fileSector = fileSector;
@@ -571,14 +595,14 @@ bool FSWriteFile(const char *filePath, FileWorker *fileWorker){
 		fileWorker->fileSize = 0;
 
 		fileWorker->mode = 'w';
-		return true;
+		return fileWorker;
 	}
 
-	return false;
+	return 0;
 }
 
 unsigned int FSRead(FileWorker *fileWorker, void *dst, unsigned int length){
-	if (buffer && fileWorker->mode == 'r'){
+	if (SDControlBuffer() && fileWorker->mode == 'r'){
 		unsigned int startSectorInCluster = FSGetStartSector(fileWorker->currentCluster);
 		char *c = (char*)dst;
 
@@ -617,7 +641,7 @@ unsigned int FSRead(FileWorker *fileWorker, void *dst, unsigned int length){
 }
 
 unsigned int FSWrite(FileWorker *fileWorker, const void *src, int length){
-	if (buffer && fileWorker->mode == 'w'){
+	if (SDControlBuffer() && fileWorker->mode == 'w'){
 		char *c = (char*)src;
 		unsigned int startSectorInCluster = FSGetStartSector(fileWorker->currentCluster);
 		while(length--){
@@ -652,16 +676,18 @@ bool FSSeek(unsigned int shift, FileWorker *fileWorker){
 	return false;
 }
 
-bool FSClose(FileWorker *fileWorker){
-	if (fileWorker->mode == 'w'){
-		// Saves File Size
-		if (SDReadSector(fileWorker->fileSector)){
-			SDSetDWord(fileWorker->fileInSectorShift+0x1C, fileWorker->fileSize);
-			SDWriteSector(fileWorker->fileSector);
+void FSClose(FileWorker *fileWorker){
+	// todo if there are no mem tp end writing - file will be corrupted
+	if (fileWorker){
+		if (SDControlBuffer() && fileWorker->mode == 'w'){
+			// Saves File Size
+			if (SDReadSector(fileWorker->fileSector)){
+				SDSetDWord(fileWorker->fileInSectorShift+0x1C, fileWorker->fileSize);
+				SDWriteSector(fileWorker->fileSector);
+			}
 		}
+		free(fileWorker);
 	}
-	fileWorker->mode = 'e';
-	return true;
 }
 
 int FSMakeNewCluster(){
@@ -743,7 +769,3 @@ void FSGetEmptyFilePlace(int cluster, int *targetSector, int *targetSectorShift)
 	*targetSector = startSector+sectorShift;
 	*targetSectorShift = inSectorShift;
 }
-
-
-
-

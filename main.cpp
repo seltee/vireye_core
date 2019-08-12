@@ -27,32 +27,37 @@ int main(void)
 {
 	// Init all of the cpu hardware. Note: display has it's own hardware initialization
 	if (initHardware()){
+		enableMemory((char*)(ram+(18*1024)), 1024);
+		
 		// Initialization
 		display.init();
-		//Terminal::setMemory(ram);
-		Engine::setSpriteMemory(ram+(2*1024), (2*1024));
+
+		// Sprites
+		Engine::setSpriteLimit(16);
+		Engine::setPalette(0);
+
 		// Enable SD
-		bool SDStatus = SDEnable(ram+(4*1024));
-		
+		bool SDStatus = SDEnable();
+
 		if (SDStatus){
 			message("Init ...");
-			
 			// Load configuration
 			configInit();
-				
+			
 			// Try to run from internal memory
 			if (SDStatus && debugInternal()){
-				message("Loading programm ...");
+				message("Loading ...");
 				if (loadGame("/debug.vex", ram+(5*1024))){
-					//while(1);
 					message("Starting ...");
 					runGame();
 				}else{
 					message("Debug failed");
 				}
 			} else {
+				message("Running SD ...");
 				// Try to run from SD Card
 				if (SDStatus && loadGame("/autorun.vex", ram+(5*1024))){
+					message("Autorun ...");
 					runGame();
 				} else {
 					display.setFPS(30);
@@ -61,8 +66,7 @@ int main(void)
 						c+=dir;
 						if (c > 160) dir = -1;
 						if (c < 0) dir = 1;
-						Text::displayString("No program, please, read manual", 4, 10, 10 + c, false);
-						Text::displayString("Thank you for using Vireye", 4, 10, 26 + c, false);
+						Text::displayString("No program", 4, 10, 10 + c, false);
 						display.draw();
 					}
 				}

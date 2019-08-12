@@ -6,6 +6,8 @@
 #define SPRITE_TYPE_BIT_MASK 2
 #define SPRITE_TYPE_BYTE_MASK 3
 #define SPRITE_TYPE_MATRIX 4
+#define SPRITE_TYPE_FILLED_RECT 5
+#define SPRITE_TYPE_RECT 6
 
 #define FILL_COLOR_BLACK 0
 #define FILL_COLOR_WHITE 1
@@ -37,7 +39,7 @@ class Engine{
 		static void clear();
 		static void setLineClear(bool state);
 		static void setFillColor(unsigned char fillNum);
-		static void setSpriteMemory(unsigned char *address, unsigned int size);
+		static bool setSpriteLimit(unsigned short spriteCount);
 		static void setPalette(const unsigned short *colors);
 			
 		// this function draws single sprite
@@ -56,4 +58,12 @@ class Engine{
 		// this function draws matrix of sprites
 		// sprites data (each value is a pointer to sprites colors array, size of each sprite(width and height must be same), x position, y position, amount of sprites in row, amount of sprites in coll	
 		static void displaySpriteMatrix(const Matrix *matrix, int8_t size, int16_t x, int16_t y, int16_t width, int16_t height, uint8_t flags = SPRITE_FLAG_NO, bool upScale = true);
+		
+		// this function draws filled rect
+		static void displayFilledRect(uint8_t color, int16_t x, int16_t y, int16_t width, int16_t height, bool upScale = true);
+		
+		// this function draws rect
+		static void displayRect(uint8_t color, int16_t x, int16_t y, int16_t width, int16_t height, bool upScale = true);
+		
+		static void disableGraphics();
 };

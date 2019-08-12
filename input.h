@@ -3,8 +3,6 @@
 #include<stm32f10x.h>
 #include<stm32f10x_gpio.h>
 
-#include "display.h"
-
 enum ButtonId {
 	INPUT_SELECT = 0,
 	INPUT_START,

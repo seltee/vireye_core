@@ -10,10 +10,10 @@
 extern Display_ILI9341 display;
 
 //terminal need 1600 bytes + sizeof(TerminalInfo)
-unsigned char *termAddress = 0;
+char *termAddress = 0;
 const char conv[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
-void Terminal::setMemory(unsigned char *address){
+void Terminal::setMemory(char *address){
 	termAddress = address;
 	clearMemory();
 }

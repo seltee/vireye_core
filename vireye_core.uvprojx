@@ -383,26 +383,6 @@
           <GroupName>Source</GroupName>
           <Files>
             <File>
-              <FileName>display.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\display.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>display.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\display.h</FilePath>
-            </File>
-            <File>
-              <FileName>display_ili9341.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>.\display_ili9341.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>display_ili9341.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\display_ili9341.h</FilePath>
-            </File>
-            <File>
               <FileName>engine.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\engine.cpp</FilePath>
@@ -516,6 +496,16 @@
               <FileName>config.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>.\config.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>display_ili9341.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>.\display_ili9341.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>display_ili9341.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\display_ili9341.h</FilePath>
             </File>
           </Files>
         </Group>

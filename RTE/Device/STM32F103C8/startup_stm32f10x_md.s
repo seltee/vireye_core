@@ -30,27 +30,11 @@
 ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Stack_Size      EQU     0x00000400
+Stack_Size      EQU     0x00000280
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
 Stack_Mem       SPACE   Stack_Size
 __initial_sp
-
-
-; <h> Heap Configuration
-;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
-; </h>
-
-Heap_Size       EQU     0x00000200
-
-                AREA    HEAP, NOINIT, READWRITE, ALIGN=3
-__heap_base
-Heap_Mem        SPACE   Heap_Size
-__heap_limit
-
-                PRESERVE8
-                THUMB
-
 
 ; Vector Table Mapped to Address 0 at Reset
                 AREA    RESET, DATA, READONLY
@@ -277,7 +261,7 @@ USBWakeUp_IRQHandler
                 ALIGN
 
 ;*******************************************************************************
-; User Stack and Heap initialization
+; User Stack (No heap)
 ;*******************************************************************************
                  IF      :DEF:__MICROLIB           
                 
@@ -292,9 +276,9 @@ USBWakeUp_IRQHandler
                  
 __user_initial_stackheap
 
-                 LDR     R0, =  Heap_Mem
+                 LDR     R0, = 0
                  LDR     R1, =(Stack_Mem + Stack_Size)
-                 LDR     R2, = (Heap_Mem +  Heap_Size)
+                 LDR     R2, = 0
                  LDR     R3, = Stack_Mem
                  BX      LR
 
