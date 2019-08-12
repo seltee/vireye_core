@@ -5,9 +5,9 @@
 #include "mem.h"
 
 struct SpriteCash *spriteCash = 0;
-unsigned char spriteCount = 0;
 unsigned char fillColor = 0x00;
 unsigned short maxSprites = 0;
+unsigned short spriteCount = 0;
 bool lineClear = true;
 
 const unsigned short *colorPallete = 0;
@@ -24,6 +24,13 @@ const unsigned short *colorPallete = 0;
 const unsigned short defColorPallete[] = {
 	0x0000, 0x0000, 0xffff, RED, GREEN, BLUE, GREY, YELLOW, CIAN, PURPLE
 };
+
+unsigned short Engine::getSpriteLimit(){
+	return maxSprites;
+}
+unsigned short Engine::getSpriteCash(){
+	return spriteCount;
+}
 
 void Engine::setPalette(const unsigned short *colors){
 	if (colors){
@@ -56,7 +63,7 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 		memset(cLine, fillColor, 640);
 	}
 	
-	for (int s = 0; s < spriteCount; s++){
+	for (unsigned short s = 0; s < spriteCount; s++){
 		sprTarget = &spriteCash[s];
 		if (lineNum >= sprTarget->y && lineNum < sprTarget->y + sprTarget->height){	
 			hMirror = (sprTarget->flags & SPRITE_H_MIRROR);
@@ -439,12 +446,12 @@ void Engine::setFillColor(unsigned char fillNum){
 	}
 }
 
-bool Engine::setSpriteLimit(unsigned short spriteCount){
+bool Engine::setSpriteLimit(unsigned short newSpriteCount){
 	disableGraphics();
-	if (spriteCount){
-		spriteCash = (SpriteCash *)malloc(spriteCount * sizeof(SpriteCash));
+	if (newSpriteCount){
+		spriteCash = (SpriteCash *)malloc(newSpriteCount * sizeof(SpriteCash));
 		if (spriteCash){
-			maxSprites = spriteCount;
+			maxSprites = newSpriteCount;
 			spriteCount = 0;
 			return true;
 		}

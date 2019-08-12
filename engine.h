@@ -41,6 +41,8 @@ class Engine{
 		static void setFillColor(unsigned char fillNum);
 		static bool setSpriteLimit(unsigned short spriteCount);
 		static void setPalette(const unsigned short *colors);
+		static unsigned short getSpriteLimit();
+		static unsigned short getSpriteCash();
 			
 		// this function draws single sprite
 		// colors array (from pallete), sprite x position, sprite y position, sprite width, sprite height (must be exectly the same, as it's exist in colors array)

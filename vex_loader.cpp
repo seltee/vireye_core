@@ -83,6 +83,12 @@ void *getCmd(char *name){
 	if (sCmp("setPalette", name)){
 		return (void *)Engine::setPalette;
 	}
+	if (sCmp("getSpriteLimit", name)){
+		return (void *)Engine::getSpriteLimit;
+	}
+	if (sCmp("getSpriteCash", name)){
+		return (void *)Engine::getSpriteCash;
+	}
 	
 	// Input
 	if (sCmp("getButtonState", name)){
