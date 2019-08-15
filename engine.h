@@ -1,5 +1,5 @@
 #pragma once
-#include <stm32f10x.h>
+#include <stdint.h>
 
 #define SPRITE_TYPE_NONE 0
 #define SPRITE_TYPE_PALLETE 1

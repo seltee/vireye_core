@@ -388,8 +388,18 @@ bool loadGame(char *path, char *ramBuffer){
 						
 					case VEX_BLOCK_TYPE_RODATA:
 						if (subHeader.size){
-							FSRead(fileWorker, ramBuffer, subHeader.size);
-							saveCode(ramBuffer, romRomShift, subHeader.size);
+							p = subHeader.size;
+							while(p){
+								if (p <= 4096){
+									FSRead(fileWorker, ramBuffer, p);
+									saveCode(ramBuffer, romRomShift + (subHeader.size - p), p);
+									p = 0;
+								}else{
+									FSRead(fileWorker, ramBuffer, 4096);
+									saveCode(ramBuffer, romRomShift + (subHeader.size - p), 4096);
+									p -= 4096;
+								}
+							}
 						}
 					break;
 					

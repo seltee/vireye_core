@@ -1,7 +1,5 @@
 #pragma once
-
-#include<stm32f10x.h>
-#include<stm32f10x_gpio.h>
+#include <stdint.h>
 
 enum ButtonId {
 	INPUT_SELECT = 0,
