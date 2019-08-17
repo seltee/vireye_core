@@ -17,5 +17,7 @@ void hInitADC();
 void hInitSpi(SPI_Def *spi);
 void hEnableTimer();
 void hEnableInterrupts();
+void hEnableSoundTim(uint16_t psc, uint16_t arr);
+void hDisableSoundTim();
 unsigned int hGetClock();
 

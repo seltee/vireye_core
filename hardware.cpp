@@ -40,7 +40,7 @@ void clearTimer(){
 
 void hInitRCC(){
 	H_RCC->APB2ENR |= RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC | RCC_APB2Periph_SPI1 | RCC_APB2Periph_ADC1;
-	H_RCC->APB1ENR |= RCC_APB1Periph_SPI2 | RCC_APB1Periph_TIM2;
+	H_RCC->APB1ENR |= RCC_APB1Periph_SPI2 | RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3;
 	H_RCC->AHBENR |= RCC_AHBPeriph_DMA1;
 }
 
@@ -156,6 +156,19 @@ void hEnableTimer(){
 
 void hEnableInterrupts(){
 	H_NVIC->ISER[0U] = (uint32_t)(1UL << (TIM2_IRQn & 0x1FUL));
+}
+
+void hEnableSoundTim(uint16_t psc, uint16_t arr){
+	H_TIM3->PSC = psc;
+	H_TIM3->ARR = arr;
+	H_TIM3->DIER |= TIM_DIER_UIE;
+	H_TIM3->CR1 |= TIM_CR1_CEN;
+	
+	H_NVIC->ISER[0U] = (uint32_t)(1UL << (TIM3_IRQn & 0x1FUL));
+}
+
+void hDisableSoundTim(){
+	H_NVIC->ICER[0U] = (uint32_t)(1UL << (((uint32_t)(int32_t)TIM3_IRQn) & 0x1FUL));	
 }
 
 unsigned int hGetClock(){

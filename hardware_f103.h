@@ -370,3 +370,4 @@ typedef struct
 #define TIM_SR_UIF                          ((uint16_t)0x0001) 
 
 #define TIM2_IRQn														28
+#define TIM3_IRQn														29

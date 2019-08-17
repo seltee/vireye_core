@@ -1,4 +1,5 @@
 #include "sound.h"
+#include "hardware.h"
 
 uint16_t (*_callback)(void);
 uint8_t sample = 0;
@@ -19,28 +20,19 @@ bool enableSoundMono(unsigned short freq, unsigned char bitPerSample, uint16_t (
 	}
 
 	_callback = callback;
-	
-	RCC_ClocksTypeDef RCC_Clocks;
-	RCC_GetClocksFreq(&RCC_Clocks);
-	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
-	TIM3->PSC = 1000000 / freq - 1;
-	TIM3->ARR = RCC_Clocks.SYSCLK_Frequency / 1000000;
-	TIM3->DIER |= TIM_DIER_UIE;
-	TIM3->CR1 |= TIM_CR1_CEN;
-	NVIC_EnableIRQ(TIM3_IRQn);
-	
+
+	hEnableSoundTim(1000000 / freq - 1, hGetClock() / 1000000);
 	return true;
+}
+
+void disableSound(){
+	hDisableSoundTim();
 }
 
 extern "C" void TIM3_IRQHandler(void)
 {
-	GPIOB->ODR = (GPIOB->ODR & 0xffffe01f) | (sample << 5);
+	H_GPIOB->ODR = (H_GPIOB->ODR & 0xffffe01f) | (sample << 5);
 	sample = ((_callback() >> shRight) << shLeft);
-  TIM3->SR &= ~TIM_SR_UIF;
+  H_TIM3->SR &= ~TIM_SR_UIF;
 }
 
-void disableSound(){
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, DISABLE);
-	NVIC_DisableIRQ(TIM3_IRQn);
-}

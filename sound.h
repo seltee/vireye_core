@@ -1,5 +1,5 @@
 #pragma once
-#include <stm32f10x.h>
+#include <stdint.h>
 
 extern bool playSounds;
 
