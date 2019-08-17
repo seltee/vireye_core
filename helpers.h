@@ -1,5 +1,5 @@
 #pragma once
-#include<stm32f10x.h>
+#include <stdint.h>
 
 #define _bitset(bits)\
   ((unsigned int)(\
@@ -31,7 +31,5 @@ unsigned int __umodsi3(unsigned int a, unsigned int b);
 int __modsi3(int a, int b);
 unsigned int __udivsi3(unsigned int n, unsigned int d);
 int __divsi3(int n, int d);
-
-
 
 unsigned int rand();

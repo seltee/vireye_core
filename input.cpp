@@ -1,14 +1,13 @@
-#include<stm32f10x.h>
-#include<stm32f10x_adc.h>
-#include<stm32f10x_gpio.h>
+//#include<stm32f10x.h>
+//#include<stm32f10x_adc.h>
+//#include<stm32f10x_gpio.h>
 
 #include "input.h"
 #include "hardware.h"
-#include "sound.h"
 #include "config.h"
 
 const uint16_t butEqPin[] =  { GPIO_Pin_8, GPIO_Pin_12, GPIO_Pin_14, GPIO_Pin_15, GPIO_Pin_13, GPIO_Pin_0 };
-const GPIO_TypeDef * butEqPort[] = { GPIOA, GPIOA, GPIOC, GPIOC, GPIOC, GPIOA };
+const GPIO_Def * butEqPort[] = { H_GPIOA, H_GPIOA, H_GPIOC, H_GPIOC, H_GPIOC, H_GPIOA };
 
 bool Input::getState(uint8_t button){
 	if (button <= 5){
