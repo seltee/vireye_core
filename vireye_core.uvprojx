@@ -507,6 +507,11 @@
               <FileType>5</FileType>
               <FilePath>.\display_ili9341.h</FilePath>
             </File>
+            <File>
+              <FileName>hardware_f103.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\hardware_f103.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
