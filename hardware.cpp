@@ -1,9 +1,3 @@
-#include<stm32f10x.h>
-#include<stm32f10x_rcc.h>
-#include<stm32f10x_gpio.h>
-#include<stm32f10x_dma.h>
-#include<stm32f10x_adc.h>
-
 #include "hardware.h"
 #include "input.h"
 #include "sdcard.h"
@@ -11,124 +5,23 @@
 unsigned int tmrCounter = 0;
 
 bool initHardware(){
-	GPIO_InitTypeDef GPIO_InitStructure;
-	ADC_InitTypeDef ADC_InitStructure;
-	
-	// Clock all the peripherals
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
-	
-	// Enable ADC system clock
-  RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC2, ENABLE);
-	
-	// Clock for ADC
-  RCC_ADCCLKConfig (RCC_PCLK2_Div8);
-	
-	// Clock for DMA
-	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
-	
-	// Remap config pf PB3
-	//GPIO_PinRemapConfig(GPIO_FullRemap_TIM2, ENABLE);
-	
-	// GPIO for input
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IPU;
-	GPIO_InitStructure.GPIO_Pin   =  GPIO_Pin_8 |  GPIO_Pin_12 |  GPIO_Pin_0;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-	
-	GPIO_InitStructure.GPIO_Pin   =  GPIO_Pin_13 |  GPIO_Pin_14 |  GPIO_Pin_15;
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	
-	//GPIO for sound
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	
-		
-	//ADC for analog sticks
-  //Config
-  ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
-  ADC_InitStructure.ADC_ScanConvMode = ENABLE;
-  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;  // we work in continuous sampling mode
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-  ADC_InitStructure.ADC_NbrOfChannel = 2;
-	ADC_Init ( ADC1, &ADC_InitStructure);
-	
-	ADC_InjectedSequencerLengthConfig(ADC1, 2);
-  ADC_InjectedChannelConfig(ADC1, ADC_Channel_8, 1, ADC_SampleTime_7Cycles5);
-  ADC_InjectedChannelConfig(ADC1, ADC_Channel_9, 2, ADC_SampleTime_7Cycles5);
- 
-  ADC_ExternalTrigInjectedConvConfig( ADC1, ADC_ExternalTrigInjecConv_None );
-	ADC_Cmd(ADC1 , ENABLE ) ;
- 
-	ADC_ResetCalibration(ADC1);
-	while(ADC_GetResetCalibrationStatus(ADC1));
-	ADC_StartCalibration(ADC1);
-	while(ADC_GetCalibrationStatus(ADC1));
-  
-	ADC_AutoInjectedConvCmd( ADC1, ENABLE );
-	ADC_SoftwareStartInjectedConvCmd ( ADC1 , ENABLE ) ;
-			
-	//MS timer
-	RCC_ClocksTypeDef RCC_Clocks;
-	RCC_GetClocksFreq(&RCC_Clocks);
-	
-	// Setting up timer for 1000 ms
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
-	TIM2->PSC = RCC_Clocks.SYSCLK_Frequency / 10000 - 1;
-	TIM2->ARR = 10;
-	TIM2->DIER |= TIM_DIER_UIE;
-	TIM2->CR1 |= TIM_CR1_CEN;
-	NVIC_EnableIRQ(TIM2_IRQn);
-	
-	// SPI initializing
-	SPI_InitTypeDef SPI_InitStructure;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-	
-	// Spi1 - Display
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7 | GPIO_Pin_6 | GPIO_Pin_5;
-	GPIO_Init(GPIOA, &GPIO_InitStructure);
-		
-	SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
-	SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
-	SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
-	SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
-	SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
-	SPI_InitStructure.SPI_NSS = SPI_NSS_Soft; 
-	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_2; 
-	SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB; 
-	
-	SPI_Init(SPI1, &SPI_InitStructure);
-	SPI_Cmd(SPI1, ENABLE);
-			
-	// Spi2	- Flash
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_13 | GPIO_Pin_15;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-	
-	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IPU;
-	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_14;
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-		
-	SPI_Init(SPI2, &SPI_InitStructure);
-	SPI_Cmd(SPI2, ENABLE);
-	
-	
+	hInitRCC();
+	hInitGPIO();
+	hInitADC();
+	hEnableTimer();
+	hEnableInterrupts();	
+
+	hInitSpi(H_SPI1);
+	hInitSpi(H_SPI2);
 	return true;
 }
 
 short int getAdcValueForXAxis(){
-	return ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_1) - 2048;
+	return ((uint16_t)(*(__IO uint32_t*) ((uint32_t)H_ADC1 + ADC_InjectedChannel_1 + (uint8_t)0x28))) - 2048;
 }
 
 short int getAdcValueForYAxis(){
-	return ADC_GetInjectedConversionValue(ADC1, ADC_InjectedChannel_2) - 2048;
+	return ((uint16_t)(*(__IO uint32_t*) ((uint32_t)H_ADC1 + ADC_InjectedChannel_2 + (uint8_t)0x28))) - 2048;
 }
 
 unsigned int getTimer(){
@@ -145,9 +38,133 @@ void clearTimer(){
 	tmrCounter = 0;
 }
 
+void hInitRCC(){
+	H_RCC->APB2ENR |= RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOC | RCC_APB2Periph_SPI1 | RCC_APB2Periph_ADC1;
+	H_RCC->APB1ENR |= RCC_APB1Periph_SPI2 | RCC_APB1Periph_TIM2;
+	H_RCC->AHBENR |= RCC_AHBPeriph_DMA1;
+}
+
+void hInitGPIO(){
+	// Spi1 - Display
+  H_GPIOA->CRL &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_5_Pos | (uint32_t)0x0f << GPIO_PIN_6_Pos | (uint32_t)0x0f << GPIO_PIN_7_Pos);
+  H_GPIOA->CRL |=  (uint32_t)((uint32_t)0x0b << GPIO_PIN_5_Pos | (uint32_t)0x0b << GPIO_PIN_6_Pos | (uint32_t)0x0b << GPIO_PIN_7_Pos);
+	
+	// Spi2 - Flash
+	H_GPIOB->CRH &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_13_Pos | (uint32_t)0x0f << GPIO_PIN_15_Pos);
+  H_GPIOB->CRH |=  (uint32_t)((uint32_t)0x0b << GPIO_PIN_13_Pos | (uint32_t)0x0b << GPIO_PIN_15_Pos);
+	
+	H_GPIOB->CRH &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_14_Pos);
+  H_GPIOB->CRH |=  (uint32_t)((uint32_t)0x08 << GPIO_PIN_14_Pos);
+	
+	// Buttons
+	H_GPIOA->CRL &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_0_Pos);
+	H_GPIOA->CRL |=  (uint32_t)((uint32_t)0x08 << GPIO_PIN_0_Pos);
+	
+	H_GPIOA->CRH &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_8_Pos | (uint32_t)0x0f << GPIO_PIN_12_Pos);
+	H_GPIOA->CRH |=  (uint32_t)((uint32_t)0x08 << GPIO_PIN_8_Pos | (uint32_t)0x08 << GPIO_PIN_12_Pos);
+	
+	H_GPIOC->CRH &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_13_Pos | (uint32_t)0x0f << GPIO_PIN_14_Pos | (uint32_t)0x0f << GPIO_PIN_15_Pos);
+	H_GPIOC->CRH |=  (uint32_t)((uint32_t)0x08 << GPIO_PIN_13_Pos | (uint32_t)0x08 << GPIO_PIN_14_Pos | (uint32_t)0x08 << GPIO_PIN_15_Pos);
+	
+	H_GPIOA->BSRR = (0x01 << 0 | 0x01 << 8 | 0x01 << 12);
+	H_GPIOC->BSRR = (0x01 << 13 | 0x01 << 14 | 0x01 << 15);
+	
+	// Sound
+	H_GPIOB->CRL &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_5_Pos | (uint32_t)0x0f << GPIO_PIN_6_Pos | (uint32_t)0x0f << GPIO_PIN_7_Pos);
+  H_GPIOB->CRL |=  (uint32_t)((uint32_t)0x02 << GPIO_PIN_5_Pos | (uint32_t)0x02 << GPIO_PIN_6_Pos | (uint32_t)0x02 << GPIO_PIN_7_Pos);
+	
+	H_GPIOB->CRH &= ~(uint32_t)((uint32_t)0x0f << GPIO_PIN_8_Pos | (uint32_t)0x0f << GPIO_PIN_9_Pos | (uint32_t)0x0f << GPIO_PIN_10_Pos | (uint32_t)0x0f << GPIO_PIN_11_Pos | (uint32_t)0x0f << GPIO_PIN_12_Pos);
+  H_GPIOB->CRH |=  (uint32_t)((uint32_t)0x02 << GPIO_PIN_8_Pos | (uint32_t)0x02 << GPIO_PIN_9_Pos | (uint32_t)0x02 << GPIO_PIN_10_Pos | (uint32_t)0x02 << GPIO_PIN_11_Pos | (uint32_t)0x02 << GPIO_PIN_12_Pos);
+}
+
+void hInitADC(){
+	unsigned int tmpreg1 = 0, tmpreg2 = 0, tmpreg3 = 0;
+	
+	H_RCC->CFGR &= ~RCC_CFGR_ADCPRE;
+	H_RCC->CFGR |= RCC_CFGR_ADCPRE_DIV8;
+	
+	H_ADC1->CR1 = (0x01 << 8);
+	H_ADC1->CR2 = 0x000E0000 | 0x01 << 1;
+
+  H_ADC1->JSQR = (2 - 1) << 20;
+		
+	//Channel 8
+  tmpreg1 = H_ADC1->SMPR2;
+  tmpreg2 = 0x00000007 << (3 * 0x08);
+  tmpreg1 &= ~tmpreg2;
+  tmpreg2 = (uint32_t)ADC_SampleTime_7Cycles5 << (3 * 0x08);
+  tmpreg1 |= tmpreg2;
+  H_ADC1->SMPR2 = tmpreg1;
+	
+	tmpreg1 = H_ADC1->JSQR;
+  tmpreg3 =  (tmpreg1 & (uint32_t)0x00300000)>> 20;
+  tmpreg2 = (uint32_t)0x0000001F << (5 * (uint8_t)((1 + 3) - (tmpreg3 + 1)));
+  tmpreg1 &= ~tmpreg2;
+  tmpreg2 = (uint32_t)0x08 << (5 * (uint8_t)((1 + 3) - (tmpreg3 + 1)));
+  tmpreg1 |= tmpreg2;
+  H_ADC1->JSQR = tmpreg1;
+	
+	//Channel 9
+  tmpreg1 = H_ADC1->SMPR2;
+  tmpreg2 = 0x00000007 << (3 * 0x09);
+  tmpreg1 &= ~tmpreg2;
+  tmpreg2 = (uint32_t)ADC_SampleTime_7Cycles5 << (3 * 0x09);
+  tmpreg1 |= tmpreg2;
+  H_ADC1->SMPR2 = tmpreg1;
+	
+	tmpreg1 = H_ADC1->JSQR;
+  tmpreg3 =  (tmpreg1 & (uint32_t)0x00300000)>> 20;
+  tmpreg2 = (uint32_t)0x0000001F << (5 * (uint8_t)((2 + 3) - (tmpreg3 + 1)));
+  tmpreg1 &= ~tmpreg2;
+  tmpreg2 = (uint32_t)0x09 << (5 * (uint8_t)((2 + 3) - (tmpreg3 + 1)));
+  tmpreg1 |= tmpreg2;
+  H_ADC1->JSQR = tmpreg1;
+	
+  H_ADC1->CR2 |= ADC_ExternalTrigInjecConv_None;
+	H_ADC1->CR2 |= ADC_CR2_ADON;
+
+	// Wait for init
+	H_ADC1->CR2 |= ADC_CR2_RSTCAL;
+	while ((H_ADC1->CR2 & ADC_CR2_RSTCAL) == ADC_CR2_RSTCAL);
+	H_ADC1->CR2 |= ADC_CR2_CAL;
+	while ((H_ADC1->CR2 & ADC_CR2_RSTCAL) == ADC_CR2_CAL);
+
+	// Adc start
+	H_ADC1->CR1 |= (uint32_t)ADC_CR1_JAUTO;
+	H_ADC1->CR2 |= 0x00208000;
+}
+
+void hInitSpi(SPI_Def *spi){
+	spi->CR1 = 0<<SPI_CR1_DFF_Pos  	//8 bit
+    | 0<<SPI_CR1_LSBFIRST_Pos     //MSB first
+    | 1<<SPI_CR1_SSM_Pos          //program SS
+    | 1<<SPI_CR1_SSI_Pos          //SS to 1
+    | 0x00<<SPI_CR1_BR_Pos        //Rate/2
+    | 1<<SPI_CR1_MSTR_Pos         //Master
+    | 0<<SPI_CR1_CPOL_Pos 
+		| 0<<SPI_CR1_CPHA_Pos
+		| 1<<SPI_CR1_SPE_Pos;
+}
+
+void hEnableTimer(){
+	// Setting up timer for 1000 ms
+	H_TIM2->PSC = hGetClock() / 10000 - 1;
+	H_TIM2->ARR = 10;
+	H_TIM2->DIER |= TIM_DIER_UIE;
+	H_TIM2->CR1 |= TIM_CR1_CEN;
+}
+
+void hEnableInterrupts(){
+	H_NVIC->ISER[0U] = (uint32_t)(1UL << (TIM2_IRQn & 0x1FUL));
+}
+
+unsigned int hGetClock(){
+	return 128000000;
+}
+
 extern "C" void TIM2_IRQHandler(void)
 {
-  TIM2->SR &= ~TIM_SR_UIF;
+  H_TIM2->SR &= ~TIM_SR_UIF;
 	tmrCounter++;
 }
 
