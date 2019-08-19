@@ -427,6 +427,7 @@ bool loadGame(char *path, char *ramBuffer){
 					break;
 						
 					case VEX_BLOCK_TYPE_RAM_RELOCATION:
+						// Block of ram relocations with different targets
 						//Terminal::sendString("Reading Ram Relocation", true);
 						//Terminal::sendNumber(subHeader.size, false, true);
 						//Terminal::sendNumber(subHeader.headerSize, false, true);
@@ -438,6 +439,11 @@ bool loadGame(char *path, char *ramBuffer){
 									case VEX_REL_TYPE_ROM:
 										*((int*)(ram + vexRel.shift)) += (int)(vexRel.targetShift + romRomShift);
 										break;
+									
+									case VEX_REL_TYPE_RAM:
+										*((int*)(ram + vexRel.shift)) += (int)(vexRel.targetShift + ram);
+										break;
+									
 									default:
 										//Terminal::sendString("Unknown type", true);
 										return false;

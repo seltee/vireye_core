@@ -14,10 +14,6 @@
 
 Display_ILI9341 display;
 
-struct San{
-	char a, b, c, d;
-};
-
 void message(char *msg){
 	Text::displayString(msg, 4, 10, 10, false);
 	display.draw();
