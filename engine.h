@@ -68,4 +68,7 @@ class Engine{
 		static void displayRect(uint8_t color, int16_t x, int16_t y, int16_t width, int16_t height, bool upScale = true);
 		
 		static void disableGraphics();
+		
+		static void setPreProcessCallback(void (*callback)(unsigned short *, unsigned short));
+		static void setPostProcessCallback(void (*callback)(unsigned short *, unsigned short));
 };

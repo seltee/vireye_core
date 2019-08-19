@@ -12,6 +12,9 @@ bool lineClear = true;
 
 const unsigned short *colorPallete = 0;
 
+void (*_preProcessCallback)(unsigned short *, unsigned short);
+void (*_postProcessCallback)(unsigned short *, unsigned short);
+
 #define RED             0x07e0   
 #define GREEN           0x001f   
 #define BLUE            0xf800
@@ -19,7 +22,6 @@ const unsigned short *colorPallete = 0;
 #define YELLOW					0xe0ff
 #define CIAN            0x975E
 #define PURPLE					0x9093
-
 
 const unsigned short defColorPallete[] = {
 	0x0000, 0x0000, 0xffff, RED, GREEN, BLUE, GREY, YELLOW, CIAN, PURPLE
@@ -59,8 +61,12 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 	bool upScale;
 	bool hMirror;
 	
-	if (lineClear){
-		memset(cLine, fillColor, 640);
+	if (_preProcessCallback){
+		_preProcessCallback(cLine, lineNum);
+	}else{
+		if (lineClear){
+			memset(cLine, fillColor, 640);
+		}
 	}
 	
 	for (unsigned short s = 0; s < spriteCount; s++){
@@ -284,10 +290,10 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 					break;
 					
 				case SPRITE_TYPE_MATRIX:
+					// width and height of each sprite
+					actualWidth = sprTarget->color;
 					// sprites in row. Color here stores shift equals to size of each sprite
-					actualMatrixWidth = upScale ? ((sprTarget->width >> sprTarget->color) >> 1) : (sprTarget->width >> sprTarget->color);
-					// real width and height of sprite
-					actualWidth = 1 << sprTarget->color;
+					actualMatrixWidth = upScale ? ((sprTarget->width / actualWidth) >> 1) : (sprTarget->width / actualWidth);
 					// line in matrix
 					actualMatrixLine = actualLine / actualWidth;
 					// line of sprite
@@ -333,9 +339,10 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 						}
 					}else{
 						// iterating sprites in matrix
+						
 						for (spriteIterator = 0; spriteIterator < actualMatrixWidth; spriteIterator++){
 							// drawing each sprite
-							spriteBytes = ((uint8_t**)sprTarget->sprite)[matrixLineSprite] + spriteLineShift;
+							spriteBytes = matrix->sprites[matrix->matrix[matrixLineSprite]] + spriteLineShift;
 							
 							// If sprite fits in boundings - we don't need to check every pixel position
 							if (targetPixel >= 0 && targetPixel < 320-displayWidth){
@@ -425,6 +432,10 @@ void Engine::parseLine(int16_t lineNum, uint16_t* cLine){
 			}
 		}
 	}
+	
+	if (_postProcessCallback){
+		_postProcessCallback(cLine, lineNum);
+	}
 }
 
 void Engine::clear(){
@@ -448,6 +459,8 @@ void Engine::setFillColor(unsigned char fillNum){
 
 bool Engine::setSpriteLimit(unsigned short newSpriteCount){
 	disableGraphics();
+	_preProcessCallback = 0;
+	_postProcessCallback = 0;
 	if (newSpriteCount){
 		spriteCash = (SpriteCash *)malloc(newSpriteCount * sizeof(SpriteCash));
 		if (spriteCash){
@@ -507,43 +520,16 @@ void Engine::displaySpriteByteMask(const uint8_t *sprite, uint8_t color, int16_t
 	
 
 void Engine::displaySpriteMatrix(const Matrix *matrix, int8_t size, int16_t x, int16_t y, int16_t width, int16_t height, uint8_t flags, bool upScale){
-	if (spriteCount < maxSprites){
-		unsigned char shift = 0;
-		switch(size){
-			case 1:
-				shift = 0;
-			break;
-			case 2:
-				shift = 1;
-			break;		
-			case 4:
-				shift = 2;
-			break;		
-			case 8:
-				shift = 3;
-			break;		
-			case 16:
-				shift = 4;
-			break;	
-			case 32:
-				shift = 5;
-			break;
-			case 64:
-				shift = 6;
-			break;					
-			default:
-				return;
-		}
-		
+	if (spriteCount < maxSprites){	
 		spriteCash[spriteCount].sprite = (const uint8_t*)matrix;
 		spriteCash[spriteCount].type = SPRITE_TYPE_MATRIX;
 		spriteCash[spriteCount].x = x;
 		spriteCash[spriteCount].y = y;
-		spriteCash[spriteCount].width = upScale ? ((width << shift) << 1) : (width << shift);
-		spriteCash[spriteCount].height = upScale ? ((height<< shift) << 1) : (height << shift);
+		spriteCash[spriteCount].width = upScale ? ((width * size) << 1) : (width * size);
+		spriteCash[spriteCount].height = upScale ? ((height * size) << 1) : (height * size);
 		spriteCash[spriteCount].upScale = upScale;
 		spriteCash[spriteCount].flags = flags;
-		spriteCash[spriteCount].color = shift;
+		spriteCash[spriteCount].color = size;
 		spriteCount++;
 	}
 }
@@ -585,3 +571,16 @@ void Engine::disableGraphics(){
 		spriteCash = 0;
 	}
 }
+
+
+void Engine::setPreProcessCallback(void (*callback)(unsigned short *, unsigned short)){
+	_preProcessCallback = callback;
+}
+
+void Engine::setPostProcessCallback(void (*callback)(unsigned short *, unsigned short)){
+	_postProcessCallback = callback;
+}
+
+
+
+

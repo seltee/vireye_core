@@ -6,6 +6,7 @@
 #include "helpers.h"
 #include "engine.h"
 #include "display_ili9341.h"
+#include "mem.h"
 
 extern Display_ILI9341 display;
 
@@ -13,9 +14,16 @@ extern Display_ILI9341 display;
 char *termAddress = 0;
 const char conv[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
-void Terminal::setMemory(char *address){
-	termAddress = address;
+void Terminal::initTerminal(){
+	termAddress = malloc(1600 + sizeof(TerminalInfo));
 	clearMemory();
+}
+
+void Terminal::disableTerminal(){
+	if (termAddress){
+		free(termAddress);
+		termAddress = 0;
+	}
 }
 
 void Terminal::clearMemory(){

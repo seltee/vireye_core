@@ -89,6 +89,12 @@ void *getCmd(char *name){
 	if (sCmp("getSpriteCash", name)){
 		return (void *)Engine::getSpriteCash;
 	}
+	if (sCmp("setPreProcessCallback", name)){
+		return (void *)Engine::setPreProcessCallback;
+	}
+	if (sCmp("setPostProcessCallback", name)){
+		return (void *)Engine::setPostProcessCallback;
+	}
 	
 	// Input
 	if (sCmp("getButtonState", name)){
@@ -219,10 +225,15 @@ void *getCmd(char *name){
 	if (sCmp("_Unwind_Resume", name)){
 		return (void *)1;
 	}
+	
 	// new[unsigned int]
 	if (sCmp("_Znwj", name)){
 		return (void *)malloc;
 	}
+	if (sCmp("_Znaj", name)){
+		return (void *)malloc;
+	}
+
 	// delete
 	if (sCmp("_ZdlPv", name)){
 		return (void *)free;
@@ -293,11 +304,13 @@ bool loadGame(char *path, char *ramBuffer){
 	VexSubHeader subHeader;
 	VexCodeSliceHeader codeSliceHeader;
 	
-	unsigned int totalBlockSize, relCount, cmd, jmpFrom;
-	unsigned short p1, p2, ramPredefinedSize = 0;
+	unsigned int totalBlockSize, relCount, cmd, jmpFrom, i, rel;
+	unsigned short p1, p2;
 	unsigned int p, inRamShift;
 	char *name;
 	VexCodeRelocation *verRel;
+	VexCodeRelocation vexRel;
+	
 	FileWorker *fileWorker = FSReadFile(path);
 	if (fileWorker){
 		FSRead(fileWorker, &header, sizeof(VexMainHeader));
@@ -310,6 +323,7 @@ bool loadGame(char *path, char *ramBuffer){
 			// Clear memory
 			clearMemory((const unsigned char *)ROM_ADDRESS_PROG);
 			
+			// Address of rom in the final memory
 			const char *romRomShift = (const char *)ROM_ADDRESS_PROG+header.codeSize;
 			
 			// Main loop of sections
@@ -317,8 +331,9 @@ bool loadGame(char *path, char *ramBuffer){
 				FSRead(fileWorker, &subHeader, sizeof(VexSubHeader));
 				switch(subHeader.type){
 					case VEX_BLOCK_TYPE_CODE_PART:
+						// Terminal::sendString("Parsing code block ...", true);
 						// Code blocks
-						for (int i = 0; i < subHeader.size; i++){
+						for (i = 0; i < subHeader.size; i++){
 							// Code block information
 							FSRead(fileWorker, &codeSliceHeader, sizeof(VexCodeSliceHeader));
 							totalBlockSize = codeSliceHeader.codeLength + codeSliceHeader.symNameTableLength + (codeSliceHeader.relocationsCount*sizeof(VexCodeRelocation));
@@ -326,7 +341,7 @@ bool loadGame(char *path, char *ramBuffer){
 							
 							FSRead(fileWorker, ramBuffer, totalBlockSize);
 							
-							for (int rel = 0; rel < relCount; rel++){
+							for (rel = 0; rel < relCount; rel++){
 								verRel = (VexCodeRelocation *)(ramBuffer + codeSliceHeader.codeLength + codeSliceHeader.symNameTableLength + rel*sizeof(VexCodeRelocation));
 								inRamShift = verRel->shift - codeSliceHeader.globalShift;
 								
@@ -344,7 +359,7 @@ bool loadGame(char *path, char *ramBuffer){
 											} else {
 												name = (char*)ramBuffer + codeSliceHeader.codeLength + verRel->nameShift;
 												cmd = (unsigned int)getCmd(name);
-												if (!cmd){
+												if (!cmd){															
 													FSClose(fileWorker);
 													return false;
 												}
@@ -387,6 +402,7 @@ bool loadGame(char *path, char *ramBuffer){
 					break;
 						
 					case VEX_BLOCK_TYPE_RODATA:
+						//Terminal::sendString("Reading prog. rom", true);
 						if (subHeader.size){
 							p = subHeader.size;
 							while(p){
@@ -404,21 +420,46 @@ bool loadGame(char *path, char *ramBuffer){
 					break;
 					
 					case VEX_BLOCK_TYPE_RAM:
+						//Terminal::sendString("Reading prog. ram", true);
 						if (subHeader.size){
-							ramPredefinedSize = subHeader.size;
 							FSRead(fileWorker, ram, subHeader.size);
 						}
 					break;
 						
+					case VEX_BLOCK_TYPE_RAM_RELOCATION:
+						//Terminal::sendString("Reading Ram Relocation", true);
+						//Terminal::sendNumber(subHeader.size, false, true);
+						//Terminal::sendNumber(subHeader.headerSize, false, true);
+
+						for (i = 0; i < subHeader.size; i++){
+							FSRead(fileWorker, &vexRel, sizeof(VexCodeRelocation));
+							if (vexRel.bind == 1){
+								switch(vexRel.type){
+									case VEX_REL_TYPE_ROM:
+										*((int*)(ram + vexRel.shift)) += (int)(vexRel.targetShift + romRomShift);
+										break;
+									default:
+										//Terminal::sendString("Unknown type", true);
+										return false;
+								}
+							} else {
+								//Terminal::sendString("Unknown bind", true);
+								return false;
+							}
+						}
+					break;
+						
 					case VEX_BLOCK_TYPE_END:
-						//todo OwO, what this?
-						memset(ram, 0, RAM_SIZE - ramPredefinedSize);
+						//Terminal::sendString("End of vex", true);
 						entryPoint = (unsigned char *)ROM_ADDRESS_PROG + header.entry;		
 						ramProgOccupied = header.ramSize;
 						FSClose(fileWorker);
 						return true;
 
 					default:
+						//Terminal::sendString("Unknown block", true);
+						//Terminal::sendNumber(subHeader.type, false, true);
+
 						FSClose(fileWorker);
 						return false;
 				}
@@ -430,6 +471,7 @@ bool loadGame(char *path, char *ramBuffer){
 }
 
 int runGame(){
+	//Terminal::disableTerminal();
 	enableMemory(ram + ramProgOccupied, RAM_SIZE - ramProgOccupied);
 	Engine::setPalette(0);
 	const unsigned char *prog = entryPoint + 1;
